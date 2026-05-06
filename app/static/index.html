@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skóla Royale Python</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="logo">SR</div>
+      <h1>Skóla Royale</h1>
+      <p>Innskráning fyrir nemendur og kennara.</p>
+      <input id="username" placeholder="Notandanafn" autocomplete="username">
+      <input id="password" placeholder="Lykilorð" type="password" autocomplete="current-password">
+      <button onclick="login()">Innskrá</button>
+      <p class="hint">Fyrsti kennariaðgangur: <strong>kennari</strong> / <strong>kennari123</strong>. Breyttu þessu áður en þú setur kerfið á opinn vef.</p>
+      <div id="loginMsg" class="msg"></div>
+    </div>
+  </div>
+
+  <header class="topbar hidden" id="topbar">
+    <div class="brand">
+      <div class="logo small">SR</div>
+      <div>
+        <h1>Skóla Royale</h1>
+        <small id="whoami"></small>
+      </div>
+    </div>
+    <div class="stats">
+      <div><span>Level</span><b id="levelVal">1</b></div>
+      <div><span>XP</span><b id="xpVal">0</b></div>
+      <div><span>Coins</span><b id="coinVal">0</b></div>
+      <div><span>Streak</span><b id="streakVal">0</b></div>
+      <div><span>Rétt</span><b id="correctVal">0</b></div>
+    </div>
+  </header>
+
+  <main class="app hidden" id="app">
+    <aside class="side">
+      <section class="profile">
+        <div class="avatar" id="avatarBox">🪂</div>
+        <h2 id="playerTitle">Nýliði</h2>
+        <div class="bar"><div id="xpBar"></div></div>
+      </section>
+      <button class="menu active" onclick="showView('mission')">🎯 Mission</button>
+      <button class="menu" onclick="showView('map')">🗺️ Mission-kort</button>
+      <button class="menu" onclick="showView('boss')">👑 Boss Fight</button>
+      <button class="menu" onclick="showView('daily')">🎁 Dagleg verðlaun</button>
+      <button class="menu" onclick="showView('shop')">🛒 Búðin</button>
+      <button class="menu" onclick="showView('achievements')">🏆 Afrek</button>
+      <button class="menu teacher-only hidden" onclick="showView('teacher')">👨‍🏫 Mælaborð kennara</button>
+      <button class="menu teacher-only hidden" onclick="showView('questions')">✍️ Spurningabanki</button>
+      <button class="menu teacher-only hidden" onclick="showView('packs')">📦 Verkefnapakkar</button>
+      <button class="menu teacher-only hidden" onclick="showView('reports')">📊 Skýrslur</button>
+      <button class="menu danger" onclick="logout()">Útskrá</button>
+    </aside>
+
+    <section class="main">
+      <section id="view-mission" class="view active">
+        <div class="hero epic-hero">
+          <div>
+            <h2 id="missionHeroTitle">Mission-eyja</h2>
+            <p id="missionHeroText">Veldu svæði, kláraðu verkefni, safnaðu loot og styrktu avatarinn þinn.</p>
+          </div>
+          <div class="hero-boss-orb" id="heroOrb">⚡</div>
+        </div>
+
+        <div class="quest-status">
+          <div class="quest-chip"><span>🧭 Svæði</span><b id="currentZoneName">Blandað Royale</b></div>
+          <div class="quest-chip"><span>📦 Pakki</span><b id="activePackInfo">Enginn valinn</b></div>
+          <div class="quest-chip"><span>🔥 Streak</span><b id="streakMini">0</b></div>
+          <div class="quest-chip"><span>🎯 Daily</span><b id="dailyQuest">hleður...</b></div>
+        </div>
+
+        <div class="question-card">
+          <div id="subjectBadge" class="badge">🎯 Blandað</div>
+          <h2 id="questionText">Ýttu á Byrja Mission.</h2>
+          <p id="hintText" class="hint-purple"></p>
+          <div id="answers" class="answers"></div>
+          <div id="textAnswerBox" class="textAnswer hidden">
+            <input id="textAnswer" placeholder="Skrifaðu svar..." onkeydown="if(event.key==='Enter') submitTextAnswer()">
+            <button onclick="submitTextAnswer()">Senda</button>
+          </div>
+          <div class="actions">
+            <button onclick="startMission()">▶ Byrja Mission</button>
+            <button onclick="useHint()">💡 Vísbending</button>
+            <button onclick="useSkip()">⏭️ Skipta</button>
+            <button class="boss-btn" onclick="startBossFight()">👑 Boss Fight</button>
+          </div>
+          <div class="mission-strip">
+            <span id="inventoryMini">🎒 Hjálp: 0</span>
+            <span id="bossMini">👑 Boss: læstur</span>
+          </div>
+          <div id="feedback" class="feedback"></div>
+        </div>
+      </section>
+
+      <section id="view-map" class="view">
+        <h2>🗺️ Mission-kort</h2>
+        <p>Veldu lendingarsvæði. Hvert svæði hefur sína stemningu og færni.</p>
+        <div class="world-map">
+          <button class="zone-tile z-mix" onclick="setZone('mixed')"><span>🎯</span><b>Blandað Royale</b><small>Allar greinar · meiri XP</small></button>
+          <button class="zone-tile z-math" onclick="setZone('math')"><span>🧮</span><b>Reikni-hæðir</b><small>Margföldun, deiling, flatarmál</small></button>
+          <button class="zone-tile z-isl" onclick="setZone('icelandic')"><span>🇮🇸</span><b>Orða-borg</b><small>Orðflokkar, stafsetning, lesskilningur</small></button>
+          <button class="zone-tile z-eng" onclick="setZone('english')"><span>🇬🇧</span><b>English Base</b><small>Vocabulary, phrases, grammar</small></button>
+          <button class="zone-tile z-sci" onclick="setZone('science')"><span>🌿</span><b>Vísinda-skógur</b><small>Líkaminn, dýr, efni, geimurinn</small></button>
+          <button class="zone-tile z-geo" onclick="setZone('geo')"><span>🌍</span><b>Korta-eyja</b><small>Kortalestur, lönd, áttir</small></button>
+        </div>
+      </section>
+
+      <section id="view-boss" class="view">
+        <h2>👑 Boss Fight</h2>
+        <div class="boss-arena">
+          <div class="boss-monster" id="bossMonster">🐉</div>
+          <div class="boss-info">
+            <h3 id="bossTitle">Dreki Þekkingarinnar</h3>
+            <p id="bossText">Svaraðu 5 verkefnum rétt til að sigra bossinn og fá stór verðlaun.</p>
+            <div class="boss-health"><div id="bossHealthFill"></div></div>
+            <p><strong id="bossProgressText">Boss bíður eftir áskorun.</strong></p>
+            <button class="boss-btn" onclick="startBossFight()">Byrja Boss Fight</button>
+          </div>
+        </div>
+        <div class="grid boss-rules">
+          <div class="shop-item"><h3>⚔️ Reglur</h3><p>5 rétt svör sigra boss. Rangt svar lækkar streak en stoppar ekki bardagann.</p></div>
+          <div class="shop-item"><h3>🎁 Verðlaun</h3><p>Sigur gefur coins, XP og loot. Boss Fight opnast eftir level 3 eða 10 rétt svör.</p></div>
+          <div class="shop-item"><h3>🛡️ Ráð</h3><p>Kauptu skjöld eða vísbendingu áður en þú ferð í bardaga.</p></div>
+        </div>
+      </section>
+
+      <section id="view-daily" class="view">
+        <h2>🎁 Dagleg verðlaun</h2>
+        <p>Komdu inn á hverjum degi, kláraðu markmið og byggðu upp streak.</p>
+        <div class="daily-reward-panel">
+          <div class="daily-big" id="dailyBigIcon">🎁</div>
+          <div>
+            <h3 id="dailyTitle">Daily Quest</h3>
+            <p id="dailyDetail">Hleður...</p>
+            <div class="daily-progress"><div id="dailyProgressFill"></div></div>
+            <button onclick="claimDailyLoginReward()">Sækja daglegan innskráningarbónus</button>
+          </div>
+        </div>
+        <div class="reward-track" id="rewardTrack"></div>
+      </section>
+
+      <section id="view-shop" class="view">
+        <h2>🛒 Búðin</h2>
+        <p>Nemendur kaupa hjálparhluti, þemu og smá forskot fyrir góða frammistöðu.</p>
+        <div id="shopGrid" class="grid"></div>
+      </section>
+
+      <section id="view-achievements" class="view">
+        <h2>🏆 Afrek og Battle Pass</h2>
+        <p>Stutt markmið sem gefa nemendum hraða tilfinningu fyrir árangri.</p>
+        <div id="achievementGrid" class="grid"></div>
+      </section>
+
+
+      <section id="view-questions" class="view">
+        <h2>✍️ Spurningabanki kennara</h2>
+        <p class="teacher-intro">Hér getur þú sett inn spurningar beint á vefinn. Þær hlaðast sjálfkrafa inn hjá nemendum næst þegar þeir fá verkefni eða endurhlaða síðuna.</p>
+
+        <div class="teacher-box">
+          <h3>Bæta við spurningu</h3>
+          <div class="form-grid">
+            <select id="qSubject">
+              <option value="math">Stærðfræði</option>
+              <option value="icelandic">Íslenska</option>
+              <option value="english">Enska</option>
+              <option value="science">Náttúrufræði</option>
+              <option value="geo">Landafræði/samfélagsfræði</option>
+            </select>
+            <input id="qSkill" placeholder="Færni, t.d. margföldun">
+            <select id="qDifficulty">
+              <option value="1">Erfiðleiki 1</option>
+              <option value="2">Erfiðleiki 2</option>
+              <option value="3">Erfiðleiki 3</option>
+              <option value="4">Erfiðleiki 4</option>
+              <option value="5">Erfiðleiki 5</option>
+            </select>
+          </div>
+          <textarea id="qText" rows="3" placeholder="Spurningin sjálf"></textarea>
+          <div class="form-grid">
+            <input id="qAnswer" placeholder="Rétt svar">
+            <input id="qHint" placeholder="Vísbending">
+          </div>
+          <textarea id="qOptions" rows="3" placeholder="Svarmöguleikar, einn í hverri línu. Settu rétta svarið líka inn. Ef þetta er textasvar má skilja þetta eftir autt."></textarea>
+          <button onclick="createTeacherQuestion()">Vista spurningu</button>
+          <button class="gray-btn" onclick="clearQuestionForm()">Hreinsa</button>
+          <span id="questionMsg"></span>
+        </div>
+
+        <div class="teacher-box">
+          <h3>Spurningar sem kennari hefur bætt við</h3>
+          <button onclick="loadTeacherQuestions()">Endurhlaða spurningar</button>
+          <div id="teacherQuestionsList"></div>
+        </div>
+      </section>
+
+
+      <section id="view-packs" class="view">
+        <h2>📦 Verkefnapakkar</h2>
+        <p class="teacher-intro">Búðu til pakka úr kennaraspurningum og tengdu við bekk. Nemendur í þeim bekk fá spurningarnar oftar í mission.</p>
+
+        <div class="teacher-box">
+          <h3>Búa til verkefnapakka</h3>
+          <div class="form-grid">
+            <input id="packTitle" placeholder="Heiti pakka, t.d. Margföldun 6–9">
+            <input id="packClass" placeholder="Bekkur/hópur, t.d. 5A. Skildu autt fyrir alla.">
+          </div>
+          <textarea id="packDescription" rows="2" placeholder="Lýsing, t.d. Æfing fyrir próf á föstudag."></textarea>
+          <h4>Veldu spurningar í pakkann</h4>
+          <p>Hér birtast spurningar sem þú hefur búið til í ✍️ Spurningabanka.</p>
+          <div id="packQuestionPicker" class="question-picker"></div>
+          <button onclick="createMissionPack()">Vista verkefnapakka</button>
+          <button class="gray-btn" onclick="clearPackForm()">Hreinsa</button>
+          <span id="packMsg"></span>
+        </div>
+
+        <div class="teacher-box">
+          <h3>Virku verkefnapakkarnir</h3>
+          <button onclick="loadMissionPacks()">Endurhlaða pakka</button>
+          <div id="missionPacksList"></div>
+        </div>
+      </section>
+
+
+      <section id="view-reports" class="view">
+        <h2>📊 Skýrslur og útflutningur</h2>
+        <p class="teacher-intro">Sæktu gögn úr kerfinu, prentaðu nemendaskýrslur og sjáðu hverjir þurfa stuðning.</p>
+
+        <div class="teacher-box">
+          <h3>⬇️ Sækja CSV/Excel gögn</h3>
+          <p>Veldu bekk. Skildu eftir autt til að sækja alla nemendur.</p>
+          <select id="reportClassFilter">
+            <option value="">Allir bekkir</option>
+          </select>
+          <div class="report-actions">
+            <button onclick="downloadClassReport()">Sækja bekkjarskýrslu CSV</button>
+            <button onclick="downloadSkillReport()">Sækja færniskýrslu CSV</button>
+            <button onclick="loadSupportNeeds()">Finna nemendur sem þurfa stuðning</button>
+          </div>
+        </div>
+
+        <div class="teacher-box">
+          <h3>🆘 Nemendur sem gætu þurft stuðning</h3>
+          <p>Kerfið leitar að færni þar sem nemandi er undir 65% og hefur svarað a.m.k. 3 spurningum.</p>
+          <div id="supportNeedsList"></div>
+        </div>
+
+        <div class="teacher-box print-area" id="printStudentReport">
+          <h3>🖨️ Prentvæn nemendaskýrsla</h3>
+          <p>Opnaðu nemendaskýrslu í mælaborði kennara og ýttu svo á prenta.</p>
+          <button onclick="printCurrentStudentReport()">Prenta síðustu opnuðu nemendaskýrslu</button>
+        </div>
+      </section>
+
+      <section id="view-teacher" class="view">
+        <h2>👨‍🏫 Mælaborð kennara</h2>
+        <p class="teacher-intro">Hér sérðu hverjir eru virkir, hvernig þeim gengur og í hvaða greinum hópurinn þarf meiri æfingu.</p>
+        <div class="teacher-box">
+          <h3>Stofna nemanda</h3>
+          <div class="form-grid">
+            <input id="newUsername" placeholder="notandanafn t.d. nem1">
+            <input id="newName" placeholder="nafn nemanda">
+            <input id="newPassword" placeholder="lykilorð">
+            <input id="newClass" placeholder="bekkur/hópur t.d. 5A">
+          </div>
+          <button onclick="createStudent()">Stofna nemanda</button>
+          <span id="createMsg"></span>
+        </div>
+
+        <div class="teacher-box">
+          <h3>Stofna marga nemendur í einu</h3>
+          <p>Settu eina línu fyrir hvern nemanda: <code>notandanafn,nafn,lykilorð,bekkur</code></p>
+          <textarea id="bulkStudents" rows="6" placeholder="nem1,Anna,1234,5A&#10;nem2,Birkir,1234,5A"></textarea>
+          <button onclick="createBulkStudents()">Stofna lista</button>
+          <span id="bulkMsg"></span>
+        </div>
+
+        <div class="teacher-box">
+          <h3>Sía mælaborð</h3>
+          <select id="classFilter" onchange="loadTeacher()">
+            <option value="">Allir bekkir</option>
+          </select>
+          <button onclick="loadTeacher()">Endurhlaða mælaborð</button>
+        </div>
+
+        <div id="studentDetail" class="teacher-box hidden"></div>
+
+        <div class="dashboard">
+          <canvas id="studentChart" height="140"></canvas>
+          <canvas id="subjectChart" height="140"></canvas>
+        </div>
+
+        <div class="teacher-box">
+          <h3>🎯 Færnimælaborð</h3>
+          <p>Hér sérðu hvaða færni hópurinn hefur náð og hvað þarf helst að æfa næst.</p>
+          <div id="skillNeeds"></div>
+          <canvas id="skillChart" height="160"></canvas>
+          <div id="skillTable"></div>
+        </div>
+
+        <div id="studentTable"></div>
+      </section>
+    </section>
+  </main>
+
+  <div id="lootModal" class="loot-modal hidden">
+    <div class="loot-card">
+      <div id="lootIcon" class="loot-icon">🎁</div>
+      <h2 id="lootTitle">Loot opnað!</h2>
+      <p id="lootText">Þú fékkst verðlaun.</p>
+      <button onclick="closeLootModal()">Taka við</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

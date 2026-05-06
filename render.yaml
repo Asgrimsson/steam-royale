@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: skola-royale
+    env: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DATA_DIR
+        value: /var/data
+      - key: SESSION_DAYS
+        value: "14"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: TEACHER_USERNAME
+        value: kennari
+      - key: TEACHER_PASSWORD
+        sync: false
+      - key: ALLOW_DEFAULT_TEACHER_PASSWORD
+        value: "false"
+    disk:
+      name: skola-royale-data
+      mountPath: /var/data
+      sizeGB: 1
