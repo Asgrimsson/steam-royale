@@ -225,6 +225,38 @@ def init_db():
             FOREIGN KEY(path_id) REFERENCES learning_paths(id) ON DELETE CASCADE,
             FOREIGN KEY(step_id) REFERENCES learning_path_steps(id) ON DELETE CASCADE
         );
+
+        CREATE TABLE IF NOT EXISTS path_quizzes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            path_id INTEGER NOT NULL,
+            title TEXT NOT NULL,
+            description TEXT NOT NULL DEFAULT '',
+            class_name TEXT NOT NULL DEFAULT '',
+            grade_level INTEGER NOT NULL DEFAULT 5,
+            subject TEXT NOT NULL DEFAULT 'mixed',
+            question_count INTEGER NOT NULL DEFAULT 10,
+            pass_percent INTEGER NOT NULL DEFAULT 70,
+            active INTEGER NOT NULL DEFAULT 1,
+            created_by INTEGER,
+            created_at INTEGER NOT NULL,
+            updated_at INTEGER NOT NULL,
+            FOREIGN KEY(path_id) REFERENCES learning_paths(id) ON DELETE CASCADE,
+            FOREIGN KEY(created_by) REFERENCES users(id)
+        );
+
+        CREATE TABLE IF NOT EXISTS path_quiz_attempts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            quiz_id INTEGER NOT NULL,
+            user_id INTEGER NOT NULL,
+            score INTEGER NOT NULL DEFAULT 0,
+            total INTEGER NOT NULL DEFAULT 0,
+            percent INTEGER NOT NULL DEFAULT 0,
+            passed INTEGER NOT NULL DEFAULT 0,
+            answers_json TEXT NOT NULL DEFAULT '[]',
+            created_at INTEGER NOT NULL,
+            FOREIGN KEY(quiz_id) REFERENCES path_quizzes(id) ON DELETE CASCADE,
+            FOREIGN KEY(user_id) REFERENCES users(id)
+        );
         """)
 
         # Lightweight migrations for older local databases
@@ -371,6 +403,20 @@ class LearningPathProgressIn(BaseModel):
 class LearningPathClaimIn(BaseModel):
     path_id: int
     step_id: int
+
+
+class PathQuizCreateIn(BaseModel):
+    path_id: int
+    title: Optional[str] = None
+    description: str = ""
+    question_count: int = Field(default=10, ge=3, le=40)
+    pass_percent: int = Field(default=70, ge=0, le=100)
+    active: bool = True
+
+
+class PathQuizSubmitIn(BaseModel):
+    quiz_id: int
+    answers: list[dict] = Field(default_factory=list)
 
 
 class ProgressIn(BaseModel):
@@ -1379,6 +1425,170 @@ def teacher_learning_path_progress(path_id: int, teacher=Depends(require_teacher
             WHERE u.role='student' AND (lp.class_name='' OR COALESCE(NULLIF(u.class_name,''), 'Óflokkað')=lp.class_name)
             ORDER BY u.display_name COLLATE NOCASE, s.step_order
         """, (path_id,)).fetchall()
+        return [dict(r) for r in rows]
+
+
+
+def quiz_row_to_dict(r):
+    return dict(r)
+
+
+@app.post("/api/teacher/path-quizzes")
+def teacher_create_path_quiz(data: PathQuizCreateIn, teacher=Depends(require_teacher)):
+    with db() as conn:
+        path = conn.execute("""
+            SELECT id, title, description, class_name, grade_level, subject
+            FROM learning_paths WHERE id=?
+        """, (data.path_id,)).fetchone()
+        if not path:
+            raise HTTPException(status_code=404, detail="Námsleið fannst ekki.")
+        title = data.title or f"Lokapróf - {path['title']}"
+        cur = conn.execute("""
+            INSERT INTO path_quizzes(path_id, title, description, class_name, grade_level, subject, question_count, pass_percent, active, created_by, created_at, updated_at)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
+        """, (
+            data.path_id, title.strip(), data.description.strip() or f"Lokapróf úr námsleið: {path['title']}",
+            path["class_name"], path["grade_level"], path["subject"], data.question_count,
+            data.pass_percent, 1 if data.active else 0, teacher["id"], now(), now()
+        ))
+        row = conn.execute("SELECT * FROM path_quizzes WHERE id=?", (cur.lastrowid,)).fetchone()
+        return quiz_row_to_dict(row)
+
+
+@app.get("/api/path-quizzes")
+def assigned_path_quizzes(user=Depends(current_user)):
+    class_name = user.get("class_name") or ""
+    with db() as conn:
+        rows = conn.execute("""
+            SELECT * FROM path_quizzes
+            WHERE active=1 AND (class_name='' OR class_name=?)
+            ORDER BY updated_at DESC
+        """, (class_name,)).fetchall()
+        out = []
+        for r in rows:
+            d = quiz_row_to_dict(r)
+            best = conn.execute("""
+                SELECT MAX(percent) AS best_percent, COUNT(*) AS attempts
+                FROM path_quiz_attempts
+                WHERE quiz_id=? AND user_id=?
+            """, (r["id"], user["id"])).fetchone()
+            d["best_percent"] = best["best_percent"] if best and best["best_percent"] is not None else None
+            d["attempts"] = best["attempts"] if best else 0
+            out.append(d)
+        return out
+
+
+@app.get("/api/path-quizzes/{quiz_id}/questions")
+def get_path_quiz_questions(quiz_id: int, user=Depends(current_user)):
+    with db() as conn:
+        quiz = conn.execute("SELECT * FROM path_quizzes WHERE id=? AND active=1", (quiz_id,)).fetchone()
+        if not quiz:
+            raise HTTPException(status_code=404, detail="Próf fannst ekki.")
+        steps = conn.execute("""
+            SELECT subject, skill, grade_level FROM learning_path_steps
+            WHERE path_id=?
+        """, (quiz["path_id"],)).fetchall()
+
+    # Use static question bank as source for quiz questions
+    bank_path = APP_DIR / "static" / "questions.json"
+    data = json.loads(bank_path.read_text(encoding="utf-8"))
+    all_q = data.get("questions", [])
+    skills = {s["skill"] for s in steps if s["skill"]}
+    subjects = {s["subject"] for s in steps if s["subject"] and s["subject"] != "mixed"}
+    grade = quiz["grade_level"]
+
+    pool = [
+        q for q in all_q
+        if int(q.get("grade_level", grade)) == int(grade)
+        and (not subjects or q.get("subject") in subjects or quiz["subject"] == "mixed")
+        and (not skills or q.get("skill") in skills or len(skills) < 2)
+        and q.get("options")
+    ]
+    if len(pool) < quiz["question_count"]:
+        pool = [
+            q for q in all_q
+            if int(q.get("grade_level", grade)) == int(grade)
+            and (quiz["subject"] == "mixed" or q.get("subject") == quiz["subject"] or not quiz["subject"])
+            and q.get("options")
+        ]
+    if len(pool) < quiz["question_count"]:
+        pool = [q for q in all_q if q.get("options")]
+
+    import random
+    random.shuffle(pool)
+    selected = pool[:quiz["question_count"]]
+    # do not send hint only if you want exam mode stricter
+    return [{
+        "id": q["id"],
+        "subject": q.get("subject"),
+        "skill": q.get("skill", "almennt"),
+        "grade_level": q.get("grade_level", grade),
+        "text": q.get("text"),
+        "options": q.get("options") or [],
+    } for q in selected]
+
+
+@app.post("/api/path-quizzes/submit")
+def submit_path_quiz(data: PathQuizSubmitIn, user=Depends(current_user)):
+    with db() as conn:
+        quiz = conn.execute("SELECT * FROM path_quizzes WHERE id=? AND active=1", (data.quiz_id,)).fetchone()
+        if not quiz:
+            raise HTTPException(status_code=404, detail="Próf fannst ekki.")
+
+    bank_path = APP_DIR / "static" / "questions.json"
+    qdata = json.loads(bank_path.read_text(encoding="utf-8"))
+    answer_map = {q["id"]: str(q.get("answer")) for q in qdata.get("questions", [])}
+    detailed = []
+    score = 0
+    total = 0
+    for a in data.answers:
+        qid = str(a.get("id"))
+        given = str(a.get("answer", ""))
+        correct_answer = answer_map.get(qid)
+        if correct_answer is None:
+            continue
+        correct = normalize_answer(given) == normalize_answer(correct_answer)
+        score += 1 if correct else 0
+        total += 1
+        detailed.append({"id": qid, "answer": given, "correct_answer": correct_answer, "correct": correct})
+    percent = round((score / total) * 100) if total else 0
+    passed = 1 if percent >= quiz["pass_percent"] else 0
+    with db() as conn:
+        conn.execute("""
+            INSERT INTO path_quiz_attempts(quiz_id, user_id, score, total, percent, passed, answers_json, created_at)
+            VALUES (?,?,?,?,?,?,?,?)
+        """, (data.quiz_id, user["id"], score, total, percent, passed, json.dumps(detailed, ensure_ascii=False), now()))
+        # Reward pass once by adding small reward. Multiple passes still recorded.
+        if passed:
+            p = conn.execute("SELECT coins, xp FROM progress WHERE user_id=?", (user["id"],)).fetchone()
+            if p:
+                conn.execute("UPDATE progress SET coins=?, xp=?, updated_at=? WHERE user_id=?", (p["coins"] + 250, p["xp"] + 150, now(), user["id"]))
+    return {"score": score, "total": total, "percent": percent, "passed": bool(passed), "answers": detailed}
+
+
+@app.get("/api/teacher/path-quizzes")
+def teacher_list_path_quizzes(teacher=Depends(require_teacher)):
+    with db() as conn:
+        rows = conn.execute("""
+            SELECT q.*, lp.title AS path_title
+            FROM path_quizzes q
+            JOIN learning_paths lp ON lp.id=q.path_id
+            ORDER BY q.updated_at DESC
+        """).fetchall()
+        return [dict(r) for r in rows]
+
+
+@app.get("/api/teacher/path-quizzes/{quiz_id}/results")
+def teacher_path_quiz_results(quiz_id: int, teacher=Depends(require_teacher)):
+    with db() as conn:
+        rows = conn.execute("""
+            SELECT u.display_name, u.username, COALESCE(NULLIF(u.class_name,''), 'Óflokkað') AS class_name,
+                   a.score, a.total, a.percent, a.passed, a.created_at
+            FROM path_quiz_attempts a
+            JOIN users u ON u.id=a.user_id
+            WHERE a.quiz_id=?
+            ORDER BY a.created_at DESC
+        """, (quiz_id,)).fetchall()
         return [dict(r) for r in rows]
 
 

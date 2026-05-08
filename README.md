@@ -629,3 +629,27 @@ git push
 ```
 
 Render býr sjálfkrafa til nýju töfluna `learning_path_progress` við næsta deploy.
+
+
+## v1.6 - Lokapróf úr námsleið + meiri náttúrufræði
+
+Nýtt:
+
+- Kennari getur búið til lokapróf úr námsleið
+- Nemendur fá sérstaka síðu: `📝 Lokapróf`
+- Próf velur spurningar út frá námsleið, grein, færni og bekkjarstigi
+- Nemandi sendir inn próf og fær niðurstöðu strax
+- Kerfið vistar prófniðurstöður
+- Kennari sér niðurstöður prófa
+- Nemandi fær verðlaun ef hann stenst próf
+- Bætt við 39 náttúrufræðiverkefnum fyrir 5., 6. og 7. bekk
+
+### Uppfærsla
+
+```cmd
+git add .
+git commit -m "Skola Royale v1.6 path quizzes and science"
+git push
+```
+
+Render býr sjálfkrafa til nýju töflurnar `path_quizzes` og `path_quiz_attempts`.

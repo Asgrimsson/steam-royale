@@ -763,3 +763,26 @@ textarea, select{
   opacity:.55;
   cursor:not-allowed;
 }
+
+/* v1.6 path quizzes */
+.quiz-question{
+  background:#fff;
+  border:2px solid #e5e7eb;
+  border-radius:18px;
+  padding:14px;
+  margin:12px 0;
+}
+.quiz-option{
+  display:block;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  padding:10px;
+  margin:8px 0;
+  font-weight:850;
+  cursor:pointer;
+}
+.quiz-option input{
+  width:auto;
+  margin-right:8px;
+}

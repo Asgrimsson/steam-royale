@@ -681,6 +681,8 @@ function showView(id){
   if(id==="reports") loadReportsView();
   if(id==="learningpaths") loadLearningPaths();
   if(id==="pathmap") loadStudentLearningPaths();
+  if(id==="quizzes") loadStudentQuizzes();
+  if(id==="quizteacher") loadTeacherQuizzes();
   if(id==="boss") updateBossUI();
   if(id==="daily") renderDailyRewards();
   if(id==="achievements") renderAchievements();
@@ -1530,5 +1532,148 @@ async function deleteLearningPath(id){
   }catch(e){toast(e.message)}
 }
 
+
+
+let STUDENT_QUIZZES = [];
+let ACTIVE_QUIZ = null;
+let ACTIVE_QUIZ_QUESTIONS = [];
+
+async function loadStudentQuizzes(){
+  const list = document.getElementById("studentQuizList");
+  if(!list) return;
+  list.innerHTML = "<p>Hleð lokaprófum...</p>";
+  try{
+    STUDENT_QUIZZES = await API.call("/api/path-quizzes");
+    if(!STUDENT_QUIZZES.length){
+      list.innerHTML = "<p>Engin lokapróf eru virk fyrir þig ennþá.</p>";
+      return;
+    }
+    list.innerHTML = STUDENT_QUIZZES.map(q => `
+      <div class="shop-item">
+        <div style="font-size:3rem">📝</div>
+        <h3>${escapeHtml(q.title)}</h3>
+        <p>${escapeHtml(q.description || "")}</p>
+        <p><strong>${q.question_count} spurningar</strong> · Lágmark ${q.pass_percent}%</p>
+        <p>${q.best_percent === null ? "Ekki tekið" : "Besta skor: " + q.best_percent + "%"}</p>
+        <button onclick="startPathQuiz(${q.id})">Byrja próf</button>
+      </div>`).join("");
+  }catch(e){ list.innerHTML = `<p class="bad">${e.message}</p>`; }
+}
+
+async function startPathQuiz(quizId){
+  try{
+    ACTIVE_QUIZ = STUDENT_QUIZZES.find(q=>q.id===quizId);
+    ACTIVE_QUIZ_QUESTIONS = await API.call(`/api/path-quizzes/${quizId}/questions`);
+    renderQuizRunner();
+  }catch(e){toast(e.message)}
+}
+
+function renderQuizRunner(){
+  const box = document.getElementById("quizRunner");
+  if(!box) return;
+  box.classList.remove("hidden");
+  box.innerHTML = `
+    <h3>📝 ${escapeHtml(ACTIVE_QUIZ.title)}</h3>
+    <p>Veldu svar við hverri spurningu og sendu inn prófið.</p>
+    ${ACTIVE_QUIZ_QUESTIONS.map((q,i)=>`
+      <div class="quiz-question">
+        <strong>${i+1}. ${escapeHtml(q.text)}</strong>
+        <div>
+          ${(q.options || []).map(opt=>`
+            <label class="quiz-option">
+              <input type="radio" name="quiz-${q.id}" value="${escapeHtml(opt)}">
+              ${escapeHtml(opt)}
+            </label>`).join("")}
+        </div>
+      </div>`).join("")}
+    <button onclick="submitPathQuiz()">Senda lokapróf</button>
+  `;
+  box.scrollIntoView({behavior:"smooth"});
+}
+
+async function submitPathQuiz(){
+  if(!ACTIVE_QUIZ) return;
+  const answers = ACTIVE_QUIZ_QUESTIONS.map(q => {
+    const checked = document.querySelector(`input[name="quiz-${CSS.escape(q.id)}"]:checked`);
+    return {id:q.id, answer: checked ? checked.value : ""};
+  });
+  try{
+    const res = await API.call("/api/path-quizzes/submit", {
+      method:"POST",
+      body:JSON.stringify({quiz_id:ACTIVE_QUIZ.id, answers})
+    });
+    showLootModal(res.passed ? "🏆" : "📝", res.passed ? "Próf staðið!" : "Prófi lokið", `${res.score}/${res.total} rétt · ${res.percent}%${res.passed ? " · +250 coins og +150 XP" : ""}`);
+    await loadProgress();
+    await loadStudentQuizzes();
+    updateUI();
+  }catch(e){toast(e.message)}
+}
+
+async function loadTeacherQuizzes(){
+  const select = document.getElementById("quizPathSelect");
+  const list = document.getElementById("teacherQuizList");
+  if(!select || !list) return;
+  try{
+    if(!teacherLearningPathsCache.length) await loadLearningPaths();
+    select.innerHTML = teacherLearningPathsCache.map(p=>`<option value="${p.id}">${escapeHtml(p.title)} (${p.grade_level}. bekkur)</option>`).join("");
+    const quizzes = await API.call("/api/teacher/path-quizzes");
+    if(!quizzes.length){
+      list.innerHTML = "<p>Engin lokapróf komin.</p>";
+      return;
+    }
+    list.innerHTML = quizzes.map(q=>`
+      <div class="pack-card">
+        <div>
+          <h3>📝 ${escapeHtml(q.title)}</h3>
+          <p>${escapeHtml(q.path_title || "")}</p>
+          <div class="pack-meta"><span>${q.question_count} spurningar</span><span>Lágmark ${q.pass_percent}%</span><span>${q.active ? "virkt" : "óvirkt"}</span></div>
+        </div>
+        <div class="pack-actions">
+          <button onclick="loadQuizResults(${q.id})">Niðurstöður</button>
+        </div>
+        <div id="quizResults-${q.id}" class="lp-progress-box"></div>
+      </div>`).join("");
+  }catch(e){list.innerHTML = `<p class="bad">${e.message}</p>`}
+}
+
+async function createPathQuiz(){
+  quizTeacherMsg.textContent = "";
+  const pathId = Number(quizPathSelect.value);
+  if(!pathId){quizTeacherMsg.textContent = " Veldu námsleið."; return;}
+  try{
+    await API.call("/api/teacher/path-quizzes", {
+      method:"POST",
+      body:JSON.stringify({
+        path_id:pathId,
+        title:quizTitle.value || null,
+        question_count:Number(quizQuestionCount.value || 10),
+        pass_percent:Number(quizPassPercent.value || 70),
+        active:true
+      })
+    });
+    quizTeacherMsg.textContent = " Lokapróf búið til ✅";
+    quizTitle.value = "";
+    await loadTeacherQuizzes();
+  }catch(e){quizTeacherMsg.textContent = " " + e.message}
+}
+
+async function loadQuizResults(quizId){
+  const box = document.getElementById(`quizResults-${quizId}`);
+  if(!box) return;
+  box.innerHTML = "<p>Hleð niðurstöðum...</p>";
+  try{
+    const rows = await API.call(`/api/teacher/path-quizzes/${quizId}/results`);
+    if(!rows.length){box.innerHTML = "<p>Engar niðurstöður komnar.</p>"; return;}
+    box.innerHTML = `<table class="table"><thead><tr><th>Nemandi</th><th>Bekkur</th><th>Skor</th><th>%</th><th>Staða</th></tr></thead><tbody>
+      ${rows.map(r=>`<tr>
+        <td><strong>${escapeHtml(r.display_name)}</strong><br><small>${escapeHtml(r.username)}</small></td>
+        <td>${escapeHtml(r.class_name)}</td>
+        <td>${r.score}/${r.total}</td>
+        <td>${r.percent}%</td>
+        <td>${r.passed ? "✅ staðið" : "❌ æfa betur"}</td>
+      </tr>`).join("")}
+    </tbody></table>`;
+  }catch(e){box.innerHTML = `<p class="bad">${e.message}</p>`}
+}
 
 window.onload=()=>{if(API.token)boot();}

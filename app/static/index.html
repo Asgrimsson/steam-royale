@@ -64,12 +64,14 @@
       <button class="menu" onclick="showView('boss')">👑 Boss Fight</button>
       <button class="menu" onclick="showView('daily')">🎁 Dagleg verðlaun</button>
       <button class="menu" onclick="showView('pathmap')">🧭 Námsleið</button>
+      <button class="menu" onclick="showView('quizzes')">📝 Lokapróf</button>
       <button class="menu" onclick="showView('shop')">🛒 Búðin</button>
       <button class="menu" onclick="showView('achievements')">🏆 Afrek</button>
       <button class="menu teacher-only hidden" onclick="showView('teacher')">👨‍🏫 Mælaborð kennara</button>
       <button class="menu teacher-only hidden" onclick="showView('questions')">✍️ Spurningabanki</button>
       <button class="menu teacher-only hidden" onclick="showView('packs')">📦 Verkefnapakkar</button>
       <button class="menu teacher-only hidden" onclick="showView('learningpaths')">🧭 Námsleiðir</button>
+      <button class="menu teacher-only hidden" onclick="showView('quizteacher')">📝 Lokapróf</button>
       <button class="menu teacher-only hidden" onclick="showView('reports')">📊 Skýrslur</button>
       <button class="menu danger" onclick="logout()">Útskrá</button>
     </aside>
@@ -167,6 +169,13 @@
         <h2>🧭 Námsleiðin mín</h2>
         <p>Hér sérðu námsleiðir sem kennari hefur virkjað fyrir bekkinn þinn.</p>
         <div id="studentLearningPaths" class="learning-path-map"></div>
+      </section>
+
+      <section id="view-quizzes" class="view">
+        <h2>📝 Lokapróf</h2>
+        <p>Hér birtast lokapróf sem kennari hefur búið til úr námsleiðum.</p>
+        <div id="studentQuizList" class="grid"></div>
+        <div id="quizRunner" class="teacher-box hidden"></div>
       </section>
 
       <section id="view-shop" class="view">
@@ -324,6 +333,28 @@
           <h3>Virkar námsleiðir</h3>
           <button onclick="loadLearningPaths()">Endurhlaða námsleiðir</button>
           <div id="learningPathsList"></div>
+        </div>
+      </section>
+
+      <section id="view-quizteacher" class="view">
+        <h2>📝 Lokapróf úr námsleið</h2>
+        <p class="teacher-intro">Búðu til lokapróf úr námsleið og skoðaðu niðurstöður.</p>
+        <div class="teacher-box">
+          <h3>Búa til lokapróf</h3>
+          <p>Veldu námsleið og fjölda spurninga.</p>
+          <div class="form-grid">
+            <select id="quizPathSelect"></select>
+            <input id="quizQuestionCount" type="number" min="3" max="40" value="10">
+            <input id="quizPassPercent" type="number" min="0" max="100" value="70">
+          </div>
+          <input id="quizTitle" placeholder="Heiti prófs, t.d. Lokapróf - Prósentur">
+          <button onclick="createPathQuiz()">Búa til lokapróf</button>
+          <span id="quizTeacherMsg"></span>
+        </div>
+        <div class="teacher-box">
+          <h3>Lokapróf og niðurstöður</h3>
+          <button onclick="loadTeacherQuizzes()">Endurhlaða</button>
+          <div id="teacherQuizList"></div>
         </div>
       </section>
 

@@ -1,6 +1,6 @@
 {
-  "version": "1.3",
-  "description": "Skóla Royale v1.3: Adaptive learning og stækkaður 7. bekkjar verkefnabanki.",
+  "version": "1.6",
+  "description": "Skóla Royale v1.6: Lokapróf úr námsleið og meiri náttúrufræði fyrir 5.-7. bekk.",
   "subjects": {
     "math": "Stærðfræði",
     "icelandic": "Íslenska",
@@ -15611,6 +15611,669 @@
         "veðurspá",
         "kortalykill",
         "tegund atvinnu"
+      ]
+    },
+    {
+      "id": "v16_00966",
+      "subject": "science",
+      "grade_level": 5,
+      "skill": "líkaminn",
+      "difficulty": 1,
+      "type": "choice",
+      "text": "Hvaða líffæri dælir blóði um líkamann?",
+      "answer": "hjarta",
+      "hint": "Hjartað er dæla líkamans.",
+      "options": [
+        "hjarta",
+        "lunga",
+        "magi",
+        "eyra"
+      ]
+    },
+    {
+      "id": "v16_00967",
+      "subject": "science",
+      "grade_level": 5,
+      "skill": "líkaminn",
+      "difficulty": 1,
+      "type": "choice",
+      "text": "Hvaða líffæri notum við mest til að anda?",
+      "answer": "lungu",
+      "hint": "Lungun taka inn súrefni.",
+      "options": [
+        "lungu",
+        "hjarta",
+        "hné",
+        "tunga"
+      ]
+    },
+    {
+      "id": "v16_00968",
+      "subject": "science",
+      "grade_level": 5,
+      "skill": "líkaminn",
+      "difficulty": 1,
+      "type": "choice",
+      "text": "Hvað verndar heilann?",
+      "answer": "höfuðkúpan",
+      "hint": "Heilinn er inni í höfuðkúpunni.",
+      "options": [
+        "höfuðkúpan",
+        "rifbein",
+        "magi",
+        "hné"
+      ]
+    },
+    {
+      "id": "v16_00969",
+      "subject": "science",
+      "grade_level": 5,
+      "skill": "skynfæri",
+      "difficulty": 1,
+      "type": "choice",
+      "text": "Hvaða skynfæri notum við til að heyra?",
+      "answer": "eyru",
+      "hint": "Við heyrum með eyrunum.",
+      "options": [
+        "eyru",
+        "augu",
+        "nef",
+        "tunga"
+      ]
+    },
+    {
+      "id": "v16_00970",
+      "subject": "science",
+      "grade_level": 5,
+      "skill": "skynfæri",
+      "difficulty": 1,
+      "type": "choice",
+      "text": "Hvaða skynfæri notum við til að finna lykt?",
+      "answer": "nef",
+      "hint": "Lyktarskynið tengist nefinu.",
+      "options": [
+        "nef",
+        "eyru",
+        "fætur",
+        "hendur"
+      ]
+    },
+    {
+      "id": "v16_00971",
+      "subject": "science",
+      "grade_level": 5,
+      "skill": "plöntur",
+      "difficulty": 1,
+      "type": "choice",
+      "text": "Hvaða hluti plöntu tekur oftast upp vatn úr jarðvegi?",
+      "answer": "rót",
+      "hint": "Rætur taka upp vatn og næringu.",
+      "options": [
+        "rót",
+        "blóm",
+        "lauf",
+        "ávöxtur"
+      ]
+    },
+    {
+      "id": "v16_00972",
+      "subject": "science",
+      "grade_level": 5,
+      "skill": "plöntur",
+      "difficulty": 1,
+      "type": "choice",
+      "text": "Hvað þurfa plöntur til að vaxa?",
+      "answer": "ljós, vatn og næringu",
+      "hint": "Plöntur þurfa ljós, vatn og næringu.",
+      "options": [
+        "ljós, vatn og næringu",
+        "bara sand",
+        "bara myrkur",
+        "bara steina"
+      ]
+    },
+    {
+      "id": "v16_00973",
+      "subject": "science",
+      "grade_level": 5,
+      "skill": "dýr",
+      "difficulty": 1,
+      "type": "choice",
+      "text": "Hvaða dýr er spendýr?",
+      "answer": "hestur",
+      "hint": "Spendýr gefa afkvæmum mjólk.",
+      "options": [
+        "hestur",
+        "lax",
+        "fluga",
+        "ormur"
+      ]
+    },
+    {
+      "id": "v16_00974",
+      "subject": "science",
+      "grade_level": 5,
+      "skill": "dýr",
+      "difficulty": 1,
+      "type": "choice",
+      "text": "Hvaða dýr verpir eggjum?",
+      "answer": "hæna",
+      "hint": "Fuglar verpa eggjum.",
+      "options": [
+        "hæna",
+        "hundur",
+        "kýr",
+        "hestur"
+      ]
+    },
+    {
+      "id": "v16_00975",
+      "subject": "science",
+      "grade_level": 5,
+      "skill": "veður",
+      "difficulty": 1,
+      "type": "choice",
+      "text": "Hvað kallast vatn sem fellur úr skýjum?",
+      "answer": "úrkoma",
+      "hint": "Rigning og snjór eru úrkoma.",
+      "options": [
+        "úrkoma",
+        "jarðskjálfti",
+        "hraun",
+        "vindátt"
+      ]
+    },
+    {
+      "id": "v16_00976",
+      "subject": "science",
+      "grade_level": 5,
+      "skill": "vatn",
+      "difficulty": 1,
+      "type": "choice",
+      "text": "Í hvaða formi er vatn þegar það er frosið?",
+      "answer": "ís",
+      "hint": "Frosið vatn er ís.",
+      "options": [
+        "ís",
+        "gufa",
+        "sandur",
+        "loft"
+      ]
+    },
+    {
+      "id": "v16_00977",
+      "subject": "science",
+      "grade_level": 5,
+      "skill": "efni",
+      "difficulty": 1,
+      "type": "choice",
+      "text": "Hvaða efni er gegnsætt?",
+      "answer": "gler",
+      "hint": "Gegnsætt þýðir að sjá má í gegnum það.",
+      "options": [
+        "gler",
+        "tré",
+        "steinn",
+        "járn"
+      ]
+    },
+    {
+      "id": "v16_00978",
+      "subject": "science",
+      "grade_level": 6,
+      "skill": "vistkerfi",
+      "difficulty": 2,
+      "type": "choice",
+      "text": "Hvað er vistkerfi?",
+      "answer": "samfélag lífvera og umhverfis þeirra",
+      "hint": "Vistkerfi inniheldur lífverur og umhverfi.",
+      "options": [
+        "samfélag lífvera og umhverfis þeirra",
+        "bara eitt dýr",
+        "bara vatn",
+        "bara veður"
+      ]
+    },
+    {
+      "id": "v16_00979",
+      "subject": "science",
+      "grade_level": 6,
+      "skill": "vistkerfi",
+      "difficulty": 2,
+      "type": "choice",
+      "text": "Hvað er framleiðandi í fæðukeðju?",
+      "answer": "planta",
+      "hint": "Plöntur búa til eigin fæðu.",
+      "options": [
+        "planta",
+        "refur",
+        "örn",
+        "maur"
+      ]
+    },
+    {
+      "id": "v16_00980",
+      "subject": "science",
+      "grade_level": 6,
+      "skill": "fæðukeðjur",
+      "difficulty": 2,
+      "type": "choice",
+      "text": "Hvað kemur oft fyrst í fæðukeðju?",
+      "answer": "planta",
+      "hint": "Plöntur nýta sólarljós.",
+      "options": [
+        "planta",
+        "úlfur",
+        "maður",
+        "örn"
+      ]
+    },
+    {
+      "id": "v16_00981",
+      "subject": "science",
+      "grade_level": 6,
+      "skill": "orka",
+      "difficulty": 2,
+      "type": "choice",
+      "text": "Hvaða orkugjafi kemur frá sólinni?",
+      "answer": "sólarorka",
+      "hint": "Sólarorka kemur frá sólinni.",
+      "options": [
+        "sólarorka",
+        "kol",
+        "olía",
+        "jarðgas"
+      ]
+    },
+    {
+      "id": "v16_00982",
+      "subject": "science",
+      "grade_level": 6,
+      "skill": "orka",
+      "difficulty": 2,
+      "type": "choice",
+      "text": "Hvað er endurnýjanleg orka?",
+      "answer": "orka sem endurnýjast á náttúrulegan hátt",
+      "hint": "Endurnýjanleg orka klárast ekki auðveldlega.",
+      "options": [
+        "orka sem endurnýjast á náttúrulegan hátt",
+        "orka sem klárast alltaf strax",
+        "bara rafhlaða",
+        "tegund steins"
+      ]
+    },
+    {
+      "id": "v16_00983",
+      "subject": "science",
+      "grade_level": 6,
+      "skill": "rafmagn",
+      "difficulty": 2,
+      "type": "choice",
+      "text": "Hvað þarf rafrás til að ljósapera lýsi?",
+      "answer": "lokaða rafrás",
+      "hint": "Rafmagn þarf lokaða leið.",
+      "options": [
+        "lokaða rafrás",
+        "opna rafrás",
+        "ekkert vír",
+        "bara plast"
+      ]
+    },
+    {
+      "id": "v16_00984",
+      "subject": "science",
+      "grade_level": 6,
+      "skill": "rafmagn",
+      "difficulty": 2,
+      "type": "choice",
+      "text": "Hvaða efni leiðir rafmagn vel?",
+      "answer": "kopar",
+      "hint": "Málmar leiða rafmagn oft vel.",
+      "options": [
+        "kopar",
+        "plast",
+        "gúmmí",
+        "tré"
+      ]
+    },
+    {
+      "id": "v16_00985",
+      "subject": "science",
+      "grade_level": 6,
+      "skill": "efni",
+      "difficulty": 2,
+      "type": "choice",
+      "text": "Hvað gerist þegar ís bráðnar?",
+      "answer": "fast efni verður að vökva",
+      "hint": "Ís er fast vatn.",
+      "options": [
+        "fast efni verður að vökva",
+        "vökvi verður að gasi",
+        "gas verður að föstu efni",
+        "vatn hverfur"
+      ]
+    },
+    {
+      "id": "v16_00986",
+      "subject": "science",
+      "grade_level": 6,
+      "skill": "efni",
+      "difficulty": 2,
+      "type": "choice",
+      "text": "Hvað kallast þegar vökvi breytist í gas?",
+      "answer": "uppgufun",
+      "hint": "Vatn getur gufað upp.",
+      "options": [
+        "uppgufun",
+        "þétting",
+        "bráðnun",
+        "frysting"
+      ]
+    },
+    {
+      "id": "v16_00987",
+      "subject": "science",
+      "grade_level": 6,
+      "skill": "ljóstillífun",
+      "difficulty": 2,
+      "type": "choice",
+      "text": "Hvað nota plöntur í ljóstillífun?",
+      "answer": "ljós, vatn og koltvíoxíð",
+      "hint": "Ljóstillífun býr til fæðu í plöntum.",
+      "options": [
+        "ljós, vatn og koltvíoxíð",
+        "salt, sykur og sand",
+        "bara myrkur",
+        "bara súrefni"
+      ]
+    },
+    {
+      "id": "v16_00988",
+      "subject": "science",
+      "grade_level": 6,
+      "skill": "jarðfræði",
+      "difficulty": 2,
+      "type": "choice",
+      "text": "Hvað er hraun?",
+      "answer": "bráðin kvika sem hefur komið upp á yfirborð",
+      "hint": "Hraun kemur úr eldfjöllum.",
+      "options": [
+        "bráðin kvika sem hefur komið upp á yfirborð",
+        "frosið vatn",
+        "tegund skýs",
+        "vindur"
+      ]
+    },
+    {
+      "id": "v16_00989",
+      "subject": "science",
+      "grade_level": 6,
+      "skill": "veður og loftslag",
+      "difficulty": 2,
+      "type": "choice",
+      "text": "Hvað mælir hitamælir?",
+      "answer": "hitastig",
+      "hint": "Hitamælir mælir hita.",
+      "options": [
+        "hitastig",
+        "vindhraða",
+        "úrkomu",
+        "þrýsting í dekkjum"
+      ]
+    },
+    {
+      "id": "v16_00990",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "frumur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er frumukjarni?",
+      "answer": "stjórnstöð frumunnar sem geymir erfðaefni",
+      "hint": "Kjarninn geymir DNA.",
+      "options": [
+        "stjórnstöð frumunnar sem geymir erfðaefni",
+        "orkuver frumunnar",
+        "ytra lag húðar",
+        "bein í fæti"
+      ]
+    },
+    {
+      "id": "v16_00991",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "frumur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað gera hvatberar?",
+      "answer": "vinna orku úr fæðu",
+      "hint": "Hvatberar eru orkuver frumunnar.",
+      "options": [
+        "vinna orku úr fæðu",
+        "geyma vatn eingöngu",
+        "búa til bein",
+        "vernda tennur"
+      ]
+    },
+    {
+      "id": "v16_00992",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "erfðir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er gen?",
+      "answer": "hluti erfðaefnis sem hefur áhrif á eiginleika",
+      "hint": "Gen eru upplýsingar í DNA.",
+      "options": [
+        "hluti erfðaefnis sem hefur áhrif á eiginleika",
+        "tegund steins",
+        "veðurfyrirbæri",
+        "hluti af korti"
+      ]
+    },
+    {
+      "id": "v16_00993",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "erfðir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Af hverju líkjast börn oft foreldrum sínum?",
+      "answer": "þau erfa eiginleika frá foreldrum",
+      "hint": "Erfðir berast milli kynslóða.",
+      "options": [
+        "þau erfa eiginleika frá foreldrum",
+        "þau borða sama mat",
+        "þau búa í sama húsi",
+        "þau læra sömu stafina"
+      ]
+    },
+    {
+      "id": "v16_00994",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "kraftar",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er þyngdarkraftur?",
+      "answer": "kraftur sem dregur hluti að jörðinni",
+      "hint": "Þyngdarkraftur togar hluti niður.",
+      "options": [
+        "kraftur sem dregur hluti að jörðinni",
+        "ljós frá sólinni",
+        "hljóð í lofti",
+        "tegund vökva"
+      ]
+    },
+    {
+      "id": "v16_00995",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "kraftar",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvaða kraftur hægir á hlut sem rennur eftir gólfi?",
+      "answer": "núningskraftur",
+      "hint": "Núningur vinnur gegn hreyfingu.",
+      "options": [
+        "núningskraftur",
+        "ljóskraftur",
+        "litakraftur",
+        "vatnskraftur eingöngu"
+      ]
+    },
+    {
+      "id": "v16_00996",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "efnabreytingar",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvaða dæmi er efnabreyting?",
+      "answer": "við brennslu myndast ný efni",
+      "hint": "Efnabreyting breytir efninu sjálfu.",
+      "options": [
+        "við brennslu myndast ný efni",
+        "ís bráðnar",
+        "vatn frýs",
+        "pappír er klipptur"
+      ]
+    },
+    {
+      "id": "v16_00997",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "efnabreytingar",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvaða dæmi er hamskipti en ekki efnabreyting?",
+      "answer": "vatn gufar upp",
+      "hint": "Efnið er enn vatn, bara annað ham.",
+      "options": [
+        "vatn gufar upp",
+        "járn ryðgar",
+        "pappír brennur",
+        "mjólk súrnar"
+      ]
+    },
+    {
+      "id": "v16_00998",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "loftslag",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hver er munurinn á veðri og loftslagi?",
+      "answer": "veður er stutt tímabil en loftslag langtímamynstur",
+      "hint": "Loftslag er meðaltal yfir langan tíma.",
+      "options": [
+        "veður er stutt tímabil en loftslag langtímamynstur",
+        "það er enginn munur",
+        "loftslag er bara rigning",
+        "veður tekur hundrað ár"
+      ]
+    },
+    {
+      "id": "v16_00999",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "loftslag",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er gróðurhúsaáhrif?",
+      "answer": "lofttegundir halda eftir varma í lofthjúpi jarðar",
+      "hint": "Gróðurhúsaáhrif halda jörðinni hlýrri.",
+      "options": [
+        "lofttegundir halda eftir varma í lofthjúpi jarðar",
+        "jörðin hættir að snúast",
+        "hafið verður að ís samstundis",
+        "vindur hverfur"
+      ]
+    },
+    {
+      "id": "v16_01000",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "jarðfræði",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Af hverju verða jarðskjálftar oft á flekaskilum?",
+      "answer": "jarðskorpuflekar hreyfast þar",
+      "hint": "Hreyfing fleka veldur spennu.",
+      "options": [
+        "jarðskorpuflekar hreyfast þar",
+        "sólin skín þar meira",
+        "þar er alltaf frost",
+        "þar eru engar bergtegundir"
+      ]
+    },
+    {
+      "id": "v16_01001",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "jarðfræði",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er setberg?",
+      "answer": "berg sem myndast úr seti sem þjappast saman",
+      "hint": "Set safnast í lög.",
+      "options": [
+        "berg sem myndast úr seti sem þjappast saman",
+        "bráðið berg",
+        "lofttegund",
+        "frosið vatn"
+      ]
+    },
+    {
+      "id": "v16_01002",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "orkuflæði",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvers vegna tapast orka milli þrepa í fæðukeðju?",
+      "answer": "lífverur nota orku til hreyfingar, hita og lífsstarfsemi",
+      "hint": "Ekki öll orka fer áfram til næsta þreps.",
+      "options": [
+        "lífverur nota orku til hreyfingar, hita og lífsstarfsemi",
+        "orkan hverfur í stafrófið",
+        "plöntur nota enga orku",
+        "rándýr borða aldrei"
+      ]
+    },
+    {
+      "id": "v16_01003",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "rannsóknir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er breyta í tilraun?",
+      "answer": "þáttur sem getur haft áhrif á niðurstöðu",
+      "hint": "Breyta er það sem við skoðum eða breytum.",
+      "options": [
+        "þáttur sem getur haft áhrif á niðurstöðu",
+        "niðurstaða sem er alltaf rétt",
+        "tegund dýrs",
+        "eining á korti"
+      ]
+    },
+    {
+      "id": "v16_01004",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "rannsóknir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Af hverju þarf samanburðarhóp í tilraun?",
+      "answer": "til að bera saman áhrif breytingarinnar",
+      "hint": "Samanburður hjálpar að sjá hvort breyting skipti máli.",
+      "options": [
+        "til að bera saman áhrif breytingarinnar",
+        "til að rugla niðurstöður",
+        "til að sleppa mælingum",
+        "til að breyta öllu í einu"
       ]
     }
   ],
