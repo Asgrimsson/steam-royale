@@ -601,3 +601,31 @@ git push
 ```
 
 Render deploy-ar sjálfkrafa.
+
+
+## v1.5 - Námsleiðar-framvinda
+
+Nýtt:
+
+- Nemandi getur byrjað skref í námsleið
+- Kerfið vistar framvindu:
+  - rétt svör
+  - svör alls
+  - lokið/ólokið
+  - verðlaun sótt/ósótt
+- Skref læsast þar til fyrra skref er klárað
+- Nemandi fær framvindustiku í hverju skrefi
+- Nemandi getur sótt verðlaun þegar skrefi er lokið
+- Kennari getur skoðað framvindu námsleiðar fyrir nemendur
+
+### Uppfærsla
+
+Afritaðu yfir núverandi verkefni og ýttu á GitHub:
+
+```cmd
+git add .
+git commit -m "Skola Royale v1.5 learning path progress"
+git push
+```
+
+Render býr sjálfkrafa til nýju töfluna `learning_path_progress` við næsta deploy.

@@ -732,3 +732,34 @@ textarea, select{
 @media(max-width:900px){
   .lp-step-row{grid-template-columns:1fr}
 }
+
+/* v1.5 learning path progress */
+.path-step.completed{
+  background:linear-gradient(135deg,#dcfce7,#fef9c3);
+  border-color:#86efac;
+}
+.path-step.locked{
+  filter:grayscale(.45);
+  opacity:.68;
+}
+.step-progress{
+  height:12px;
+  border-radius:999px;
+  background:#e2e8f0;
+  overflow:hidden;
+  border:1px solid rgba(15,23,42,.08);
+}
+.step-progress div{
+  height:100%;
+  background:linear-gradient(90deg,#22c55e,#facc15);
+  border-radius:999px;
+}
+.lp-progress-box{
+  width:100%;
+  margin-top:12px;
+  overflow-x:auto;
+}
+.path-step button:disabled{
+  opacity:.55;
+  cursor:not-allowed;
+}

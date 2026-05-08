@@ -41,6 +41,7 @@ let missionPacksCache = [];
 let MY_SKILL_STATS = [];
 let LEARNING_PATHS = [];
 let teacherLearningPathsCache = [];
+let LEARNING_PATH_PROGRESS = [];
 let currentStudentDetailId = null;
 
 const shopItems = [
@@ -388,6 +389,7 @@ async function boot(){
     if(savedGrade) state.gradeLevel = savedGrade;
     state.adaptiveMode = localStorage.getItem("sr_adaptive_mode") === "1";
     await loadMySkillStats();
+    await loadLearningPathProgress();
     loginScreen.classList.add("hidden"); topbar.classList.remove("hidden"); app.classList.remove("hidden");
     whoami.textContent=`${API.user.display_name} · ${API.user.role==="teacher"?"kennari":"nemandi"}`;
     document.querySelectorAll(".teacher-only").forEach(x=>x.classList.toggle("hidden",API.user.role!=="teacher"));
@@ -447,6 +449,7 @@ async function answer(val){
     feedback.classList.add("bad");
   }
   updateDaily(correct);
+  sendLearningAnswerProgress(correct);
   if(API.user?.role === "student" && state.total_answered % 3 === 0) loadMySkillStats();
   checkAchievements();
   await logAttempt({
@@ -1234,12 +1237,101 @@ function printCurrentStudentReport(){
 
 
 
+
+async function loadLearningPathProgress(){
+  try{
+    if(API.token && API.user?.role === "student"){
+      LEARNING_PATH_PROGRESS = await API.call("/api/learning-path-progress");
+    }
+  }catch(e){
+    console.warn("Náði ekki að hlaða námsleiðarframvindu.", e);
+    LEARNING_PATH_PROGRESS = [];
+  }
+}
+
+function getStepProgress(pathId, stepId){
+  return (LEARNING_PATH_PROGRESS || []).find(p => Number(p.path_id)===Number(pathId) && Number(p.step_id)===Number(stepId));
+}
+
+function isPreviousStepCompleted(path, index){
+  if(index === 0) return true;
+  const prev = path.steps[index-1];
+  const p = getStepProgress(path.id, prev.id);
+  return !!p?.completed;
+}
+
+async function claimLearningStepReward(pathId, stepId){
+  try{
+    const res = await API.call("/api/learning-path-progress/claim", {
+      method:"POST",
+      body:JSON.stringify({path_id:pathId, step_id:stepId})
+    });
+    showLootModal("💰", "Skrefaverðlaun!", `+${res.coins} coins og +${res.xp} XP`);
+    await loadLearningPathProgress();
+    await loadProgress();
+    renderStudentLearningPaths();
+    updateUI();
+  }catch(e){ toast(e.message); }
+}
+
+async function sendLearningAnswerProgress(correct){
+  if(!state.activeLearningStep) return;
+  try{
+    const step = state.activeLearningStep;
+    const res = await API.call("/api/learning-path-progress/answer", {
+      method:"POST",
+      body:JSON.stringify({
+        path_id: step.pathId,
+        step_id: step.stepId,
+        correct: !!correct,
+        answered: true
+      })
+    });
+    await loadLearningPathProgress();
+    if(res.completed && !step.completedToastShown){
+      step.completedToastShown = true;
+      showLootModal("✅", "Skrefi lokið!", `${step.title} er lokið. Sæktu verðlaunin á námsleiðarkortinu.`);
+    }
+  }catch(e){
+    console.warn("Náði ekki að vista námsleiðarframvindu.", e);
+  }
+}
+
+async function loadLearningPathTeacherProgress(pathId){
+  try{
+    const rows = await API.call(`/api/teacher/learning-paths/${pathId}/progress`);
+    const box = document.getElementById(`lpProgress-${pathId}`);
+    if(!box) return;
+    if(!rows.length){
+      box.innerHTML = "<p>Engin framvinda komin.</p>";
+      return;
+    }
+    const students = {};
+    rows.forEach(r => {
+      students[r.user_id] = students[r.user_id] || {name:r.display_name, username:r.username, class_name:r.class_name, steps:[]};
+      students[r.user_id].steps.push(r);
+    });
+    box.innerHTML = `<table class="table"><thead><tr><th>Nemandi</th><th>Bekkur</th><th>Skref</th><th>Framvinda</th><th>Lokið</th></tr></thead><tbody>
+      ${Object.values(students).map(s => `
+        <tr>
+          <td><strong>${escapeHtml(s.name)}</strong><br><small>${escapeHtml(s.username)}</small></td>
+          <td>${escapeHtml(s.class_name)}</td>
+          <td>${s.steps.map(x => `${x.completed ? "✅" : "⬜"} ${escapeHtml(x.step_title)}`).join("<br>")}</td>
+          <td>${s.steps.map(x => `${x.correct_count}/${x.target_correct} rétt`).join("<br>")}</td>
+          <td>${s.steps.filter(x=>x.completed).length}/${s.steps.length}</td>
+        </tr>`).join("")}
+    </tbody></table>`;
+  }catch(e){toast(e.message)}
+}
+
+
 async function loadStudentLearningPaths(){
   const box = document.getElementById("studentLearningPaths");
   if(!box) return;
   box.innerHTML = "<p>Hleð námsleiðum...</p>";
   try{
     LEARNING_PATHS = await API.call("/api/learning-paths");
+    await loadLearningPathProgress();
     renderStudentLearningPaths();
   }catch(e){
     box.innerHTML = `<p class="bad">${e.message}</p>`;
@@ -1261,14 +1353,24 @@ function renderStudentLearningPaths(){
       </div>
       <p>${escapeHtml(path.description || "")}</p>
       <div class="path-steps">
-        ${(path.steps || []).map((s,i)=>`
-          <div class="path-step ${s.step_type}">
-            <div class="step-orb">${s.step_type === "boss" || s.boss_required ? "👑" : i+1}</div>
+        ${(path.steps || []).map((s,i)=>{
+          const prog = getStepProgress(path.id, s.id);
+          const completed = !!prog?.completed;
+          const claimed = !!prog?.reward_claimed;
+          const locked = !isPreviousStepCompleted(path, i);
+          const correct = prog?.correct_count || 0;
+          const pct = Math.min(100, Math.round((correct / Math.max(1, s.target_correct)) * 100));
+          return `
+          <div class="path-step ${s.step_type} ${completed ? "completed" : ""} ${locked ? "locked" : ""}">
+            <div class="step-orb">${locked ? "🔒" : completed ? "✅" : (s.step_type === "boss" || s.boss_required ? "👑" : i+1)}</div>
             <strong>${escapeHtml(s.title)}</strong>
             <small>${escapeHtml(s.description || "")}</small>
-            <span>${SUBJECTS[s.subject]?.name || s.subject} · ${s.skill || "valin færni"} · ${s.target_correct} rétt</span>
-            <button onclick="startLearningPathStep(${path.id}, ${s.id})">Byrja skref</button>
-          </div>`).join("")}
+            <span>${SUBJECTS[s.subject]?.name || s.subject} · ${s.skill || "valin færni"} · ${correct}/${s.target_correct} rétt</span>
+            <div class="step-progress"><div style="width:${pct}%"></div></div>
+            ${completed 
+              ? `<button ${claimed ? "disabled" : ""} onclick="claimLearningStepReward(${path.id}, ${s.id})">${claimed ? "Verðlaun sótt ✅" : "Sækja verðlaun"}</button>`
+              : `<button ${locked ? "disabled" : ""} onclick="startLearningPathStep(${path.id}, ${s.id})">${locked ? "Læst" : "Byrja skref"}</button>`}
+          </div>`}).join("")}
       </div>
     </div>
   `).join("");
@@ -1282,6 +1384,7 @@ function startLearningPathStep(pathId, stepId){
   state.gradeLevel = String(step.grade_level || path.grade_level || effectiveGradeLevel());
   localStorage.setItem("sr_grade_level", state.gradeLevel);
   state.activeLearningStep = {pathId, stepId, skill:step.skill, targetCorrect:step.target_correct, title:step.title, boss:step.boss_required};
+  API.call("/api/learning-path-progress/start", {method:"POST", body:JSON.stringify({path_id:pathId, step_id:stepId})}).then(loadLearningPathProgress).catch(console.warn);
   showView("mission");
   if(step.boss_required || step.step_type === "boss") startBossFight();
   else nextQuestion();
@@ -1402,8 +1505,10 @@ function renderLearningPathsList(){
       </div>
       <div class="pack-actions">
         <button onclick="toggleLearningPath(${p.id}, ${p.active ? 0 : 1})">${p.active ? "Óvirkja" : "Virkja"}</button>
+        <button onclick="loadLearningPathTeacherProgress(${p.id})">Framvinda</button>
         <button onclick="deleteLearningPath(${p.id})">Eyða</button>
       </div>
+      <div id="lpProgress-${p.id}" class="lp-progress-box"></div>
     </div>
   `).join("");
 }

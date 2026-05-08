@@ -207,6 +207,24 @@ def init_db():
             created_at INTEGER NOT NULL,
             FOREIGN KEY(path_id) REFERENCES learning_paths(id) ON DELETE CASCADE
         );
+
+        CREATE TABLE IF NOT EXISTS learning_path_progress (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            path_id INTEGER NOT NULL,
+            step_id INTEGER NOT NULL,
+            correct_count INTEGER NOT NULL DEFAULT 0,
+            answered_count INTEGER NOT NULL DEFAULT 0,
+            completed INTEGER NOT NULL DEFAULT 0,
+            reward_claimed INTEGER NOT NULL DEFAULT 0,
+            started_at INTEGER NOT NULL,
+            updated_at INTEGER NOT NULL,
+            completed_at INTEGER,
+            UNIQUE(user_id, path_id, step_id),
+            FOREIGN KEY(user_id) REFERENCES users(id),
+            FOREIGN KEY(path_id) REFERENCES learning_paths(id) ON DELETE CASCADE,
+            FOREIGN KEY(step_id) REFERENCES learning_path_steps(id) ON DELETE CASCADE
+        );
         """)
 
         # Lightweight migrations for older local databases
@@ -341,6 +359,18 @@ class LearningPathUpdate(BaseModel):
     reward_coins: Optional[int] = Field(default=None, ge=0, le=10000)
     active: Optional[bool] = None
     steps: Optional[list[LearningPathStepIn]] = None
+
+
+class LearningPathProgressIn(BaseModel):
+    path_id: int
+    step_id: int
+    correct: bool = False
+    answered: bool = True
+
+
+class LearningPathClaimIn(BaseModel):
+    path_id: int
+    step_id: int
 
 
 class ProgressIn(BaseModel):
@@ -1204,6 +1234,152 @@ def teacher_delete_learning_path(path_id: int, teacher=Depends(require_teacher))
         conn.execute("DELETE FROM learning_path_steps WHERE path_id=?", (path_id,))
         conn.execute("DELETE FROM learning_paths WHERE id=?", (path_id,))
     return {"ok": True}
+
+
+
+def get_learning_step(conn, step_id: int):
+    return conn.execute("""
+        SELECT s.id, s.path_id, s.step_order, s.title, s.description, s.step_type, s.subject, s.skill, s.grade_level, s.target_correct, s.boss_required, s.reward_coins,
+               p.title AS path_title, p.class_name, p.active
+        FROM learning_path_steps s
+        JOIN learning_paths p ON p.id = s.path_id
+        WHERE s.id=?
+    """, (step_id,)).fetchone()
+
+
+def progress_row_to_dict(r):
+    if not r:
+        return None
+    return {
+        "path_id": r["path_id"],
+        "step_id": r["step_id"],
+        "correct_count": r["correct_count"],
+        "answered_count": r["answered_count"],
+        "completed": bool(r["completed"]),
+        "reward_claimed": bool(r["reward_claimed"]),
+        "started_at": r["started_at"],
+        "updated_at": r["updated_at"],
+        "completed_at": r["completed_at"],
+    }
+
+
+@app.get("/api/learning-path-progress")
+def my_learning_path_progress(user=Depends(current_user)):
+    with db() as conn:
+        rows = conn.execute("""
+            SELECT path_id, step_id, correct_count, answered_count, completed, reward_claimed, started_at, updated_at, completed_at
+            FROM learning_path_progress
+            WHERE user_id=?
+        """, (user["id"],)).fetchall()
+        return [progress_row_to_dict(r) for r in rows]
+
+
+@app.post("/api/learning-path-progress/start")
+def start_learning_path_step(data: LearningPathClaimIn, user=Depends(current_user)):
+    with db() as conn:
+        step = get_learning_step(conn, data.step_id)
+        if not step or step["path_id"] != data.path_id:
+            raise HTTPException(status_code=404, detail="Skref fannst ekki.")
+        conn.execute("""
+            INSERT OR IGNORE INTO learning_path_progress(user_id, path_id, step_id, correct_count, answered_count, completed, reward_claimed, started_at, updated_at)
+            VALUES (?,?,?,?,0,0,0,0,?,?)
+        """, (user["id"], data.path_id, data.step_id, now(), now()))
+        row = conn.execute("""
+            SELECT path_id, step_id, correct_count, answered_count, completed, reward_claimed, started_at, updated_at, completed_at
+            FROM learning_path_progress
+            WHERE user_id=? AND path_id=? AND step_id=?
+        """, (user["id"], data.path_id, data.step_id)).fetchone()
+        return progress_row_to_dict(row)
+
+
+@app.post("/api/learning-path-progress/answer")
+def update_learning_path_progress(data: LearningPathProgressIn, user=Depends(current_user)):
+    with db() as conn:
+        step = get_learning_step(conn, data.step_id)
+        if not step or step["path_id"] != data.path_id:
+            raise HTTPException(status_code=404, detail="Skref fannst ekki.")
+        conn.execute("""
+            INSERT OR IGNORE INTO learning_path_progress(user_id, path_id, step_id, correct_count, answered_count, completed, reward_claimed, started_at, updated_at)
+            VALUES (?,?,?,?,0,0,0,0,?,?)
+        """, (user["id"], data.path_id, data.step_id, now(), now()))
+        row = conn.execute("""
+            SELECT correct_count, answered_count, completed
+            FROM learning_path_progress
+            WHERE user_id=? AND path_id=? AND step_id=?
+        """, (user["id"], data.path_id, data.step_id)).fetchone()
+        new_correct = row["correct_count"] + (1 if data.correct else 0)
+        new_answered = row["answered_count"] + (1 if data.answered else 0)
+        completed = 1 if (new_correct >= step["target_correct"]) else row["completed"]
+        completed_at = now() if completed and not row["completed"] else None
+        if completed_at:
+            conn.execute("""
+                UPDATE learning_path_progress
+                SET correct_count=?, answered_count=?, completed=1, updated_at=?, completed_at=?
+                WHERE user_id=? AND path_id=? AND step_id=?
+            """, (new_correct, new_answered, now(), completed_at, user["id"], data.path_id, data.step_id))
+        else:
+            conn.execute("""
+                UPDATE learning_path_progress
+                SET correct_count=?, answered_count=?, completed=?, updated_at=?
+                WHERE user_id=? AND path_id=? AND step_id=?
+            """, (new_correct, new_answered, completed, now(), user["id"], data.path_id, data.step_id))
+        out = conn.execute("""
+            SELECT path_id, step_id, correct_count, answered_count, completed, reward_claimed, started_at, updated_at, completed_at
+            FROM learning_path_progress
+            WHERE user_id=? AND path_id=? AND step_id=?
+        """, (user["id"], data.path_id, data.step_id)).fetchone()
+        return progress_row_to_dict(out)
+
+
+@app.post("/api/learning-path-progress/claim")
+def claim_learning_path_step_reward(data: LearningPathClaimIn, user=Depends(current_user)):
+    with db() as conn:
+        step = get_learning_step(conn, data.step_id)
+        if not step or step["path_id"] != data.path_id:
+            raise HTTPException(status_code=404, detail="Skref fannst ekki.")
+        prog = conn.execute("""
+            SELECT completed, reward_claimed
+            FROM learning_path_progress
+            WHERE user_id=? AND path_id=? AND step_id=?
+        """, (user["id"], data.path_id, data.step_id)).fetchone()
+        if not prog or not prog["completed"]:
+            raise HTTPException(status_code=400, detail="Skrefi er ekki lokið.")
+        if prog["reward_claimed"]:
+            raise HTTPException(status_code=400, detail="Verðlaun hafa þegar verið sótt.")
+        p = conn.execute("SELECT coins, xp FROM progress WHERE user_id=?", (user["id"],)).fetchone()
+        if not p:
+            conn.execute("INSERT INTO progress(user_id, updated_at) VALUES (?,?)", (user["id"], now()))
+            p = conn.execute("SELECT coins, xp FROM progress WHERE user_id=?", (user["id"],)).fetchone()
+        reward = step["reward_coins"]
+        conn.execute("UPDATE progress SET coins=?, xp=?, updated_at=? WHERE user_id=?", (p["coins"] + reward, p["xp"] + max(20, reward // 2), now(), user["id"]))
+        conn.execute("""
+            UPDATE learning_path_progress SET reward_claimed=1, updated_at=?
+            WHERE user_id=? AND path_id=? AND step_id=?
+        """, (now(), user["id"], data.path_id, data.step_id))
+        return {"ok": True, "coins": reward, "xp": max(20, reward // 2)}
+
+
+@app.get("/api/teacher/learning-paths/{path_id}/progress")
+def teacher_learning_path_progress(path_id: int, teacher=Depends(require_teacher)):
+    with db() as conn:
+        path = conn.execute("SELECT id, title, class_name FROM learning_paths WHERE id=?", (path_id,)).fetchone()
+        if not path:
+            raise HTTPException(status_code=404, detail="Námsleið fannst ekki.")
+        rows = conn.execute("""
+            SELECT u.id AS user_id, u.display_name, u.username, COALESCE(NULLIF(u.class_name,''), 'Óflokkað') AS class_name,
+                   s.id AS step_id, s.title AS step_title, s.step_order, s.target_correct,
+                   COALESCE(pr.correct_count,0) AS correct_count,
+                   COALESCE(pr.answered_count,0) AS answered_count,
+                   COALESCE(pr.completed,0) AS completed,
+                   COALESCE(pr.reward_claimed,0) AS reward_claimed
+            FROM users u
+            JOIN learning_paths lp ON lp.id=?
+            JOIN learning_path_steps s ON s.path_id=lp.id
+            LEFT JOIN learning_path_progress pr ON pr.user_id=u.id AND pr.path_id=lp.id AND pr.step_id=s.id
+            WHERE u.role='student' AND (lp.class_name='' OR COALESCE(NULLIF(u.class_name,''), 'Óflokkað')=lp.class_name)
+            ORDER BY u.display_name COLLATE NOCASE, s.step_order
+        """, (path_id,)).fetchall()
+        return [dict(r) for r in rows]
 
 
 @app.get("/api/teacher/subject-summary")
