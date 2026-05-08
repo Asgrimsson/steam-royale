@@ -578,3 +578,47 @@ textarea, select{
 .level-picker-box label{display:block;font-weight:950;margin-bottom:6px}
 .level-picker-box select{width:100%;margin:0;background:white}
 .level-picker-box small{display:block;margin-top:6px;color:#475569;font-weight:800}
+
+/* v1.2 epic content and shop */
+.shop-kind{
+  display:inline-block;
+  background:#eef2ff;
+  color:#312e81;
+  border-radius:999px;
+  padding:5px 9px;
+  font-weight:900;
+  margin-bottom:8px;
+}
+.collection-box{
+  margin-top:18px;
+}
+.collection-pill{
+  display:inline-block;
+  margin:5px;
+  padding:8px 12px;
+  border-radius:999px;
+  background:#f1f5f9;
+  font-weight:950;
+  border:2px solid #e2e8f0;
+}
+.collection-pill.rare{background:#dbeafe;border-color:#60a5fa;color:#1e3a8a}
+.collection-pill.epic{background:#ede9fe;border-color:#a78bfa;color:#4c1d95}
+.collection-pill.legendary{background:#fef3c7;border-color:#f59e0b;color:#78350f}
+.theme-space{
+  background:
+    radial-gradient(circle at 18% 18%, rgba(125,211,252,.28), transparent 25%),
+    radial-gradient(circle at 82% 20%, rgba(196,181,253,.25), transparent 23%),
+    linear-gradient(135deg,#020617,#1e1b4b,#0f172a)!important;
+}
+.theme-lava{
+  background:
+    radial-gradient(circle at 25% 20%, rgba(253,186,116,.35), transparent 25%),
+    radial-gradient(circle at 80% 15%, rgba(248,113,113,.32), transparent 25%),
+    linear-gradient(135deg,#3b0764,#7f1d1d,#ea580c)!important;
+}
+.theme-ice{
+  background:
+    radial-gradient(circle at 22% 15%, rgba(224,242,254,.55), transparent 24%),
+    radial-gradient(circle at 80% 18%, rgba(186,230,253,.38), transparent 25%),
+    linear-gradient(135deg,#082f49,#0369a1,#e0f2fe)!important;
+}

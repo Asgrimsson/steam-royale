@@ -1,6 +1,6 @@
 {
-  "version": "1.1",
-  "description": "Verkefnabanki fyrir Skóla Royale. Hægt er að bæta við spurningum í sama sniði.",
+  "version": "1.2",
+  "description": "Skóla Royale verkefnabanki með þyngdarstigum, 7. bekkjar efni, finndu-villuna og fylla-í-eyðu verkefnum.",
   "subjects": {
     "math": "Stærðfræði",
     "icelandic": "Íslenska",
@@ -11838,6 +11838,2420 @@
         "bókum og pennum"
       ],
       "grade_level": 6
+    },
+    {
+      "id": "v12_00744",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 10% af 40?",
+      "answer": "4",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "4",
+        "9",
+        "14",
+        "30"
+      ]
+    },
+    {
+      "id": "v12_00745",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 20% af 40?",
+      "answer": "8",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "13",
+        "8",
+        "3",
+        "20"
+      ]
+    },
+    {
+      "id": "v12_00746",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 25% af 40?",
+      "answer": "10",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "15",
+        "10",
+        "5",
+        "24"
+      ]
+    },
+    {
+      "id": "v12_00747",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 50% af 40?",
+      "answer": "20",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "-10",
+        "15",
+        "25",
+        "20"
+      ]
+    },
+    {
+      "id": "v12_00748",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 75% af 40?",
+      "answer": "30",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "-35",
+        "25",
+        "30",
+        "35"
+      ]
+    },
+    {
+      "id": "v12_00749",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 10% af 60?",
+      "answer": "6",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "1",
+        "6",
+        "11",
+        "50"
+      ]
+    },
+    {
+      "id": "v12_00750",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 20% af 60?",
+      "answer": "12",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "17",
+        "40",
+        "7",
+        "12"
+      ]
+    },
+    {
+      "id": "v12_00751",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 25% af 60?",
+      "answer": "15",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "20",
+        "10",
+        "35",
+        "15"
+      ]
+    },
+    {
+      "id": "v12_00752",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 50% af 60?",
+      "answer": "30",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "10",
+        "30",
+        "25",
+        "35"
+      ]
+    },
+    {
+      "id": "v12_00753",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 75% af 60?",
+      "answer": "45",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "45",
+        "40",
+        "50",
+        "-15"
+      ]
+    },
+    {
+      "id": "v12_00754",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 10% af 80?",
+      "answer": "8",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "70",
+        "8",
+        "3",
+        "13"
+      ]
+    },
+    {
+      "id": "v12_00755",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 20% af 80?",
+      "answer": "16",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "60",
+        "16",
+        "21",
+        "11"
+      ]
+    },
+    {
+      "id": "v12_00756",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 25% af 80?",
+      "answer": "20",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "55",
+        "15",
+        "25",
+        "20"
+      ]
+    },
+    {
+      "id": "v12_00757",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 50% af 80?",
+      "answer": "40",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "45",
+        "40",
+        "35",
+        "30"
+      ]
+    },
+    {
+      "id": "v12_00758",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 75% af 80?",
+      "answer": "60",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "5",
+        "60",
+        "65",
+        "55"
+      ]
+    },
+    {
+      "id": "v12_00759",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 10% af 100?",
+      "answer": "10",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "15",
+        "90",
+        "10",
+        "5"
+      ]
+    },
+    {
+      "id": "v12_00760",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 20% af 100?",
+      "answer": "20",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "15",
+        "80",
+        "25",
+        "20"
+      ]
+    },
+    {
+      "id": "v12_00761",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 25% af 100?",
+      "answer": "25",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "75",
+        "25",
+        "30",
+        "20"
+      ]
+    },
+    {
+      "id": "v12_00762",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 50% af 100?",
+      "answer": "50",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "55",
+        "45",
+        "3",
+        "50"
+      ]
+    },
+    {
+      "id": "v12_00763",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 75% af 100?",
+      "answer": "75",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "25",
+        "70",
+        "80",
+        "75"
+      ]
+    },
+    {
+      "id": "v12_00764",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 10% af 120?",
+      "answer": "12",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "7",
+        "12",
+        "17",
+        "110"
+      ]
+    },
+    {
+      "id": "v12_00765",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 20% af 120?",
+      "answer": "24",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "24",
+        "100",
+        "19",
+        "29"
+      ]
+    },
+    {
+      "id": "v12_00766",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 25% af 120?",
+      "answer": "30",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "95",
+        "35",
+        "30",
+        "25"
+      ]
+    },
+    {
+      "id": "v12_00767",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 50% af 120?",
+      "answer": "60",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "70",
+        "65",
+        "60",
+        "55"
+      ]
+    },
+    {
+      "id": "v12_00768",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 75% af 120?",
+      "answer": "90",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "95",
+        "85",
+        "45",
+        "90"
+      ]
+    },
+    {
+      "id": "v12_00769",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 10% af 160?",
+      "answer": "16",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "21",
+        "11",
+        "150",
+        "16"
+      ]
+    },
+    {
+      "id": "v12_00770",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 20% af 160?",
+      "answer": "32",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "27",
+        "32",
+        "37",
+        "140"
+      ]
+    },
+    {
+      "id": "v12_00771",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 25% af 160?",
+      "answer": "40",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "35",
+        "40",
+        "135",
+        "45"
+      ]
+    },
+    {
+      "id": "v12_00772",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 50% af 160?",
+      "answer": "80",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "80",
+        "75",
+        "110",
+        "85"
+      ]
+    },
+    {
+      "id": "v12_00773",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 75% af 160?",
+      "answer": "120",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "85",
+        "115",
+        "125",
+        "120"
+      ]
+    },
+    {
+      "id": "v12_00774",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 10% af 200?",
+      "answer": "20",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "15",
+        "190",
+        "20",
+        "25"
+      ]
+    },
+    {
+      "id": "v12_00775",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 20% af 200?",
+      "answer": "40",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "45",
+        "180",
+        "40",
+        "35"
+      ]
+    },
+    {
+      "id": "v12_00776",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 25% af 200?",
+      "answer": "50",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "45",
+        "50",
+        "175",
+        "55"
+      ]
+    },
+    {
+      "id": "v12_00777",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 50% af 200?",
+      "answer": "100",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "105",
+        "95",
+        "150",
+        "100"
+      ]
+    },
+    {
+      "id": "v12_00778",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 75% af 200?",
+      "answer": "150",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "145",
+        "150",
+        "155",
+        "125"
+      ]
+    },
+    {
+      "id": "v12_00779",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 10% af 240?",
+      "answer": "24",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "24",
+        "230",
+        "29",
+        "19"
+      ]
+    },
+    {
+      "id": "v12_00780",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 20% af 240?",
+      "answer": "48",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "53",
+        "43",
+        "220",
+        "48"
+      ]
+    },
+    {
+      "id": "v12_00781",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 25% af 240?",
+      "answer": "60",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "215",
+        "60",
+        "55",
+        "65"
+      ]
+    },
+    {
+      "id": "v12_00782",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 50% af 240?",
+      "answer": "120",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "190",
+        "125",
+        "115",
+        "120"
+      ]
+    },
+    {
+      "id": "v12_00783",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 75% af 240?",
+      "answer": "180",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "180",
+        "185",
+        "165",
+        "175"
+      ]
+    },
+    {
+      "id": "v12_00784",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 10% af 300?",
+      "answer": "30",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "30",
+        "290",
+        "25",
+        "35"
+      ]
+    },
+    {
+      "id": "v12_00785",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 20% af 300?",
+      "answer": "60",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "55",
+        "60",
+        "280",
+        "65"
+      ]
+    },
+    {
+      "id": "v12_00786",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 25% af 300?",
+      "answer": "75",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "70",
+        "75",
+        "275",
+        "80"
+      ]
+    },
+    {
+      "id": "v12_00787",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 50% af 300?",
+      "answer": "150",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "250",
+        "150",
+        "145",
+        "155"
+      ]
+    },
+    {
+      "id": "v12_00788",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 75% af 300?",
+      "answer": "225",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "225",
+        "21",
+        "220",
+        "230"
+      ]
+    },
+    {
+      "id": "v12_00789",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 10% af 400?",
+      "answer": "40",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "45",
+        "40",
+        "35",
+        "390"
+      ]
+    },
+    {
+      "id": "v12_00790",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 20% af 400?",
+      "answer": "80",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "85",
+        "75",
+        "80",
+        "380"
+      ]
+    },
+    {
+      "id": "v12_00791",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 25% af 400?",
+      "answer": "100",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "95",
+        "105",
+        "375",
+        "100"
+      ]
+    },
+    {
+      "id": "v12_00792",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 50% af 400?",
+      "answer": "200",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "200",
+        "350",
+        "195",
+        "205"
+      ]
+    },
+    {
+      "id": "v12_00793",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 75% af 400?",
+      "answer": "300",
+      "hint": "Prósenta þýðir af hundraði. 25% er fjórðungur og 50% er helmingur.",
+      "options": [
+        "300",
+        "325",
+        "305",
+        "295"
+      ]
+    },
+    {
+      "id": "v12_00794",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hlutföll",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hlutfallið er 2:3. Hvað verður seinni talan ef fyrri talan verður 8?",
+      "answer": "12",
+      "hint": "Finndu margföldunarstuðulinn og margfaldaðu báðar tölur með honum.",
+      "options": [
+        "11",
+        "12",
+        "16",
+        "7"
+      ]
+    },
+    {
+      "id": "v12_00795",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hlutföll",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hlutfallið er 3:4. Hvað verður seinni talan ef fyrri talan verður 9?",
+      "answer": "12",
+      "hint": "Finndu margföldunarstuðulinn og margfaldaðu báðar tölur með honum.",
+      "options": [
+        "15",
+        "12",
+        "13",
+        "7"
+      ]
+    },
+    {
+      "id": "v12_00796",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hlutföll",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hlutfallið er 4:5. Hvað verður seinni talan ef fyrri talan verður 16?",
+      "answer": "20",
+      "hint": "Finndu margföldunarstuðulinn og margfaldaðu báðar tölur með honum.",
+      "options": [
+        "21",
+        "24",
+        "20",
+        "9"
+      ]
+    },
+    {
+      "id": "v12_00797",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hlutföll",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hlutfallið er 5:8. Hvað verður seinni talan ef fyrri talan verður 10?",
+      "answer": "16",
+      "hint": "Finndu margföldunarstuðulinn og margfaldaðu báðar tölur með honum.",
+      "options": [
+        "18",
+        "16",
+        "10",
+        "35"
+      ]
+    },
+    {
+      "id": "v12_00798",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hlutföll",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hlutfallið er 7:10. Hvað verður seinni talan ef fyrri talan verður 14?",
+      "answer": "20",
+      "hint": "Finndu margföldunarstuðulinn og margfaldaðu báðar tölur með honum.",
+      "options": [
+        "22",
+        "12",
+        "24",
+        "20"
+      ]
+    },
+    {
+      "id": "v12_00799",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hlutföll",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hlutfallið er 9:12. Hvað verður seinni talan ef fyrri talan verður 36?",
+      "answer": "48",
+      "hint": "Finndu margföldunarstuðulinn og margfaldaðu báðar tölur með honum.",
+      "options": [
+        "52",
+        "68",
+        "48",
+        "16"
+      ]
+    },
+    {
+      "id": "v12_00800",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hlutföll",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hlutfallið er 12:15. Hvað verður seinni talan ef fyrri talan verður 36?",
+      "answer": "45",
+      "hint": "Finndu margföldunarstuðulinn og margfaldaðu báðar tölur með honum.",
+      "options": [
+        "48",
+        "45",
+        "18",
+        "51"
+      ]
+    },
+    {
+      "id": "v12_00801",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hlutföll",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hlutfallið er 6:9. Hvað verður seinni talan ef fyrri talan verður 12?",
+      "answer": "18",
+      "hint": "Finndu margföldunarstuðulinn og margfaldaðu báðar tölur með honum.",
+      "options": [
+        "21",
+        "20",
+        "11",
+        "18"
+      ]
+    },
+    {
+      "id": "v12_00802",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "neikvæðar tölur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er -12 + (10)?",
+      "answer": "-2",
+      "hint": "Notaðu talnalínu. Neikvæð tala færist til vinstri, jákvæð til hægri.",
+      "options": [
+        "1",
+        "2",
+        "-2",
+        "-5"
+      ]
+    },
+    {
+      "id": "v12_00803",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "neikvæðar tölur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er -9 + (7)?",
+      "answer": "-2",
+      "hint": "Notaðu talnalínu. Neikvæð tala færist til vinstri, jákvæð til hægri.",
+      "options": [
+        "-5",
+        "2",
+        "1",
+        "-2"
+      ]
+    },
+    {
+      "id": "v12_00804",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "neikvæðar tölur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er -6 + (10)?",
+      "answer": "4",
+      "hint": "Notaðu talnalínu. Neikvæð tala færist til vinstri, jákvæð til hægri.",
+      "options": [
+        "-4",
+        "4",
+        "7",
+        "1"
+      ]
+    },
+    {
+      "id": "v12_00805",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "neikvæðar tölur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er -3 + (-8)?",
+      "answer": "-11",
+      "hint": "Notaðu talnalínu. Neikvæð tala færist til vinstri, jákvæð til hægri.",
+      "options": [
+        "11",
+        "-14",
+        "-8",
+        "-11"
+      ]
+    },
+    {
+      "id": "v12_00806",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "neikvæðar tölur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 0 + (10)?",
+      "answer": "10",
+      "hint": "Notaðu talnalínu. Neikvæð tala færist til vinstri, jákvæð til hægri.",
+      "options": [
+        "13",
+        "-10",
+        "7",
+        "10"
+      ]
+    },
+    {
+      "id": "v12_00807",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "neikvæðar tölur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 3 + (-2)?",
+      "answer": "1",
+      "hint": "Notaðu talnalínu. Neikvæð tala færist til vinstri, jákvæð til hægri.",
+      "options": [
+        "-1",
+        "4",
+        "1",
+        "-2"
+      ]
+    },
+    {
+      "id": "v12_00808",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "neikvæðar tölur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 6 + (-8)?",
+      "answer": "-2",
+      "hint": "Notaðu talnalínu. Neikvæð tala færist til vinstri, jákvæð til hægri.",
+      "options": [
+        "-5",
+        "1",
+        "-2",
+        "2"
+      ]
+    },
+    {
+      "id": "v12_00809",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "neikvæðar tölur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 9 + (7)?",
+      "answer": "16",
+      "hint": "Notaðu talnalínu. Neikvæð tala færist til vinstri, jákvæð til hægri.",
+      "options": [
+        "-16",
+        "19",
+        "13",
+        "16"
+      ]
+    },
+    {
+      "id": "v12_00810",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "neikvæðar tölur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er 12 + (4)?",
+      "answer": "16",
+      "hint": "Notaðu talnalínu. Neikvæð tala færist til vinstri, jákvæð til hægri.",
+      "options": [
+        "19",
+        "-16",
+        "13",
+        "16"
+      ]
+    },
+    {
+      "id": "v12_00811",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 2x + 2 = 8. Hvað er x?",
+      "answer": "3",
+      "hint": "Dragðu fyrst frá töluna sem er bætt við, deildu síðan með stuðlinum fyrir framan x.",
+      "options": [
+        "5",
+        "2",
+        "4",
+        "3"
+      ]
+    },
+    {
+      "id": "v12_00812",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 3x + 7 = 28. Hvað er x?",
+      "answer": "7",
+      "hint": "Dragðu fyrst frá töluna sem er bætt við, deildu síðan með stuðlinum fyrir framan x.",
+      "options": [
+        "7",
+        "6",
+        "8",
+        "9"
+      ]
+    },
+    {
+      "id": "v12_00813",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 4x + 2 = 42. Hvað er x?",
+      "answer": "10",
+      "hint": "Dragðu fyrst frá töluna sem er bætt við, deildu síðan með stuðlinum fyrir framan x.",
+      "options": [
+        "9",
+        "12",
+        "11",
+        "10"
+      ]
+    },
+    {
+      "id": "v12_00814",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 5x + 1 = 46. Hvað er x?",
+      "answer": "9",
+      "hint": "Dragðu fyrst frá töluna sem er bætt við, deildu síðan með stuðlinum fyrir framan x.",
+      "options": [
+        "11",
+        "9",
+        "8",
+        "10"
+      ]
+    },
+    {
+      "id": "v12_00815",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 6x + 13 = 67. Hvað er x?",
+      "answer": "9",
+      "hint": "Dragðu fyrst frá töluna sem er bætt við, deildu síðan með stuðlinum fyrir framan x.",
+      "options": [
+        "8",
+        "9",
+        "10",
+        "11"
+      ]
+    },
+    {
+      "id": "v12_00816",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 7x + 5 = 54. Hvað er x?",
+      "answer": "7",
+      "hint": "Dragðu fyrst frá töluna sem er bætt við, deildu síðan með stuðlinum fyrir framan x.",
+      "options": [
+        "9",
+        "7",
+        "6",
+        "8"
+      ]
+    },
+    {
+      "id": "v12_00817",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 8x + 3 = 83. Hvað er x?",
+      "answer": "10",
+      "hint": "Dragðu fyrst frá töluna sem er bætt við, deildu síðan með stuðlinum fyrir framan x.",
+      "options": [
+        "10",
+        "11",
+        "12",
+        "9"
+      ]
+    },
+    {
+      "id": "v12_00818",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 9x + 15 = 96. Hvað er x?",
+      "answer": "9",
+      "hint": "Dragðu fyrst frá töluna sem er bætt við, deildu síðan með stuðlinum fyrir framan x.",
+      "options": [
+        "9",
+        "8",
+        "11",
+        "10"
+      ]
+    },
+    {
+      "id": "v12_00819",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "meðaltal",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvert er meðaltal talnanna: 4, 6, 8, 10, 12?",
+      "answer": "8",
+      "hint": "Leggðu tölurnar saman og deildu með fjölda talna.",
+      "options": [
+        "40",
+        "10",
+        "8",
+        "6"
+      ]
+    },
+    {
+      "id": "v12_00820",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "meðaltal",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvert er meðaltal talnanna: 5, 7, 9, 11, 13?",
+      "answer": "9",
+      "hint": "Leggðu tölurnar saman og deildu með fjölda talna.",
+      "options": [
+        "7",
+        "45",
+        "9",
+        "11"
+      ]
+    },
+    {
+      "id": "v12_00821",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "meðaltal",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvert er meðaltal talnanna: 10, 20, 30, 40, 50?",
+      "answer": "30",
+      "hint": "Leggðu tölurnar saman og deildu með fjölda talna.",
+      "options": [
+        "30",
+        "150",
+        "28",
+        "32"
+      ]
+    },
+    {
+      "id": "v12_00822",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "meðaltal",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvert er meðaltal talnanna: 3, 6, 6, 9, 12?",
+      "answer": "7.2",
+      "hint": "Leggðu tölurnar saman og deildu með fjölda talna.",
+      "options": [
+        "36",
+        "10.2",
+        "7.2",
+        "9.2"
+      ]
+    },
+    {
+      "id": "v12_00823",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "meðaltal",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvert er meðaltal talnanna: 12, 15, 18, 21, 24?",
+      "answer": "18",
+      "hint": "Leggðu tölurnar saman og deildu með fjölda talna.",
+      "options": [
+        "16",
+        "18",
+        "20",
+        "90"
+      ]
+    },
+    {
+      "id": "v12_00824",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "meðaltal",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvert er meðaltal talnanna: 2, 4, 8, 16, 32?",
+      "answer": "12.4",
+      "hint": "Leggðu tölurnar saman og deildu með fjölda talna.",
+      "options": [
+        "15.4",
+        "62",
+        "14.4",
+        "12.4"
+      ]
+    },
+    {
+      "id": "v12_00825",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "flatarmál þríhyrninga",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Þríhyrningur hefur grunnlínu 6 cm og hæð 4 cm. Hvert er flatarmálið?",
+      "answer": "12",
+      "hint": "Flatarmál þríhyrnings = grunnlína × hæð ÷ 2.",
+      "options": [
+        "7",
+        "17",
+        "24",
+        "12"
+      ]
+    },
+    {
+      "id": "v12_00826",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "flatarmál þríhyrninga",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Þríhyrningur hefur grunnlínu 8 cm og hæð 5 cm. Hvert er flatarmálið?",
+      "answer": "20",
+      "hint": "Flatarmál þríhyrnings = grunnlína × hæð ÷ 2.",
+      "options": [
+        "15",
+        "40",
+        "20",
+        "25"
+      ]
+    },
+    {
+      "id": "v12_00827",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "flatarmál þríhyrninga",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Þríhyrningur hefur grunnlínu 10 cm og hæð 7 cm. Hvert er flatarmálið?",
+      "answer": "35",
+      "hint": "Flatarmál þríhyrnings = grunnlína × hæð ÷ 2.",
+      "options": [
+        "35",
+        "70",
+        "40",
+        "30"
+      ]
+    },
+    {
+      "id": "v12_00828",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "flatarmál þríhyrninga",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Þríhyrningur hefur grunnlínu 12 cm og hæð 9 cm. Hvert er flatarmálið?",
+      "answer": "54",
+      "hint": "Flatarmál þríhyrnings = grunnlína × hæð ÷ 2.",
+      "options": [
+        "54",
+        "108",
+        "49",
+        "59"
+      ]
+    },
+    {
+      "id": "v12_00829",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "flatarmál þríhyrninga",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Þríhyrningur hefur grunnlínu 15 cm og hæð 6 cm. Hvert er flatarmálið?",
+      "answer": "45",
+      "hint": "Flatarmál þríhyrnings = grunnlína × hæð ÷ 2.",
+      "options": [
+        "90",
+        "40",
+        "45",
+        "50"
+      ]
+    },
+    {
+      "id": "v12_00830",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "flatarmál þríhyrninga",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Þríhyrningur hefur grunnlínu 20 cm og hæð 11 cm. Hvert er flatarmálið?",
+      "answer": "110",
+      "hint": "Flatarmál þríhyrnings = grunnlína × hæð ÷ 2.",
+      "options": [
+        "220",
+        "110",
+        "105",
+        "115"
+      ]
+    },
+    {
+      "id": "v12_00831",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "flatarmál þríhyrninga",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Þríhyrningur hefur grunnlínu 7 cm og hæð 12 cm. Hvert er flatarmálið?",
+      "answer": "42",
+      "hint": "Flatarmál þríhyrnings = grunnlína × hæð ÷ 2.",
+      "options": [
+        "42",
+        "84",
+        "37",
+        "47"
+      ]
+    },
+    {
+      "id": "v12_00832",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "flatarmál þríhyrninga",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Þríhyrningur hefur grunnlínu 14 cm og hæð 10 cm. Hvert er flatarmálið?",
+      "answer": "70",
+      "hint": "Flatarmál þríhyrnings = grunnlína × hæð ÷ 2.",
+      "options": [
+        "140",
+        "70",
+        "65",
+        "75"
+      ]
+    },
+    {
+      "id": "v12_00833",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "rúmmál",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Kassi er 3 cm × 4 cm × 5 cm. Hvert er rúmmálið?",
+      "answer": "60",
+      "hint": "Rúmmál rétthyrnds kassa = lengd × breidd × hæð.",
+      "options": [
+        "60",
+        "12",
+        "80",
+        "17"
+      ]
+    },
+    {
+      "id": "v12_00834",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "rúmmál",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Kassi er 5 cm × 5 cm × 6 cm. Hvert er rúmmálið?",
+      "answer": "150",
+      "hint": "Rúmmál rétthyrnds kassa = lengd × breidd × hæð.",
+      "options": [
+        "16",
+        "170",
+        "150",
+        "31"
+      ]
+    },
+    {
+      "id": "v12_00835",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "rúmmál",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Kassi er 8 cm × 3 cm × 4 cm. Hvert er rúmmálið?",
+      "answer": "96",
+      "hint": "Rúmmál rétthyrnds kassa = lengd × breidd × hæð.",
+      "options": [
+        "116",
+        "15",
+        "96",
+        "28"
+      ]
+    },
+    {
+      "id": "v12_00836",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "rúmmál",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Kassi er 10 cm × 5 cm × 2 cm. Hvert er rúmmálið?",
+      "answer": "100",
+      "hint": "Rúmmál rétthyrnds kassa = lengd × breidd × hæð.",
+      "options": [
+        "17",
+        "120",
+        "52",
+        "100"
+      ]
+    },
+    {
+      "id": "v12_00837",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "rúmmál",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Kassi er 7 cm × 6 cm × 3 cm. Hvert er rúmmálið?",
+      "answer": "126",
+      "hint": "Rúmmál rétthyrnds kassa = lengd × breidd × hæð.",
+      "options": [
+        "45",
+        "146",
+        "126",
+        "16"
+      ]
+    },
+    {
+      "id": "v12_00838",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "rúmmál",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Kassi er 12 cm × 4 cm × 5 cm. Hvert er rúmmálið?",
+      "answer": "240",
+      "hint": "Rúmmál rétthyrnds kassa = lengd × breidd × hæð.",
+      "options": [
+        "240",
+        "21",
+        "260",
+        "53"
+      ]
+    },
+    {
+      "id": "v12_00839",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "finndu villuna",
+      "difficulty": 3,
+      "type": "error",
+      "text": "Finndu villuna: 25% af 80 = 25",
+      "answer": "25% af 80 er 20",
+      "hint": "25% er fjórðungur. 80 ÷ 4 = 20.",
+      "options": [
+        "25% af 80 er 20",
+        "25% af 80 er 40",
+        "25% af 80 er 25",
+        "Dæmið er rétt"
+      ]
+    },
+    {
+      "id": "v12_00840",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "finndu villuna",
+      "difficulty": 3,
+      "type": "error",
+      "text": "Finndu villuna: -4 + 9 = -13",
+      "answer": "-4 + 9 = 5",
+      "hint": "Farðu 9 skref til hægri frá -4.",
+      "options": [
+        "-4 + 9 = 5",
+        "-4 + 9 = -13",
+        "-4 + 9 = 13",
+        "Dæmið er rétt"
+      ]
+    },
+    {
+      "id": "v12_00841",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "finndu villuna",
+      "difficulty": 3,
+      "type": "error",
+      "text": "Find the mistake: She are happy.",
+      "answer": "She is happy.",
+      "hint": "She tekur is, ekki are.",
+      "options": [
+        "She is happy.",
+        "She am happy.",
+        "She be happy.",
+        "Setningin er rétt"
+      ]
+    },
+    {
+      "id": "v12_00842",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "finndu villuna",
+      "difficulty": 3,
+      "type": "error",
+      "text": "Find the mistake: I goed to school yesterday.",
+      "answer": "I went to school yesterday.",
+      "hint": "Go er óregluleg sögn: go, went, gone.",
+      "options": [
+        "I went to school yesterday.",
+        "I go to school yesterday.",
+        "I going to school yesterday.",
+        "Setningin er rétt"
+      ]
+    },
+    {
+      "id": "v12_00843",
+      "subject": "icelandic",
+      "grade_level": 7,
+      "skill": "finndu villuna",
+      "difficulty": 3,
+      "type": "error",
+      "text": "Finndu villuna: Ég hlakka til að hitta þig á morgun og hann kom í gær. Hvað vantar helst?",
+      "answer": "Setningin er of löng og þarf betri greinarmerki.",
+      "hint": "Langar setningar þurfa oft punkt eða skýr tengiorð.",
+      "options": [
+        "Setningin er of löng og þarf betri greinarmerki.",
+        "Það vantar stóran staf í Ég.",
+        "Orðið morgun er rangt skrifað.",
+        "Engin villa"
+      ]
+    },
+    {
+      "id": "v12_00844",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "finndu villuna",
+      "difficulty": 3,
+      "type": "error",
+      "text": "Finndu villuna: Plöntur nota aðeins vatn til að búa til fæðu.",
+      "answer": "Plöntur nota ljós, vatn og koltvíoxíð.",
+      "hint": "Ljóstillífun notar sólarljós, vatn og koltvíoxíð.",
+      "options": [
+        "Plöntur nota ljós, vatn og koltvíoxíð.",
+        "Plöntur nota aðeins vatn.",
+        "Plöntur þurfa ekki ljós.",
+        "Setningin er rétt"
+      ]
+    },
+    {
+      "id": "v12_00845",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "fylla í eyðu",
+      "difficulty": 3,
+      "type": "blank",
+      "text": "Fill in the blank: Yesterday I ____ to the library.",
+      "answer": "went",
+      "hint": "Past tense of go is went.",
+      "options": [
+        "went",
+        "go",
+        "gone",
+        "going"
+      ]
+    },
+    {
+      "id": "v12_00846",
+      "subject": "english",
+      "grade_level": 6,
+      "skill": "fylla í eyðu",
+      "difficulty": 2,
+      "type": "blank",
+      "text": "Fill in the blank: The cat is ____ the table.",
+      "answer": "under",
+      "hint": "Under merkir undir.",
+      "options": [
+        "under",
+        "quickly",
+        "blue",
+        "apple"
+      ]
+    },
+    {
+      "id": "v12_00847",
+      "subject": "icelandic",
+      "grade_level": 6,
+      "skill": "fylla í eyðu",
+      "difficulty": 2,
+      "type": "blank",
+      "text": "Fylltu í eyðuna: Nafnorð er heiti á manneskju, dýri, hlut eða ____.",
+      "answer": "stað",
+      "hint": "Nafnorð geta verið heiti á stöðum.",
+      "options": [
+        "stað",
+        "hlaupa",
+        "fallegur",
+        "mjög"
+      ]
+    },
+    {
+      "id": "v12_00848",
+      "subject": "icelandic",
+      "grade_level": 7,
+      "skill": "fylla í eyðu",
+      "difficulty": 3,
+      "type": "blank",
+      "text": "Fylltu í eyðuna: Bein ræða er oft afmörkuð með ____.",
+      "answer": "gæsalöppum",
+      "hint": "Bein ræða sýnir nákvæm orð persónu.",
+      "options": [
+        "gæsalöppum",
+        "kommu eingöngu",
+        "spurningarmerki",
+        "töluorðum"
+      ]
+    },
+    {
+      "id": "v12_00849",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "fylla í eyðu",
+      "difficulty": 3,
+      "type": "blank",
+      "text": "Fylltu í eyðuna: Kraftur getur breytt hraða eða ____ hlutar.",
+      "answer": "stefnu",
+      "hint": "Kraftur getur breytt hreyfingu.",
+      "options": [
+        "stefnu",
+        "lit",
+        "aldri",
+        "nafni"
+      ]
+    },
+    {
+      "id": "v12_00850",
+      "subject": "geo",
+      "grade_level": 7,
+      "skill": "fylla í eyðu",
+      "difficulty": 3,
+      "type": "blank",
+      "text": "Fylltu í eyðuna: Lína sem sýnir staði með sama hitastig kallast _____.",
+      "answer": "jafnhitalína",
+      "hint": "Jafn merkir sama.",
+      "options": [
+        "jafnhitalína",
+        "landamæri",
+        "miðbaugur",
+        "áttaviti"
+      ]
+    },
+    {
+      "id": "v12_00851",
+      "subject": "icelandic",
+      "grade_level": 7,
+      "skill": "aðalsetningar og aukasetningar",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvaða setning inniheldur aukasetningu?",
+      "answer": "Ég fór heim þegar skólinn var búinn.",
+      "hint": "Aukasetning getur byrjað á orðum eins og þegar, því að, ef.",
+      "options": [
+        "Ég fór heim þegar skólinn var búinn.",
+        "Ég fór heim.",
+        "Skólinn var búinn.",
+        "Ég las bók."
+      ]
+    },
+    {
+      "id": "v12_00852",
+      "subject": "icelandic",
+      "grade_level": 7,
+      "skill": "bein og óbein ræða",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Breyttu í óbeina ræðu: Anna sagði: „Ég kem á morgun.“",
+      "answer": "Anna sagði að hún kæmi daginn eftir.",
+      "hint": "Óbein ræða endursegir það sem sagt var.",
+      "options": [
+        "Anna sagði að hún kæmi daginn eftir.",
+        "Anna sagði: Ég kem á morgun.",
+        "Anna kemur á morgun.",
+        "Ég sagði að Anna kæmi."
+      ]
+    },
+    {
+      "id": "v12_00853",
+      "subject": "icelandic",
+      "grade_level": 7,
+      "skill": "textagerð",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er efnisgrein?",
+      "answer": "Hluti texta sem fjallar um eina meginhugmynd.",
+      "hint": "Efnisgrein heldur utan um eina hugmynd.",
+      "options": [
+        "Hluti texta sem fjallar um eina meginhugmynd.",
+        "Eitt orð í setningu.",
+        "Allur textinn.",
+        "Aðeins fyrirsögn."
+      ]
+    },
+    {
+      "id": "v12_00854",
+      "subject": "icelandic",
+      "grade_level": 7,
+      "skill": "rökstuðningur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvaða svar rökstyður best skoðun?",
+      "answer": "Mér finnst þetta gott vegna þess að dæmin sýna árangur.",
+      "hint": "Rökstuðningur segir af hverju.",
+      "options": [
+        "Mér finnst þetta gott vegna þess að dæmin sýna árangur.",
+        "Mér finnst þetta bara.",
+        "Já.",
+        "Nei, af því bara."
+      ]
+    },
+    {
+      "id": "v12_00855",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "What is the past tense of 'go'?",
+      "answer": "went",
+      "hint": "Irregular verbs do not always add -ed.",
+      "options": [
+        "goed",
+        "went",
+        "gone",
+        "go"
+      ]
+    },
+    {
+      "id": "v12_00856",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Choose the correct sentence.",
+      "answer": "I went it yesterday.",
+      "hint": "Yesterday usually needs past tense.",
+      "options": [
+        "I went it yesterday.",
+        "I go it yesterday.",
+        "I gone it yesterday.",
+        "I goed it yesterday."
+      ]
+    },
+    {
+      "id": "v12_00857",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "What is the past tense of 'see'?",
+      "answer": "saw",
+      "hint": "Irregular verbs do not always add -ed.",
+      "options": [
+        "see",
+        "saw",
+        "seen",
+        "seeed"
+      ]
+    },
+    {
+      "id": "v12_00858",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Choose the correct sentence.",
+      "answer": "I saw it yesterday.",
+      "hint": "Yesterday usually needs past tense.",
+      "options": [
+        "I saw it yesterday.",
+        "I see it yesterday.",
+        "I seen it yesterday.",
+        "I seeed it yesterday."
+      ]
+    },
+    {
+      "id": "v12_00859",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "What is the past tense of 'write'?",
+      "answer": "wrote",
+      "hint": "Irregular verbs do not always add -ed.",
+      "options": [
+        "written",
+        "writeed",
+        "wrote",
+        "write"
+      ]
+    },
+    {
+      "id": "v12_00860",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Choose the correct sentence.",
+      "answer": "I wrote it yesterday.",
+      "hint": "Yesterday usually needs past tense.",
+      "options": [
+        "I wrote it yesterday.",
+        "I write it yesterday.",
+        "I written it yesterday.",
+        "I writeed it yesterday."
+      ]
+    },
+    {
+      "id": "v12_00861",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "What is the past tense of 'eat'?",
+      "answer": "ate",
+      "hint": "Irregular verbs do not always add -ed.",
+      "options": [
+        "eat",
+        "ate",
+        "eated",
+        "eaten"
+      ]
+    },
+    {
+      "id": "v12_00862",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Choose the correct sentence.",
+      "answer": "I ate it yesterday.",
+      "hint": "Yesterday usually needs past tense.",
+      "options": [
+        "I ate it yesterday.",
+        "I eat it yesterday.",
+        "I eaten it yesterday.",
+        "I eated it yesterday."
+      ]
+    },
+    {
+      "id": "v12_00863",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "What is the past tense of 'take'?",
+      "answer": "took",
+      "hint": "Irregular verbs do not always add -ed.",
+      "options": [
+        "take",
+        "took",
+        "taken",
+        "takeed"
+      ]
+    },
+    {
+      "id": "v12_00864",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Choose the correct sentence.",
+      "answer": "I took it yesterday.",
+      "hint": "Yesterday usually needs past tense.",
+      "options": [
+        "I took it yesterday.",
+        "I take it yesterday.",
+        "I taken it yesterday.",
+        "I takeed it yesterday."
+      ]
+    },
+    {
+      "id": "v12_00865",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "What is the past tense of 'make'?",
+      "answer": "made",
+      "hint": "Irregular verbs do not always add -ed.",
+      "options": [
+        "made",
+        "make",
+        "makeed",
+        "12"
+      ]
+    },
+    {
+      "id": "v12_00866",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Choose the correct sentence.",
+      "answer": "I made it yesterday.",
+      "hint": "Yesterday usually needs past tense.",
+      "options": [
+        "I made it yesterday.",
+        "I make it yesterday.",
+        "I made it yesterday.",
+        "I makeed it yesterday."
+      ]
+    },
+    {
+      "id": "v12_00867",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "What is the past tense of 'come'?",
+      "answer": "came",
+      "hint": "Irregular verbs do not always add -ed.",
+      "options": [
+        "comeed",
+        "came",
+        "come",
+        "17"
+      ]
+    },
+    {
+      "id": "v12_00868",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Choose the correct sentence.",
+      "answer": "I came it yesterday.",
+      "hint": "Yesterday usually needs past tense.",
+      "options": [
+        "I came it yesterday.",
+        "I come it yesterday.",
+        "I come it yesterday.",
+        "I comeed it yesterday."
+      ]
+    },
+    {
+      "id": "v12_00869",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "What is the past tense of 'begin'?",
+      "answer": "began",
+      "hint": "Irregular verbs do not always add -ed.",
+      "options": [
+        "begined",
+        "begun",
+        "begin",
+        "began"
+      ]
+    },
+    {
+      "id": "v12_00870",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Choose the correct sentence.",
+      "answer": "I began it yesterday.",
+      "hint": "Yesterday usually needs past tense.",
+      "options": [
+        "I began it yesterday.",
+        "I begin it yesterday.",
+        "I begun it yesterday.",
+        "I begined it yesterday."
+      ]
+    },
+    {
+      "id": "v12_00871",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "What is the past tense of 'break'?",
+      "answer": "broke",
+      "hint": "Irregular verbs do not always add -ed.",
+      "options": [
+        "broken",
+        "broke",
+        "break",
+        "breaked"
+      ]
+    },
+    {
+      "id": "v12_00872",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Choose the correct sentence.",
+      "answer": "I broke it yesterday.",
+      "hint": "Yesterday usually needs past tense.",
+      "options": [
+        "I broke it yesterday.",
+        "I break it yesterday.",
+        "I broken it yesterday.",
+        "I breaked it yesterday."
+      ]
+    },
+    {
+      "id": "v12_00873",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "What is the past tense of 'choose'?",
+      "answer": "chose",
+      "hint": "Irregular verbs do not always add -ed.",
+      "options": [
+        "choose",
+        "chooseed",
+        "chosen",
+        "chose"
+      ]
+    },
+    {
+      "id": "v12_00874",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "óreglulegar sagnir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Choose the correct sentence.",
+      "answer": "I chose it yesterday.",
+      "hint": "Yesterday usually needs past tense.",
+      "options": [
+        "I chose it yesterday.",
+        "I choose it yesterday.",
+        "I chosen it yesterday.",
+        "I chooseed it yesterday."
+      ]
+    },
+    {
+      "id": "v12_00875",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "frumur",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er fruma?",
+      "answer": "Minnsta lifandi byggingareining lífvera.",
+      "hint": "Lífverur eru gerðar úr frumum.",
+      "options": [
+        "Minnsta lifandi byggingareining lífvera.",
+        "Stórt líffæri.",
+        "Tegund af steini.",
+        "Hluti af korti."
+      ]
+    },
+    {
+      "id": "v12_00876",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "kraftar",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvaða eining er oft notuð fyrir kraft?",
+      "answer": "Newton",
+      "hint": "Kraftur er mældur í newtonum.",
+      "options": [
+        "Newton",
+        "metri",
+        "lítri",
+        "gráða"
+      ]
+    },
+    {
+      "id": "v12_00877",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "efnabreytingar",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvaða dæmi er efnabreyting?",
+      "answer": "Pappír brennur.",
+      "hint": "Efnabreyting býr til ný efni.",
+      "options": [
+        "Pappír brennur.",
+        "Ís bráðnar.",
+        "Vatn frýs.",
+        "Sykur leysist upp."
+      ]
+    },
+    {
+      "id": "v12_00878",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "jarðfræði",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað veldur jarðskjálftum oftast?",
+      "answer": "Hreyfing jarðskorpufleka.",
+      "hint": "Flekaskil og misgengi tengjast skjálftum.",
+      "options": [
+        "Hreyfing jarðskorpufleka.",
+        "Tunglið skín.",
+        "Vindur blæs.",
+        "Regn fellur."
+      ]
+    },
+    {
+      "id": "v12_00879",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "loftslag",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hver er munur á veðri og loftslagi?",
+      "answer": "Veður er stutt tímabil, loftslag er langtímamynstur.",
+      "hint": "Loftslag er meðaltal yfir langan tíma.",
+      "options": [
+        "Veður er stutt tímabil, loftslag er langtímamynstur.",
+        "Það er enginn munur.",
+        "Loftslag er bara í dag.",
+        "Veður er alltaf eins."
+      ]
+    },
+    {
+      "id": "v12_00880",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "erfðir",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað eru erfðir?",
+      "answer": "Eiginleikar sem berast frá foreldrum til afkvæma.",
+      "hint": "Erfðir tengjast genum.",
+      "options": [
+        "Eiginleikar sem berast frá foreldrum til afkvæma.",
+        "Að læra heima.",
+        "Að ferðast milli landa.",
+        "Gerð veðurs."
+      ]
+    },
+    {
+      "id": "v12_00881",
+      "subject": "geo",
+      "grade_level": 7,
+      "skill": "mannfjöldi",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað kallast það þegar fólk flytur úr sveit í borg?",
+      "answer": "þéttbýlismyndun",
+      "hint": "Þéttbýli merkir byggð þar sem margir búa þétt.",
+      "options": [
+        "þéttbýlismyndun",
+        "eldgos",
+        "miðbaugur",
+        "loftþrýstingur"
+      ]
+    },
+    {
+      "id": "v12_00882",
+      "subject": "geo",
+      "grade_level": 7,
+      "skill": "lýðræði",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað er lýðræði?",
+      "answer": "Stjórnarfar þar sem fólkið hefur áhrif á ákvarðanir, oft með kosningum.",
+      "hint": "Lýður merkir fólk.",
+      "options": [
+        "Stjórnarfar þar sem fólkið hefur áhrif á ákvarðanir, oft með kosningum.",
+        "Þegar einn ræður öllu.",
+        "Tegund fjalls.",
+        "Veðurkerfi."
+      ]
+    },
+    {
+      "id": "v12_00883",
+      "subject": "geo",
+      "grade_level": 7,
+      "skill": "loftslagssvæði",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvaða loftslagssvæði er nálægt miðbaug?",
+      "answer": "hitabelti",
+      "hint": "Nálægt miðbaug er oft heitt.",
+      "options": [
+        "hitabelti",
+        "heimskautaloftslag",
+        "eyðimörk eingöngu",
+        "fjallaloftslag"
+      ]
+    },
+    {
+      "id": "v12_00884",
+      "subject": "geo",
+      "grade_level": 7,
+      "skill": "söguleg tímabil",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Hvað þýðir að heimild sé frumheimild?",
+      "answer": "Heimild frá þeim tíma eða frá beinum vitni.",
+      "hint": "Frumheimild er nálægt atburðinum.",
+      "options": [
+        "Heimild frá þeim tíma eða frá beinum vitni.",
+        "Kennslubók skrifuð löngu seinna.",
+        "Skáldsaga.",
+        "Kort af Evrópu."
+      ]
+    },
+    {
+      "id": "v12_00885",
+      "subject": "geo",
+      "grade_level": 7,
+      "skill": "heimsríki",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Af hverju skiptu hafnir miklu máli í heimsviðskiptum?",
+      "answer": "Þær auðvelduðu flutning vara milli landa.",
+      "hint": "Hafnir tengjast skipum og verslun.",
+      "options": [
+        "Þær auðvelduðu flutning vara milli landa.",
+        "Þær voru bara skraut.",
+        "Þær stöðvuðu alla verslun.",
+        "Þær tengdust ekki sjó."
+      ]
     }
   ],
   "grade_levels": {

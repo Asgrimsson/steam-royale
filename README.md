@@ -486,3 +486,52 @@ DEPLOYMENT.md
 - Kennari getur merkt eigin spurningar með bekkjarstigi
 - Svör vista bekkjarstig
 - Sjá `PERSISTENCE.md` fyrir varanlega vistun á Render
+
+
+## v1.2 - Epic Content & Shop
+
+Nýtt í þessari útgáfu:
+
+- Stækkaður verkefnabanki: 142 ný verkefni
+- Fleiri 7. bekkjar verkefni
+- Ný verkefnagerð: Finndu villuna
+- Ný verkefnagerð: Fylla í eyður
+- Fleiri stærðfræðiþættir:
+  - prósentur
+  - hlutföll
+  - neikvæðar tölur
+  - jöfnur
+  - meðaltal
+  - flatarmál þríhyrninga
+  - rúmmál
+- Fleiri íslenskuverkefni fyrir 7. bekk
+- Fleiri enskuverkefni með óreglulegum sögnum
+- Fleiri náttúrufræði- og samfélagsfræðiverkefni
+- Stórbætt búð:
+  - lukkudýr/pets
+  - þemu
+  - fleiri kraftar
+  - safngripir úr loot kössum
+- Greinabossar með mismunandi verðlaunum
+
+### Uppfærsla
+
+Afritaðu þessar skrár yfir núverandi verkefni og ýttu svo á GitHub:
+
+```text
+app/static/questions.json
+app/static/app.js
+app/static/index.html
+app/static/style.css
+README.md
+```
+
+Síðan:
+
+```cmd
+git add .
+git commit -m "Skola Royale v1.2 epic content and shop"
+git push
+```
+
+Render deploy-ar þá sjálfkrafa.

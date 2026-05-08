@@ -26,7 +26,7 @@ const SUBJECTS = {
 
 let state = {
   level:1,xp:0,coins:0,streak:0,shields:0,hints:2,skips:2,loot_boxes:0,
-  total_correct:0,total_answered:0,boss_wins:0,zone:"mixed",gradeLevel:"5",owned:{},achievements:{},current:null,
+  total_correct:0,total_answered:0,boss_wins:0,zone:"mixed",gradeLevel:"5",owned:{},pets:{},collectibles:{},activePet:null,achievements:{},current:null,
   bossMode:false,bossLeft:0,bossMax:5
 };
 
@@ -44,13 +44,40 @@ const shopItems = [
   {id:"shield",icon:"🛡️",title:"Skjöldur",price:180,desc:"Bjargar streak ef svarið er rangt.",kind:"consumable",rarity:"common"},
   {id:"hint",icon:"💡",title:"Vísbending",price:120,desc:"Sýnir hjálp við verkefni.",kind:"consumable",rarity:"common"},
   {id:"skip",icon:"⏭️",title:"Mission skipti",price:100,desc:"Skiptu um verkefni án refsingar.",kind:"consumable",rarity:"common"},
-  {id:"loot",icon:"🎁",title:"Loot kassi",price:350,desc:"Tilviljunarkennd verðlaun: coins, skjöldur eða hjálp.",kind:"consumable",rarity:"rare"},
+  {id:"firststep",icon:"🔎",title:"Fyrsta skref",price:220,desc:"Sýnir fyrsta skrefið í krefjandi verkefni.",kind:"consumable",rarity:"rare"},
+  {id:"remove2",icon:"🎯",title:"Fjarlægja 2 röng",price:260,desc:"Hjálpar í fjölvali með því að fjarlægja tvo ranga möguleika.",kind:"consumable",rarity:"rare"},
+  {id:"loot",icon:"🎁",title:"Loot kassi",price:350,desc:"Tilviljunarkennd verðlaun og safngripir.",kind:"consumable",rarity:"rare"},
   {id:"focus",icon:"🧠",title:"Fókus-bónus",price:450,desc:"Gefur +150 XP strax.",kind:"boost",rarity:"rare"},
-  {id:"double",icon:"⚡",title:"Rafmagns XP",price:650,desc:"Gefur +300 XP og opnar confetti storm.",kind:"boost",rarity:"epic"},
+  {id:"double",icon:"⚡",title:"Rafmagns XP",price:650,desc:"Gefur +300 XP og confetti storm.",kind:"boost",rarity:"epic"},
+  {id:"theme_space",icon:"🌌",title:"Geimstöð",price:900,desc:"Opnar geimþema.",kind:"theme",rarity:"epic"},
+  {id:"theme_lava",icon:"🌋",title:"Eldfjallaeyja",price:900,desc:"Opnar eldþema.",kind:"theme",rarity:"epic"},
+  {id:"theme_ice",icon:"🧊",title:"Ísheimur",price:900,desc:"Opnar ísþema.",kind:"theme",rarity:"epic"},
   {id:"crown",icon:"👑",title:"Kóróna",price:1200,desc:"Sýnir Legendary stemningu á prófílnum.",kind:"cosmetic",rarity:"legendary"},
   {id:"dragon",icon:"🐉",title:"Dreka-avatar",price:1500,desc:"Breytir avatar í dreka.",kind:"cosmetic",rarity:"legendary"},
-  {id:"ninja",icon:"🥷",title:"Ninja-avatar",price:1000,desc:"Leyndarmál meistaranemans.",kind:"cosmetic",rarity:"epic"}
+  {id:"ninja",icon:"🥷",title:"Ninja-avatar",price:1000,desc:"Leyndarmál meistaranemans.",kind:"cosmetic",rarity:"epic"},
+  {id:"pet_owl",icon:"🦉",title:"Ugla",price:800,desc:"Lukkudýr sem elskar vísbendingar.",kind:"pet",rarity:"rare"},
+  {id:"pet_fox",icon:"🦊",title:"Refur",price:900,desc:"Snjallt lukkudýr fyrir orð og lausnir.",kind:"pet",rarity:"epic"},
+  {id:"pet_robot",icon:"🤖",title:"Mini-botti",price:1000,desc:"Tækni-lukkudýr fyrir stærðfræði.",kind:"pet",rarity:"epic"},
+  {id:"pet_penguin",icon:"🐧",title:"Mörgæs",price:700,desc:"Ískaldur fókusvinur.",kind:"pet",rarity:"rare"}
 ];
+
+const collectibleItems = [
+  {id:"pencil_gold", icon:"✏️", title:"Gullblýantur", rarity:"rare"},
+  {id:"word_sword", icon:"🗡️", title:"Orðasverð", rarity:"epic"},
+  {id:"science_orb", icon:"🔮", title:"Vísindakúla", rarity:"epic"},
+  {id:"map_key", icon:"🗝️", title:"Kortalykill", rarity:"rare"},
+  {id:"knowledge_stone", icon:"💎", title:"Þekkingarsteinn", rarity:"legendary"},
+  {id:"royale_trophy", icon:"🏆", title:"Skóla-Royale bikar", rarity:"legendary"}
+];
+
+const subjectBosses = {
+  math:{icon:"🧮",name:"Margföldunartröllið",reward:520},
+  icelandic:{icon:"🇮🇸",name:"Orðflokksdrekinn",reward:520},
+  english:{icon:"🇬🇧",name:"Grammar Goblin",reward:520},
+  science:{icon:"🌿",name:"Vísindavargurinn",reward:520},
+  geo:{icon:"🌍",name:"Kortakóngurinn",reward:520},
+  mixed:{icon:"👑",name:"Dreki Þekkingarinnar",reward:650}
+};
 
 const achievementDefs = [
   {id:"first", icon:"🎯", title:"Fyrsta lending", desc:"Svaraðu einu verkefni rétt.", reward:80, check:()=>state.total_correct>=1},
@@ -407,10 +434,10 @@ function winBossFight(){
   state.bossMode = false;
   state.bossLeft = 0;
   state.boss_wins = (state.boss_wins || 0) + 1;
-  state.coins += 450;
+  state.coins += (subjectBosses[state.zone]?.reward || 450);
   state.xp += 220;
   state.loot_boxes += 2;
-  showLootModal("👑", "Boss sigraður!", "+450 coins, +220 XP og 2 loot kassar!");
+  showLootModal(subjectBosses[state.zone]?.icon || "👑", `${subjectBosses[state.zone]?.name || "Boss"} sigraður!`, `+${subjectBosses[state.zone]?.reward || 450} coins, +220 XP og 2 loot kassar!`);
   burst(["👑","🏆","⚡","💎","🎉"]);
   updateBossUI();
 }
@@ -518,40 +545,39 @@ function renderAchievements(){
 function renderShop(){
   shopGrid.innerHTML="";
   shopItems.forEach(item=>{
-    const owned=state.owned[item.id];
+    const owned=state.owned?.[item.id];
     const card=document.createElement("div"); 
     card.className=`shop-item shop-${item.rarity || "common"}`;
-    card.innerHTML=`<div class="rarity">${(item.rarity || "common").toUpperCase()}</div><div style="font-size:3rem">${item.icon}</div><h3>${item.title}</h3><p>${item.desc}</p><span class="price">${owned?"Keypt ✅":item.price+" coins"}</span><br><br><button>${owned?"Virkja":"Kaupa"}</button>`;
+    card.innerHTML=`<div class="rarity">${(item.rarity || "common").toUpperCase()}</div><div style="font-size:3rem">${item.icon}</div><h3>${item.title}</h3><p>${item.desc}</p><small class="shop-kind">${item.kind}</small><br><span class="price">${owned?"Keypt ✅":item.price+" coins"}</span><br><br><button>${owned?"Virkja":"Kaupa"}</button>`;
     card.querySelector("button").onclick=()=>buyItem(item.id); shopGrid.appendChild(card);
   });
+  renderCollection();
 }
 function buyItem(id){
   const item=shopItems.find(x=>x.id===id); if(!item)return;
-  if(item.kind==="cosmetic" && state.owned[id]){
-    activateCosmetic(id);
+  if(["cosmetic","pet","theme"].includes(item.kind) && state.owned?.[id]){
+    if(item.kind==="cosmetic") activateCosmetic(id);
+    if(item.kind==="pet") activatePet(id);
+    if(item.kind==="theme") activateTheme(id);
     return;
   }
   if(state.coins<item.price)return toast("Þig vantar fleiri coins.");
   state.coins-=item.price;
+  state.owned = state.owned || {};
+  state.pets = state.pets || {};
+  state.collectibles = state.collectibles || {};
   if(id==="shield")state.shields++;
   if(id==="hint")state.hints++;
   if(id==="skip")state.skips++;
-  if(id==="loot"){
-    state.loot_boxes++;
-    openLootBox();
-  }
-  if(id==="focus"){
-    state.xp+=150; showLootModal("🧠","Fókus-bónus!","+150 XP");
-  }
-  if(id==="double"){
-    state.xp+=300; showLootModal("⚡","Rafmagns XP!","+300 XP og confetti stormur!"); burst(["⚡","⚡","⭐","💥"]);
-  }
-  if(["crown","dragon","ninja"].includes(id)){
-    state.owned[id]=true;
-    activateCosmetic(id);
-    showLootModal(item.icon, `${item.title} keypt!`, "Avatarinn þinn fékk nýtt útlit.");
-  }
-  updateUI(); renderShop(); saveProgress();
+  if(id==="firststep"){ state.hints += 2; showLootModal("🔎","Fyrsta skref!","Þú fékkst 2 sér-vísbendingar."); }
+  if(id==="remove2"){ state.skips += 1; state.hints += 1; showLootModal("🎯","Markhjálp!","Þú fékkst 1 skipti og 1 vísbendingu."); }
+  if(id==="loot"){ state.loot_boxes++; openLootBox(); }
+  if(id==="focus"){ state.xp+=150; showLootModal("🧠","Fókus-bónus!","+150 XP"); }
+  if(id==="double"){ state.xp+=300; showLootModal("⚡","Rafmagns XP!","+300 XP og confetti stormur!"); burst(["⚡","⚡","⭐","💥"]); }
+  if(item.kind==="cosmetic"){ state.owned[id]=true; activateCosmetic(id); showLootModal(item.icon, `${item.title} keypt!`, "Avatarinn þinn fékk nýtt útlit."); }
+  if(item.kind==="pet"){ state.owned[id]=true; state.pets[id]={level:1,xp:0}; activatePet(id); showLootModal(item.icon, `${item.title} fylgir þér!`, "Lukkudýrið þitt getur levelað upp með vinnu."); }
+  if(item.kind==="theme"){ state.owned[id]=true; activateTheme(id); showLootModal(item.icon, `${item.title} virkjað!`, "Vefurinn fékk nýtt þema."); }
+  updateUI(); renderShop(); renderCollection(); saveProgress();
 }
 
 function activateCosmetic(id){
@@ -563,12 +589,19 @@ function activateCosmetic(id){
 }
 
 function openLootBox(){
-  const roll=pick(["coins","shield","hint","skip","xp"]);
+  state.collectibles = state.collectibles || {};
+  const roll=pick(["coins","shield","hint","skip","xp","collectible"]);
   if(roll==="coins"){let c=rand(120,420); state.coins+=c; showLootModal("💰","Loot: Coins!",`Þú fékkst ${c} coins!`)}
   if(roll==="shield"){state.shields++; showLootModal("🛡️","Loot: Skjöldur!","Þú fékkst einn skjöld.")}
   if(roll==="hint"){state.hints+=2; showLootModal("💡","Loot: Vísbendingar!","Þú fékkst 2 vísbendingar.")}
   if(roll==="skip"){state.skips+=2; showLootModal("⏭️","Loot: Mission skipti!","Þú fékkst 2 mission skipti.")}
   if(roll==="xp"){let xp=rand(90,260); state.xp+=xp; showLootModal("⭐","Loot: XP!",`Þú fékkst ${xp} XP!`)}
+  if(roll==="collectible"){
+    const item = awardCollectible();
+    if(item) showLootModal(item.icon, `Safngripur: ${item.title}!`, `Sjaldgæfur hlutur bættist í safnið þitt (${item.rarity}).`);
+    else {let c=300; state.coins+=c; showLootModal("💰","Safnið fullt!","Þú átt alla safngripi og fékkst 300 coins í staðinn.");}
+  }
+  renderCollection();
 }
 
 function showLootModal(icon,title,text){
@@ -596,6 +629,40 @@ function showView(id){
   if(id==="daily") renderDailyRewards();
   if(id==="achievements") renderAchievements();
 }
+
+function activateTheme(id){
+  document.body.classList.remove("theme-space","theme-lava","theme-ice");
+  if(id==="theme_space") document.body.classList.add("theme-space");
+  if(id==="theme_lava") document.body.classList.add("theme-lava");
+  if(id==="theme_ice") document.body.classList.add("theme-ice");
+  state.activeTheme = id;
+  toast("Þema virkjað!");
+}
+
+function activatePet(id){
+  state.activePet = id;
+  const item = shopItems.find(x=>x.id===id);
+  toast(`${item ? item.icon : "🐾"} Lukkudýr virkjað!`);
+  updateUI();
+  saveProgress();
+}
+
+function awardCollectible(){
+  const missing = collectibleItems.filter(c => !state.collectibles?.[c.id]);
+  if(!missing.length) return null;
+  const item = pick(missing);
+  state.collectibles = state.collectibles || {};
+  state.collectibles[item.id] = true;
+  return item;
+}
+
+function renderCollection(){
+  const box = document.getElementById("collectionBox");
+  if(!box) return;
+  const owned = collectibleItems.filter(c => state.collectibles?.[c.id]);
+  box.innerHTML = owned.length ? owned.map(c=>`<span class="collection-pill ${c.rarity}">${c.icon} ${c.title}</span>`).join("") : "<p>Engir safngripir komnir enn. Opnaðu loot kassa!</p>";
+}
+
 function updateUI(){
   levelVal.textContent=state.level; xpVal.textContent=`${state.xp}/${xpNeeded()}`; coinVal.textContent=state.coins; streakVal.textContent=state.streak; correctVal.textContent=state.total_correct;
   xpBar.style.width=Math.min(100,state.xp/xpNeeded()*100)+"%";
@@ -617,6 +684,12 @@ function updateUI(){
   if(gradeSelect) gradeSelect.value = state.gradeLevel || "5";
   const gradeHint=document.getElementById("gradeLevelHint");
   if(gradeHint) gradeHint.textContent = state.gradeLevel === "adaptive" ? "Kerfið hækkar þyngd eftir árangri." : `Verkefni miða við ${effectiveGradeLevel()}. bekk.`;
+  const petEl=document.getElementById("activePetInfo");
+  if(petEl){
+    const pet = shopItems.find(x=>x.id===state.activePet);
+    petEl.textContent = pet ? `${pet.icon} ${pet.title}` : "Ekkert lukkudýr";
+  }
+  renderCollection();
   const zoneEl=document.getElementById("currentZoneName");
   if(zoneEl) zoneEl.textContent=SUBJECTS[state.zone]?.name || state.zone;
   const packEl=document.getElementById("activePackInfo");
