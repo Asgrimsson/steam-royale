@@ -26,7 +26,7 @@ const SUBJECTS = {
 
 let state = {
   level:1,xp:0,coins:0,streak:0,shields:0,hints:2,skips:2,loot_boxes:0,
-  total_correct:0,total_answered:0,boss_wins:0,zone:"mixed",owned:{},achievements:{},current:null,
+  total_correct:0,total_answered:0,boss_wins:0,zone:"mixed",gradeLevel:"5",owned:{},achievements:{},current:null,
   bossMode:false,bossLeft:0,bossMax:5
 };
 
@@ -79,7 +79,7 @@ function q(subject,text,answer,hint,options=null){
     while(wrong.size<3){let w=n+rand(-12,12); if(w!==n && w>=0) wrong.add(String(w))}
     opts=[String(answer),...wrong];
   }
-  return {subject,text,answer:String(answer),hint,options:opts?shuffle(opts.map(String)):null};
+  return {subject,text,answer:String(answer),hint,options:opts?shuffle(opts.map(String)):null, grade_level: effectiveGradeLevel(), difficulty: Math.max(1, effectiveGradeLevel()-4)};
 }
 
 /* ---------- verkefnagenerering ---------- */
@@ -237,14 +237,39 @@ async function loadQuestionBank(){
   }
 }
 
+
+function effectiveGradeLevel(){
+  if(state.gradeLevel && state.gradeLevel !== "adaptive") return Number(state.gradeLevel);
+  if(state.level >= 8) return 7;
+  if(state.level >= 4) return 6;
+  return 5;
+}
+function setGradeLevel(value){
+  state.gradeLevel = value;
+  localStorage.setItem("sr_grade_level", value);
+  updateUI();
+  saveProgress();
+  toast(value === "adaptive" ? "Sjálfvirkt þyngdarstig virkt." : `Þyngdarstig: ${value}. bekkur`);
+  nextQuestion();
+}
+function questionMatchesGrade(item){
+  const g = Number(item.grade_level || item.gradeLevel || item.grade || 5);
+  const target = effectiveGradeLevel();
+  if(state.gradeLevel === "adaptive") return g <= target && g >= Math.max(5, target - 1);
+  return g === target;
+}
+
 function generateBankQuestion(){
   const combined = [...PACK_QUESTION_BANK, ...CUSTOM_QUESTION_BANK, ...QUESTION_BANK];
   if(!combined.length) return null;
   const allowed = state.zone === "mixed" ? ["math","icelandic","english","science","geo"] : [state.zone];
+  const gradeFiltered = combined.filter(x => allowed.includes(x.subject) && questionMatchesGrade(x));
+  const fallback = combined.filter(x => allowed.includes(x.subject));
+  const sourcePool = gradeFiltered.length ? gradeFiltered : fallback;
 
-  const packPool = PACK_QUESTION_BANK.filter(x => allowed.includes(x.subject));
-  const customPool = CUSTOM_QUESTION_BANK.filter(x => allowed.includes(x.subject));
-  const allPool = combined.filter(x => allowed.includes(x.subject));
+  const packPool = PACK_QUESTION_BANK.filter(x => allowed.includes(x.subject) && questionMatchesGrade(x));
+  const customPool = CUSTOM_QUESTION_BANK.filter(x => allowed.includes(x.subject) && questionMatchesGrade(x));
+  const allPool = sourcePool;
   if(!allPool.length) return null;
 
   // Verkefnapakkar fá mesta vægi, svo kennari geti stýrt æfingu vikunnar.
@@ -261,7 +286,8 @@ function generateBankQuestion(){
     hint: item.hint || "Hugsaðu málið og prófaðu aftur.",
     options: item.options && item.options.length ? shuffle(item.options.map(String)) : null,
     skill: item.skill || "almennt",
-    difficulty: item.difficulty || 1
+    difficulty: item.difficulty || 1,
+    grade_level: item.grade_level || item.gradeLevel || 5
   };
 }
 
@@ -283,6 +309,8 @@ async function boot(){
     const p = await API.call("/api/progress");
     state={...state,...p, owned:p.owned||{}, achievements:p.achievements||{}, current:null};
     setupDaily();
+    const savedGrade = localStorage.getItem("sr_grade_level");
+    if(savedGrade) state.gradeLevel = savedGrade;
     loginScreen.classList.add("hidden"); topbar.classList.remove("hidden"); app.classList.remove("hidden");
     whoami.textContent=`${API.user.display_name} · ${API.user.role==="teacher"?"kennari":"nemandi"}`;
     document.querySelectorAll(".teacher-only").forEach(x=>x.classList.toggle("hidden",API.user.role!=="teacher"));
@@ -347,6 +375,7 @@ async function answer(val){
     subject:state.current.subject,
     skill:state.current.skill || "almennt",
     difficulty:state.current.difficulty || 1,
+    grade_level:state.current.grade_level || effectiveGradeLevel(),
     question:state.current.text,
     answer_given:String(val),
     correct_answer:state.current.answer,
@@ -582,6 +611,12 @@ function updateUI(){
   if(inv) inv.textContent=`🎒 Skjöldur ${state.shields} · 💡 ${state.hints} · ⏭️ ${state.skips} · 🎁 ${state.loot_boxes || 0}`;
   const streakMiniEl=document.getElementById("streakMini");
   if(streakMiniEl) streakMiniEl.textContent=state.streak;
+  const gradeEl=document.getElementById("gradeMini");
+  if(gradeEl) gradeEl.textContent = state.gradeLevel === "adaptive" ? `Sjálfvirkt (${effectiveGradeLevel()}. bekkur)` : `${effectiveGradeLevel()}. bekkur`;
+  const gradeSelect=document.getElementById("gradeLevelSelect");
+  if(gradeSelect) gradeSelect.value = state.gradeLevel || "5";
+  const gradeHint=document.getElementById("gradeLevelHint");
+  if(gradeHint) gradeHint.textContent = state.gradeLevel === "adaptive" ? "Kerfið hækkar þyngd eftir árangri." : `Verkefni miða við ${effectiveGradeLevel()}. bekk.`;
   const zoneEl=document.getElementById("currentZoneName");
   if(zoneEl) zoneEl.textContent=SUBJECTS[state.zone]?.name || state.zone;
   const packEl=document.getElementById("activePackInfo");
@@ -782,6 +817,7 @@ async function createTeacherQuestion(){
     subject: qSubject.value,
     skill: qSkill.value || "almennt",
     difficulty: Number(qDifficulty.value || 1),
+    grade_level: Number(qGradeLevel.value || 5),
     text: qText.value,
     answer: qAnswer.value,
     hint: qHint.value,

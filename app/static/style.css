@@ -566,3 +566,15 @@ textarea, select{
     font-size:11px;
   }
 }
+
+/* v1.1 grade levels */
+.level-picker-box{
+  background:linear-gradient(135deg,#fef3c7,#dbeafe);
+  border:2px solid rgba(37,99,235,.18);
+  border-radius:20px;
+  padding:12px;
+  margin:12px 0;
+}
+.level-picker-box label{display:block;font-weight:950;margin-bottom:6px}
+.level-picker-box select{width:100%;margin:0;background:white}
+.level-picker-box small{display:block;margin-top:6px;color:#475569;font-weight:800}

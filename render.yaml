@@ -10,7 +10,7 @@ services:
       - key: APP_ENV
         value: production
       - key: DATA_DIR
-        value: /var/data
+        value: /opt/render/project/src/data
       - key: SESSION_DAYS
         value: "14"
       - key: SECRET_KEY
@@ -23,5 +23,5 @@ services:
         value: "false"
     disk:
       name: skola-royale-data
-      mountPath: /var/data
+      mountPath: /opt/render/project/src/data
       sizeGB: 1

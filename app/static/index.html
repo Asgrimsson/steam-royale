@@ -44,6 +44,16 @@
         <h2 id="playerTitle">Nýliði</h2>
         <div class="bar"><div id="xpBar"></div></div>
       </section>
+      <div class="level-picker-box">
+        <label for="gradeLevelSelect">🎚️ Þyngdarstig</label>
+        <select id="gradeLevelSelect" onchange="setGradeLevel(this.value)">
+          <option value="5">5. bekkur</option>
+          <option value="6">6. bekkur</option>
+          <option value="7">7. bekkur</option>
+          <option value="adaptive">Sjálfvirkt</option>
+        </select>
+        <small id="gradeLevelHint">Veldu stig verkefna.</small>
+      </div>
       <button class="menu active" onclick="showView('mission')">🎯 Mission</button>
       <button class="menu" onclick="showView('map')">🗺️ Mission-kort</button>
       <button class="menu" onclick="showView('boss')">👑 Boss Fight</button>
@@ -70,6 +80,7 @@
         <div class="quest-status">
           <div class="quest-chip"><span>🧭 Svæði</span><b id="currentZoneName">Blandað Royale</b></div>
           <div class="quest-chip"><span>📦 Pakki</span><b id="activePackInfo">Enginn valinn</b></div>
+          <div class="quest-chip"><span>🎚️ Þyngd</span><b id="gradeMini">5. bekkur</b></div>
           <div class="quest-chip"><span>🔥 Streak</span><b id="streakMini">0</b></div>
           <div class="quest-chip"><span>🎯 Daily</span><b id="dailyQuest">hleður...</b></div>
         </div>
@@ -178,6 +189,11 @@
               <option value="3">Erfiðleiki 3</option>
               <option value="4">Erfiðleiki 4</option>
               <option value="5">Erfiðleiki 5</option>
+            </select>
+            <select id="qGradeLevel">
+              <option value="5">5. bekkur</option>
+              <option value="6">6. bekkur</option>
+              <option value="7">7. bekkur</option>
             </select>
           </div>
           <textarea id="qText" rows="3" placeholder="Spurningin sjálf"></textarea>

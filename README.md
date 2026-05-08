@@ -477,3 +477,12 @@ Sjá nánar í:
 ```text
 DEPLOYMENT.md
 ```
+
+
+## v1.1 - Þyngdarstig og vistun
+
+- Þyngdarstig fyrir 5., 6. og 7. bekk
+- Sjálfvirkt þyngdarstig eftir árangri
+- Kennari getur merkt eigin spurningar með bekkjarstigi
+- Svör vista bekkjarstig
+- Sjá `PERSISTENCE.md` fyrir varanlega vistun á Render

@@ -126,6 +126,7 @@ def init_db():
             subject TEXT NOT NULL,
             skill TEXT NOT NULL DEFAULT 'almennt',
             difficulty INTEGER NOT NULL DEFAULT 1,
+            grade_level INTEGER NOT NULL DEFAULT 5,
             question TEXT NOT NULL,
             answer_given TEXT,
             correct_answer TEXT,
@@ -141,6 +142,7 @@ def init_db():
             subject TEXT NOT NULL,
             skill TEXT NOT NULL DEFAULT 'almennt',
             difficulty INTEGER NOT NULL DEFAULT 1,
+            grade_level INTEGER NOT NULL DEFAULT 5,
             text TEXT NOT NULL,
             answer TEXT NOT NULL,
             hint TEXT NOT NULL DEFAULT '',
@@ -185,6 +187,12 @@ def init_db():
             conn.execute("ALTER TABLE attempts ADD COLUMN skill TEXT NOT NULL DEFAULT 'almennt'")
         if "difficulty" not in attempt_cols:
             conn.execute("ALTER TABLE attempts ADD COLUMN difficulty INTEGER NOT NULL DEFAULT 1")
+        if "grade_level" not in attempt_cols:
+            conn.execute("ALTER TABLE attempts ADD COLUMN grade_level INTEGER NOT NULL DEFAULT 5")
+
+        custom_cols = [r["name"] for r in conn.execute("PRAGMA table_info(custom_questions)").fetchall()]
+        if "grade_level" not in custom_cols:
+            conn.execute("ALTER TABLE custom_questions ADD COLUMN grade_level INTEGER NOT NULL DEFAULT 5")
 
         teacher = conn.execute("SELECT id FROM users WHERE role='teacher' LIMIT 1").fetchone()
         if not teacher:
@@ -233,6 +241,7 @@ class QuestionCreate(BaseModel):
     subject: str = Field(min_length=2, max_length=40)
     skill: str = Field(default="almennt", max_length=80)
     difficulty: int = Field(default=1, ge=1, le=5)
+    grade_level: int = Field(default=5, ge=5, le=7)
     text: str = Field(min_length=3, max_length=1000)
     answer: str = Field(min_length=1, max_length=300)
     hint: str = Field(default="", max_length=500)
@@ -244,6 +253,7 @@ class QuestionUpdate(BaseModel):
     subject: Optional[str] = Field(default=None, min_length=2, max_length=40)
     skill: Optional[str] = Field(default=None, max_length=80)
     difficulty: Optional[int] = Field(default=None, ge=1, le=5)
+    grade_level: Optional[int] = Field(default=None, ge=5, le=7)
     text: Optional[str] = Field(default=None, min_length=3, max_length=1000)
     answer: Optional[str] = Field(default=None, min_length=1, max_length=300)
     hint: Optional[str] = Field(default=None, max_length=500)
@@ -288,6 +298,7 @@ class AttemptIn(BaseModel):
     subject: str
     skill: str = "almennt"
     difficulty: int = 1
+    grade_level: int = 5
     question: str
     answer_given: Optional[str] = ""
     correct_answer: Optional[str] = ""
@@ -385,10 +396,10 @@ def save_progress(data: ProgressIn, user=Depends(current_user)):
 def log_attempt(data: AttemptIn, user=Depends(current_user)):
     with db() as conn:
         conn.execute("""
-            INSERT INTO attempts(user_id, subject, skill, difficulty, question, answer_given, correct_answer, correct, xp_gain, coin_gain, created_at)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?)
+            INSERT INTO attempts(user_id, subject, skill, difficulty, grade_level, question, answer_given, correct_answer, correct, xp_gain, coin_gain, created_at)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
         """, (
-            user["id"], data.subject, data.skill or "almennt", data.difficulty or 1,
+            user["id"], data.subject, data.skill or "almennt", data.difficulty or 1, data.grade_level or 5,
             data.question, data.answer_given, data.correct_answer, 1 if data.correct else 0,
             data.xp_gain, data.coin_gain, now()
         ))
@@ -507,7 +518,7 @@ def student_detail(student_id: int, teacher=Depends(require_teacher)):
             ORDER BY subject, skill
         """, (student_id,)).fetchall()
         recent = conn.execute("""
-            SELECT subject, COALESCE(NULLIF(skill,''), 'almennt') AS skill, question, answer_given, correct_answer, correct, created_at
+            SELECT subject, COALESCE(NULLIF(skill,''), 'almennt') AS skill, grade_level, question, answer_given, correct_answer, correct, created_at
             FROM attempts
             WHERE user_id=?
             ORDER BY created_at DESC
@@ -550,7 +561,7 @@ def list_public_questions(user=Depends(current_user)):
     """Questions added by the teacher. Students load these automatically."""
     with db() as conn:
         rows = conn.execute("""
-            SELECT id, subject, skill, difficulty, text, answer, hint, options_json, active, created_at, updated_at
+            SELECT id, subject, skill, difficulty, grade_level, text, answer, hint, options_json, active, created_at, updated_at
             FROM custom_questions
             WHERE active=1
             ORDER BY updated_at DESC
@@ -562,7 +573,7 @@ def list_public_questions(user=Depends(current_user)):
 def teacher_list_questions(teacher=Depends(require_teacher)):
     with db() as conn:
         rows = conn.execute("""
-            SELECT id, subject, skill, difficulty, text, answer, hint, options_json, active, created_at, updated_at
+            SELECT id, subject, skill, difficulty, grade_level, text, answer, hint, options_json, active, created_at, updated_at
             FROM custom_questions
             ORDER BY updated_at DESC
         """).fetchall()
@@ -576,21 +587,21 @@ def teacher_create_question(data: QuestionCreate, teacher=Depends(require_teache
         options = [data.answer] + options
     with db() as conn:
         cur = conn.execute("""
-            INSERT INTO custom_questions(subject, skill, difficulty, text, answer, hint, options_json, active, created_by, created_at, updated_at)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?)
+            INSERT INTO custom_questions(subject, skill, difficulty, grade_level, text, answer, hint, options_json, active, created_by, created_at, updated_at)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
         """, (
-            data.subject.strip(), data.skill.strip() or "almennt", data.difficulty, data.text.strip(),
+            data.subject.strip(), data.skill.strip() or "almennt", data.difficulty, data.grade_level, data.text.strip(),
             data.answer.strip(), data.hint.strip(), json.dumps(options, ensure_ascii=False),
             1 if data.active else 0, teacher["id"], now(), now()
         ))
-        row = conn.execute("SELECT id, subject, skill, difficulty, text, answer, hint, options_json, active, created_at, updated_at FROM custom_questions WHERE id=?", (cur.lastrowid,)).fetchone()
+        row = conn.execute("SELECT id, subject, skill, difficulty, grade_level, text, answer, hint, options_json, active, created_at, updated_at FROM custom_questions WHERE id=?", (cur.lastrowid,)).fetchone()
         return question_row_to_dict(row)
 
 
 @app.patch("/api/teacher/questions/{question_id}")
 def teacher_update_question(question_id: int, data: QuestionUpdate, teacher=Depends(require_teacher)):
     allowed = {}
-    for field in ["subject", "skill", "difficulty", "text", "answer", "hint"]:
+    for field in ["subject", "skill", "difficulty", "grade_level", "text", "answer", "hint"]:
         value = getattr(data, field)
         if value is not None:
             allowed[field] = value.strip() if isinstance(value, str) else value
@@ -728,7 +739,7 @@ def pack_row_to_dict(conn, pack_row, include_questions: bool = True):
     pack["id"] = int(pack["id"])
     if include_questions:
         qrows = conn.execute("""
-            SELECT q.id, q.subject, q.skill, q.difficulty, q.text, q.answer, q.hint, q.options_json, q.active, q.created_at, q.updated_at
+            SELECT q.id, q.subject, q.skill, q.difficulty, q.grade_level, q.text, q.answer, q.hint, q.options_json, q.active, q.created_at, q.updated_at
             FROM mission_pack_questions pq
             JOIN custom_questions q ON q.id = pq.question_id
             WHERE pq.pack_id=?
@@ -929,6 +940,7 @@ def export_student_csv(student_id: int, teacher=Depends(require_teacher)):
               a.subject AS grein,
               COALESCE(NULLIF(a.skill,''), 'almennt') AS faerni,
               a.difficulty AS erfidleiki,
+              a.grade_level AS bekkjarstig,
               a.question AS spurning,
               a.answer_given AS svar_nemanda,
               a.correct_answer AS rett_svar,
@@ -940,7 +952,7 @@ def export_student_csv(student_id: int, teacher=Depends(require_teacher)):
         """, (student_id,)).fetchall()
         out = [dict(r) for r in rows]
     safe = user["username"].replace(" ", "_")
-    fields = ["grein","faerni","erfidleiki","spurning","svar_nemanda","rett_svar","rett","timi"]
+    fields = ["grein","faerni","erfidleiki","bekkjarstig","spurning","svar_nemanda","rett_svar","rett","timi"]
     return csv_response(f"skola_royale_nemandi_{safe}.csv", out, fields)
 
 
