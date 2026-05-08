@@ -26,7 +26,7 @@ const SUBJECTS = {
 
 let state = {
   level:1,xp:0,coins:0,streak:0,shields:0,hints:2,skips:2,loot_boxes:0,
-  total_correct:0,total_answered:0,boss_wins:0,zone:"mixed",gradeLevel:"5",owned:{},pets:{},collectibles:{},activePet:null,achievements:{},current:null,
+  total_correct:0,total_answered:0,boss_wins:0,zone:"mixed",gradeLevel:"5",adaptiveMode:false,owned:{},pets:{},collectibles:{},activePet:null,achievements:{},current:null,
   bossMode:false,bossLeft:0,bossMax:5
 };
 
@@ -38,6 +38,7 @@ let PACK_QUESTION_BANK = [];
 let ASSIGNED_PACKS = [];
 let teacherQuestionsCache = [];
 let missionPacksCache = [];
+let MY_SKILL_STATS = [];
 let currentStudentDetailId = null;
 
 const shopItems = [
@@ -265,6 +266,45 @@ async function loadQuestionBank(){
 }
 
 
+
+async function loadMySkillStats(){
+  try{
+    if(API.token && API.user?.role === "student"){
+      MY_SKILL_STATS = await API.call("/api/me/skills");
+    }
+  }catch(e){
+    console.warn("Náði ekki að hlaða færnistöðu nemanda.", e);
+    MY_SKILL_STATS = [];
+  }
+}
+
+function weakSkillTargets(){
+  const grade = effectiveGradeLevel ? effectiveGradeLevel() : 5;
+  const stats = (MY_SKILL_STATS || []).filter(s => Number(s.grade_level || grade) === grade && s.answered >= 3);
+  const weak = stats.filter(s => s.accuracy < 75).sort((a,b)=>a.accuracy-b.accuracy || b.answered-a.answered).slice(0,5);
+  return weak.map(s => `${s.subject}|||${s.skill}`);
+}
+
+function adaptiveQuestionScore(item){
+  if(!state.adaptiveMode) return 0;
+  const key = `${item.subject}|||${item.skill || "almennt"}`;
+  const weak = weakSkillTargets();
+  if(weak.includes(key)) return 100;
+  // prefer grade-level unseen skills a little
+  const seen = (MY_SKILL_STATS || []).find(s => s.subject === item.subject && s.skill === (item.skill || "almennt") && Number(s.grade_level) === Number(item.grade_level || effectiveGradeLevel()));
+  if(!seen) return 15;
+  if(seen.accuracy < 85) return 25;
+  return 0;
+}
+
+function setAdaptiveMode(on){
+  state.adaptiveMode = !!on;
+  localStorage.setItem("sr_adaptive_mode", state.adaptiveMode ? "1" : "0");
+  updateUI();
+  toast(state.adaptiveMode ? "Snjallæfing virk: kerfið velur veikustu færni oftar." : "Snjallæfing slökkt.");
+  nextQuestion();
+}
+
 function effectiveGradeLevel(){
   if(state.gradeLevel && state.gradeLevel !== "adaptive") return Number(state.gradeLevel);
   if(state.level >= 8) return 7;
@@ -305,7 +345,13 @@ function generateBankQuestion(){
   if(packPool.length && roll < 0.70) pool = packPool;
   else if(customPool.length && roll < 0.88) pool = customPool;
 
-  const item = pick(pool);
+  let item = pick(pool);
+  if(state.adaptiveMode && pool.length){
+    const boosted = pool
+      .map(q => ({q, score: adaptiveQuestionScore(q) + Math.random()*10}))
+      .sort((a,b)=>b.score-a.score);
+    if(boosted[0] && boosted[0].score > 20) item = boosted[0].q;
+  }
   return {
     subject: item.subject,
     text: item.packTitle ? `📦 ${item.packTitle}: ${item.text}` : item.text,
@@ -338,6 +384,8 @@ async function boot(){
     setupDaily();
     const savedGrade = localStorage.getItem("sr_grade_level");
     if(savedGrade) state.gradeLevel = savedGrade;
+    state.adaptiveMode = localStorage.getItem("sr_adaptive_mode") === "1";
+    await loadMySkillStats();
     loginScreen.classList.add("hidden"); topbar.classList.remove("hidden"); app.classList.remove("hidden");
     whoami.textContent=`${API.user.display_name} · ${API.user.role==="teacher"?"kennari":"nemandi"}`;
     document.querySelectorAll(".teacher-only").forEach(x=>x.classList.toggle("hidden",API.user.role!=="teacher"));
@@ -397,6 +445,7 @@ async function answer(val){
     feedback.classList.add("bad");
   }
   updateDaily(correct);
+  if(API.user?.role === "student" && state.total_answered % 3 === 0) loadMySkillStats();
   checkAchievements();
   await logAttempt({
     subject:state.current.subject,
@@ -678,6 +727,10 @@ function updateUI(){
   if(inv) inv.textContent=`🎒 Skjöldur ${state.shields} · 💡 ${state.hints} · ⏭️ ${state.skips} · 🎁 ${state.loot_boxes || 0}`;
   const streakMiniEl=document.getElementById("streakMini");
   if(streakMiniEl) streakMiniEl.textContent=state.streak;
+  const adaptiveBox=document.getElementById("adaptiveModeCheck");
+  if(adaptiveBox) adaptiveBox.checked = !!state.adaptiveMode;
+  const adaptiveHint=document.getElementById("adaptiveHint");
+  if(adaptiveHint) adaptiveHint.textContent = state.adaptiveMode ? "Snjallæfing velur veikustu færni oftar." : "Slökkt: verkefni veljast meira handahófskennt.";
   const gradeEl=document.getElementById("gradeMini");
   if(gradeEl) gradeEl.textContent = state.gradeLevel === "adaptive" ? `Sjálfvirkt (${effectiveGradeLevel()}. bekkur)` : `${effectiveGradeLevel()}. bekkur`;
   const gradeSelect=document.getElementById("gradeLevelSelect");

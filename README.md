@@ -535,3 +535,40 @@ git push
 ```
 
 Render deploy-ar þá sjálfkrafa.
+
+
+## v1.3 - Adaptive Learning og stærri verkefnabanki
+
+Nýtt:
+
+- 80 ný verkefni
+- Sérstakur fókus á 7. bekk
+- Snjallæfing / Adaptive Learning:
+  - nemandi getur kveikt á 🧠 Snjallæfingu
+  - kerfið skoðar færni þar sem nemandi er undir 75%
+  - slík færni birtist oftar í verkefnum
+- Nýr API endapunktur:
+  - `/api/me/skills`
+- Meiri fjölbreytni:
+  - prósentubreyting
+  - almenn brot
+  - líkur
+  - hnitakerfi
+  - fallbeyging
+  - greinarmerki
+  - present perfect
+  - conditionals
+  - frumur, DNA, kraftar
+  - lýðræði, viðskipti og lífskjör
+
+### Uppfærsla
+
+Afritaðu yfir núverandi verkefni og ýttu á GitHub:
+
+```cmd
+git add .
+git commit -m "Skola Royale v1.3 adaptive learning"
+git push
+```
+
+Render deploy-ar sjálfkrafa.

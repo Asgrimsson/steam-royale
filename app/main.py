@@ -362,6 +362,33 @@ def me(user=Depends(current_user)):
     return {"id": user["id"], "username": user["username"], "display_name": user["display_name"], "role": user["role"], "class_name": user["class_name"]}
 
 
+
+@app.get("/api/me/skills")
+def my_skill_summary(user=Depends(current_user)):
+    with db() as conn:
+        rows = conn.execute("""
+            SELECT subject,
+                   COALESCE(NULLIF(skill,''), 'almennt') AS skill,
+                   grade_level,
+                   COUNT(*) AS answered,
+                   SUM(correct) AS correct
+            FROM attempts
+            WHERE user_id=?
+            GROUP BY subject, COALESCE(NULLIF(skill,''), 'almennt'), grade_level
+            ORDER BY grade_level, subject, skill
+        """, (user["id"],)).fetchall()
+        return [
+            {
+                "subject": r["subject"],
+                "skill": r["skill"],
+                "grade_level": r["grade_level"],
+                "answered": r["answered"],
+                "correct": r["correct"],
+                "accuracy": round((r["correct"] / r["answered"]) * 100) if r["answered"] else 0
+            }
+            for r in rows
+        ]
+
 @app.get("/api/progress")
 def get_progress(user=Depends(current_user)):
     with db() as conn:

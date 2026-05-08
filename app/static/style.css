@@ -622,3 +622,17 @@ textarea, select{
     radial-gradient(circle at 80% 18%, rgba(186,230,253,.38), transparent 25%),
     linear-gradient(135deg,#082f49,#0369a1,#e0f2fe)!important;
 }
+
+/* v1.3 adaptive learning */
+.adaptive-toggle{
+  display:flex!important;
+  align-items:center;
+  gap:8px;
+  margin-top:10px;
+  font-weight:950;
+  cursor:pointer;
+}
+.adaptive-toggle input{
+  width:auto!important;
+  transform:scale(1.15);
+}

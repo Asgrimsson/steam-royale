@@ -1,6 +1,6 @@
 {
-  "version": "1.2",
-  "description": "Skóla Royale verkefnabanki með þyngdarstigum, 7. bekkjar efni, finndu-villuna og fylla-í-eyðu verkefnum.",
+  "version": "1.3",
+  "description": "Skóla Royale v1.3: Adaptive learning og stækkaður 7. bekkjar verkefnabanki.",
   "subjects": {
     "math": "Stærðfræði",
     "icelandic": "Íslenska",
@@ -14251,6 +14251,1366 @@
         "Þær voru bara skraut.",
         "Þær stöðvuðu alla verslun.",
         "Þær tengdust ekki sjó."
+      ]
+    },
+    {
+      "id": "v13_00886",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Vara kostar 1200 kr. Hún lækkar um 25%. Hvað kostar hún eftir afslátt?",
+      "answer": "900",
+      "hint": "Reiknaðu fyrst prósentuna af verðinu og dragðu hana frá.",
+      "options": [
+        "400",
+        "900",
+        "1500",
+        "300"
+      ]
+    },
+    {
+      "id": "v13_00887",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Vara kostar 800 kr. Hún lækkar um 15%. Hvað kostar hún eftir afslátt?",
+      "answer": "680",
+      "hint": "Reiknaðu fyrst prósentuna af verðinu og dragðu hana frá.",
+      "options": [
+        "220",
+        "680",
+        "120",
+        "920"
+      ]
+    },
+    {
+      "id": "v13_00888",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Vara kostar 2400 kr. Hún lækkar um 10%. Hvað kostar hún eftir afslátt?",
+      "answer": "2160",
+      "hint": "Reiknaðu fyrst prósentuna af verðinu og dragðu hana frá.",
+      "options": [
+        "340",
+        "2160",
+        "240",
+        "2640"
+      ]
+    },
+    {
+      "id": "v13_00889",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Vara kostar 3500 kr. Hún lækkar um 20%. Hvað kostar hún eftir afslátt?",
+      "answer": "2800",
+      "hint": "Reiknaðu fyrst prósentuna af verðinu og dragðu hana frá.",
+      "options": [
+        "800",
+        "700",
+        "2800",
+        "4200"
+      ]
+    },
+    {
+      "id": "v13_00890",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Vara kostar 600 kr. Hún lækkar um 30%. Hvað kostar hún eftir afslátt?",
+      "answer": "420",
+      "hint": "Reiknaðu fyrst prósentuna af verðinu og dragðu hana frá.",
+      "options": [
+        "280",
+        "780",
+        "420",
+        "180"
+      ]
+    },
+    {
+      "id": "v13_00891",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Vara kostar 1500 kr. Hún lækkar um 12%. Hvað kostar hún eftir afslátt?",
+      "answer": "1320",
+      "hint": "Reiknaðu fyrst prósentuna af verðinu og dragðu hana frá.",
+      "options": [
+        "280",
+        "1320",
+        "180",
+        "1680"
+      ]
+    },
+    {
+      "id": "v13_00892",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Vara kostar 4200 kr. Hún lækkar um 5%. Hvað kostar hún eftir afslátt?",
+      "answer": "3990",
+      "hint": "Reiknaðu fyrst prósentuna af verðinu og dragðu hana frá.",
+      "options": [
+        "4410",
+        "310",
+        "3990",
+        "210"
+      ]
+    },
+    {
+      "id": "v13_00893",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Vara kostar 999 kr. Hún lækkar um 20%. Hvað kostar hún eftir afslátt?",
+      "answer": "799",
+      "hint": "Reiknaðu fyrst prósentuna af verðinu og dragðu hana frá.",
+      "options": [
+        "799",
+        "300",
+        "1199",
+        "200"
+      ]
+    },
+    {
+      "id": "v13_00894",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentubreyting",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Tala breytist úr 50 í 60. Um hvað mörg prósent breytist hún?",
+      "answer": "20%",
+      "hint": "Breyting ÷ upphaflegt gildi × 100.",
+      "options": [
+        "20%",
+        "30%",
+        "15%",
+        "10%"
+      ]
+    },
+    {
+      "id": "v13_00895",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentubreyting",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Tala breytist úr 80 í 100. Um hvað mörg prósent breytist hún?",
+      "answer": "25%",
+      "hint": "Breyting ÷ upphaflegt gildi × 100.",
+      "options": [
+        "25%",
+        "35%",
+        "20%",
+        "20%"
+      ]
+    },
+    {
+      "id": "v13_00896",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentubreyting",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Tala breytist úr 120 í 150. Um hvað mörg prósent breytist hún?",
+      "answer": "25%",
+      "hint": "Breyting ÷ upphaflegt gildi × 100.",
+      "options": [
+        "25%",
+        "35%",
+        "20%",
+        "30%"
+      ]
+    },
+    {
+      "id": "v13_00897",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentubreyting",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Tala breytist úr 200 í 250. Um hvað mörg prósent breytist hún?",
+      "answer": "25%",
+      "hint": "Breyting ÷ upphaflegt gildi × 100.",
+      "options": [
+        "25%",
+        "35%",
+        "20%",
+        "50%"
+      ]
+    },
+    {
+      "id": "v13_00898",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentubreyting",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Tala breytist úr 40 í 52. Um hvað mörg prósent breytist hún?",
+      "answer": "30%",
+      "hint": "Breyting ÷ upphaflegt gildi × 100.",
+      "options": [
+        "30%",
+        "40%",
+        "25%",
+        "12%"
+      ]
+    },
+    {
+      "id": "v13_00899",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentubreyting",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Tala breytist úr 500 í 600. Um hvað mörg prósent breytist hún?",
+      "answer": "20%",
+      "hint": "Breyting ÷ upphaflegt gildi × 100.",
+      "options": [
+        "20%",
+        "30%",
+        "15%",
+        "100%"
+      ]
+    },
+    {
+      "id": "v13_00900",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "prósentubreyting",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Tala breytist úr 90 í 72. Um hvað mörg prósent breytist hún?",
+      "answer": "-20%",
+      "hint": "Breyting ÷ upphaflegt gildi × 100.",
+      "options": [
+        "-20%",
+        "30%",
+        "-25%",
+        "-18%"
+      ]
+    },
+    {
+      "id": "v13_00901",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "almenn brot",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er 1/2 + 1/4?",
+      "answer": "3/4",
+      "hint": "Finndu sameiginlegan nefnara og leggðu teljarana saman.",
+      "options": [
+        "3/4",
+        "1/2",
+        "1/4",
+        "1/1"
+      ]
+    },
+    {
+      "id": "v13_00902",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "almenn brot",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er 1/3 + 1/6?",
+      "answer": "1/2",
+      "hint": "Finndu sameiginlegan nefnara og leggðu teljarana saman.",
+      "options": [
+        "1/2",
+        "1/3",
+        "1/6",
+        "1/1"
+      ]
+    },
+    {
+      "id": "v13_00903",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "almenn brot",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er 2/5 + 1/5?",
+      "answer": "3/5",
+      "hint": "Finndu sameiginlegan nefnara og leggðu teljarana saman.",
+      "options": [
+        "3/5",
+        "2/5",
+        "1/5",
+        "1/1"
+      ]
+    },
+    {
+      "id": "v13_00904",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "almenn brot",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er 3/4 + 1/8?",
+      "answer": "7/8",
+      "hint": "Finndu sameiginlegan nefnara og leggðu teljarana saman.",
+      "options": [
+        "7/8",
+        "3/4",
+        "1/8",
+        "1/1"
+      ]
+    },
+    {
+      "id": "v13_00905",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "almenn brot",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er 5/6 + 1/3?",
+      "answer": "7/6",
+      "hint": "Finndu sameiginlegan nefnara og leggðu teljarana saman.",
+      "options": [
+        "7/6",
+        "5/6",
+        "1/3",
+        "1/1"
+      ]
+    },
+    {
+      "id": "v13_00906",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "almenn brot",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er 2/3 + 1/9?",
+      "answer": "7/9",
+      "hint": "Finndu sameiginlegan nefnara og leggðu teljarana saman.",
+      "options": [
+        "7/9",
+        "2/3",
+        "1/9",
+        "1/1"
+      ]
+    },
+    {
+      "id": "v13_00907",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "almenn brot",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er 3/4 - 1/4?",
+      "answer": "1/2",
+      "hint": "Breyttu í sama nefnara og dragðu teljara frá.",
+      "options": [
+        "1/2",
+        "3/4",
+        "1/4",
+        "1/4"
+      ]
+    },
+    {
+      "id": "v13_00908",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "almenn brot",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er 5/6 - 1/6?",
+      "answer": "2/3",
+      "hint": "Breyttu í sama nefnara og dragðu teljara frá.",
+      "options": [
+        "2/3",
+        "5/6",
+        "1/6",
+        "1/4"
+      ]
+    },
+    {
+      "id": "v13_00909",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "almenn brot",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er 7/8 - 3/8?",
+      "answer": "1/2",
+      "hint": "Breyttu í sama nefnara og dragðu teljara frá.",
+      "options": [
+        "1/2",
+        "7/8",
+        "3/8",
+        "1/4"
+      ]
+    },
+    {
+      "id": "v13_00910",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "almenn brot",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er 4/5 - 1/10?",
+      "answer": "7/10",
+      "hint": "Breyttu í sama nefnara og dragðu teljara frá.",
+      "options": [
+        "7/10",
+        "4/5",
+        "1/10",
+        "1/4"
+      ]
+    },
+    {
+      "id": "v13_00911",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "almenn brot",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er 9/10 - 2/5?",
+      "answer": "1/2",
+      "hint": "Breyttu í sama nefnara og dragðu teljara frá.",
+      "options": [
+        "1/2",
+        "9/10",
+        "2/5",
+        "1/4"
+      ]
+    },
+    {
+      "id": "v13_00912",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 3x - 5 = 16. Hvað er x?",
+      "answer": "7",
+      "hint": "Bættu fyrst tölunni við báðar hliðar og deildu síðan með stuðlinum.",
+      "options": [
+        "7",
+        "6",
+        "9",
+        "8"
+      ]
+    },
+    {
+      "id": "v13_00913",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 4x - 9 = 15. Hvað er x?",
+      "answer": "6",
+      "hint": "Bættu fyrst tölunni við báðar hliðar og deildu síðan með stuðlinum.",
+      "options": [
+        "6",
+        "5",
+        "8",
+        "7"
+      ]
+    },
+    {
+      "id": "v13_00914",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 5x - 12 = 28. Hvað er x?",
+      "answer": "8",
+      "hint": "Bættu fyrst tölunni við báðar hliðar og deildu síðan með stuðlinum.",
+      "options": [
+        "8",
+        "10",
+        "9",
+        "7"
+      ]
+    },
+    {
+      "id": "v13_00915",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 7x - 4 = 31. Hvað er x?",
+      "answer": "5",
+      "hint": "Bættu fyrst tölunni við báðar hliðar og deildu síðan með stuðlinum.",
+      "options": [
+        "7",
+        "4",
+        "6",
+        "5"
+      ]
+    },
+    {
+      "id": "v13_00916",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 2x - 17 = 5. Hvað er x?",
+      "answer": "11",
+      "hint": "Bættu fyrst tölunni við báðar hliðar og deildu síðan með stuðlinum.",
+      "options": [
+        "12",
+        "11",
+        "10",
+        "13"
+      ]
+    },
+    {
+      "id": "v13_00917",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 6x - 15 = 39. Hvað er x?",
+      "answer": "9",
+      "hint": "Bættu fyrst tölunni við báðar hliðar og deildu síðan með stuðlinum.",
+      "options": [
+        "9",
+        "10",
+        "8",
+        "11"
+      ]
+    },
+    {
+      "id": "v13_00918",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 8x - 3 = 77. Hvað er x?",
+      "answer": "10",
+      "hint": "Bættu fyrst tölunni við báðar hliðar og deildu síðan með stuðlinum.",
+      "options": [
+        "9",
+        "10",
+        "12",
+        "11"
+      ]
+    },
+    {
+      "id": "v13_00919",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 9x - 7 = 29. Hvað er x?",
+      "answer": "4",
+      "hint": "Bættu fyrst tölunni við báðar hliðar og deildu síðan með stuðlinum.",
+      "options": [
+        "4",
+        "6",
+        "3",
+        "5"
+      ]
+    },
+    {
+      "id": "v13_00920",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 5,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 2(x + 3) = 22. Hvað er x?",
+      "answer": "8",
+      "hint": "Deildu fyrst með tölunni fyrir utan svigann, dragðu síðan frá töluna inni í sviganum.",
+      "options": [
+        "8",
+        "10",
+        "11",
+        "7"
+      ]
+    },
+    {
+      "id": "v13_00921",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 5,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 3(x + 4) = 33. Hvað er x?",
+      "answer": "7",
+      "hint": "Deildu fyrst með tölunni fyrir utan svigann, dragðu síðan frá töluna inni í sviganum.",
+      "options": [
+        "7",
+        "11",
+        "9",
+        "6"
+      ]
+    },
+    {
+      "id": "v13_00922",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 5,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 5(x + 2) = 40. Hvað er x?",
+      "answer": "6",
+      "hint": "Deildu fyrst með tölunni fyrir utan svigann, dragðu síðan frá töluna inni í sviganum.",
+      "options": [
+        "6",
+        "102",
+        "5",
+        "8"
+      ]
+    },
+    {
+      "id": "v13_00923",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 5,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 4(x + 5) = 56. Hvað er x?",
+      "answer": "9",
+      "hint": "Deildu fyrst með tölunni fyrir utan svigann, dragðu síðan frá töluna inni í sviganum.",
+      "options": [
+        "11",
+        "9",
+        "8",
+        "14"
+      ]
+    },
+    {
+      "id": "v13_00924",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "jöfnur",
+      "difficulty": 5,
+      "type": "choice",
+      "text": "Leystu jöfnuna: 6(x + 3) = 48. Hvað er x?",
+      "answer": "5",
+      "hint": "Deildu fyrst með tölunni fyrir utan svigann, dragðu síðan frá töluna inni í sviganum.",
+      "options": [
+        "5",
+        "7",
+        "4",
+        "8"
+      ]
+    },
+    {
+      "id": "v13_00925",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "líkur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Í poka eru 3 rauðar kúlur og 7 bláar. Hverjar eru líkurnar á rauðri kúlu?",
+      "answer": "3/10",
+      "hint": "Líkur = hagstæð tilfelli ÷ öll tilfelli.",
+      "options": [
+        "3/10",
+        "7/10",
+        "3/7",
+        "1/3"
+      ]
+    },
+    {
+      "id": "v13_00926",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "líkur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Teningi er kastað. Hverjar eru líkurnar á að fá slétta tölu?",
+      "answer": "3/6",
+      "hint": "Sléttar tölur á teningi eru 2, 4 og 6.",
+      "options": [
+        "3/6",
+        "2/6",
+        "1/6",
+        "4/6"
+      ]
+    },
+    {
+      "id": "v13_00927",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "líkur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Teningi er kastað. Hverjar eru líkurnar á að fá 5?",
+      "answer": "1/6",
+      "hint": "Teningur hefur sex mögulegar útkomur.",
+      "options": [
+        "1/6",
+        "5/6",
+        "1/5",
+        "2/6"
+      ]
+    },
+    {
+      "id": "v13_00928",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "líkur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Spil er valið úr 10 spilum merktum 1–10. Hverjar eru líkurnar á tölu stærri en 7?",
+      "answer": "3/10",
+      "hint": "Tölurnar 8, 9 og 10 eru þrjár útkomur.",
+      "options": [
+        "3/10",
+        "7/10",
+        "2/10",
+        "4/10"
+      ]
+    },
+    {
+      "id": "v13_00929",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hnitakerfi",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Punkturinn er (2, 3). Hvert er x-hnitið?",
+      "answer": "2",
+      "hint": "Fyrri talan í hnitaparinu er x-hnit.",
+      "options": [
+        "34",
+        "-2",
+        "3",
+        "2"
+      ]
+    },
+    {
+      "id": "v13_00930",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hnitakerfi",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Punkturinn er (2, 3). Hvert er y-hnitið?",
+      "answer": "3",
+      "hint": "Seinni talan í hnitaparinu er y-hnit.",
+      "options": [
+        "-3",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "id": "v13_00931",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hnitakerfi",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Punkturinn er (-1, 4). Hvert er x-hnitið?",
+      "answer": "-1",
+      "hint": "Fyrri talan í hnitaparinu er x-hnit.",
+      "options": [
+        "4",
+        "1",
+        "0",
+        "-1"
+      ]
+    },
+    {
+      "id": "v13_00932",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hnitakerfi",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Punkturinn er (-1, 4). Hvert er y-hnitið?",
+      "answer": "4",
+      "hint": "Seinni talan í hnitaparinu er y-hnit.",
+      "options": [
+        "4",
+        "-1",
+        "-4",
+        "5"
+      ]
+    },
+    {
+      "id": "v13_00933",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hnitakerfi",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Punkturinn er (5, -2). Hvert er x-hnitið?",
+      "answer": "5",
+      "hint": "Fyrri talan í hnitaparinu er x-hnit.",
+      "options": [
+        "6",
+        "-2",
+        "5",
+        "-5"
+      ]
+    },
+    {
+      "id": "v13_00934",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hnitakerfi",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Punkturinn er (5, -2). Hvert er y-hnitið?",
+      "answer": "-2",
+      "hint": "Seinni talan í hnitaparinu er y-hnit.",
+      "options": [
+        "-1",
+        "-2",
+        "5",
+        "2"
+      ]
+    },
+    {
+      "id": "v13_00935",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hnitakerfi",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Punkturinn er (-3, -3). Hvert er x-hnitið?",
+      "answer": "-3",
+      "hint": "Fyrri talan í hnitaparinu er x-hnit.",
+      "options": [
+        "3",
+        "-3",
+        "181",
+        "-2"
+      ]
+    },
+    {
+      "id": "v13_00936",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hnitakerfi",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Punkturinn er (-3, -3). Hvert er y-hnitið?",
+      "answer": "-3",
+      "hint": "Seinni talan í hnitaparinu er y-hnit.",
+      "options": [
+        "-3",
+        "181",
+        "-2",
+        "3"
+      ]
+    },
+    {
+      "id": "v13_00937",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hnitakerfi",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Punkturinn er (0, 6). Hvert er x-hnitið?",
+      "answer": "0",
+      "hint": "Fyrri talan í hnitaparinu er x-hnit.",
+      "options": [
+        "6",
+        "55",
+        "1",
+        "0"
+      ]
+    },
+    {
+      "id": "v13_00938",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hnitakerfi",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Punkturinn er (0, 6). Hvert er y-hnitið?",
+      "answer": "6",
+      "hint": "Seinni talan í hnitaparinu er y-hnit.",
+      "options": [
+        "6",
+        "0",
+        "7",
+        "-6"
+      ]
+    },
+    {
+      "id": "v13_00939",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hnitakerfi",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Punkturinn er (7, 0). Hvert er x-hnitið?",
+      "answer": "7",
+      "hint": "Fyrri talan í hnitaparinu er x-hnit.",
+      "options": [
+        "-7",
+        "7",
+        "8",
+        "0"
+      ]
+    },
+    {
+      "id": "v13_00940",
+      "subject": "math",
+      "grade_level": 7,
+      "skill": "hnitakerfi",
+      "difficulty": 3,
+      "type": "choice",
+      "text": "Punkturinn er (7, 0). Hvert er y-hnitið?",
+      "answer": "0",
+      "hint": "Seinni talan í hnitaparinu er y-hnit.",
+      "options": [
+        "7",
+        "1",
+        "43",
+        "0"
+      ]
+    },
+    {
+      "id": "v13_00941",
+      "subject": "icelandic",
+      "grade_level": 7,
+      "skill": "greinarmerki",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvar á komma best við?",
+      "answer": "Ég ætla að koma, ef ég næ strætó.",
+      "hint": "Komma er oft notuð á undan aukasetningu.",
+      "options": [
+        "Ég ætla að koma, ef ég næ strætó.",
+        "Ég ætla, að koma ef ég næ strætó.",
+        "Ég ætla að, koma ef ég næ strætó.",
+        "Ég ætla að koma ef, ég næ strætó."
+      ]
+    },
+    {
+      "id": "v13_00942",
+      "subject": "icelandic",
+      "grade_level": 7,
+      "skill": "greinarmerki",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Veldu setningu með réttri greinarmerkjasetningu.",
+      "answer": "„Kemur þú?“ spurði Sara.",
+      "hint": "Spurningu lýkur með spurningarmerki.",
+      "options": [
+        "„Kemur þú?“ spurði Sara.",
+        "„Kemur þú,“ spurði Sara.",
+        "Kemur þú. spurði Sara",
+        "„Kemur þú“ spurði Sara?"
+      ]
+    },
+    {
+      "id": "v13_00943",
+      "subject": "icelandic",
+      "grade_level": 7,
+      "skill": "greinarmerki",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Veldu rétt skrifaða beina ræðu.",
+      "answer": "Jón sagði: „Ég kem seinna.“",
+      "hint": "Bein ræða er oft afmörkuð með gæsalöppum.",
+      "options": [
+        "Jón sagði: „Ég kem seinna.“",
+        "Jón sagði ég kem seinna.",
+        "„Jón sagði: Ég kem seinna.",
+        "Jón sagði, „ég kem seinna“"
+      ]
+    },
+    {
+      "id": "v13_00944",
+      "subject": "icelandic",
+      "grade_level": 7,
+      "skill": "fallbeyging",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Í hvaða falli er orðið „hund“ í setningunni: Ég sá hund.",
+      "answer": "þolfalli",
+      "hint": "Spyrðu: hvern sá ég?",
+      "options": [
+        "þolfalli",
+        "nefnifalli",
+        "þágufalli",
+        "eignarfalli"
+      ]
+    },
+    {
+      "id": "v13_00945",
+      "subject": "icelandic",
+      "grade_level": 7,
+      "skill": "fallbeyging",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Í hvaða falli er orðið „stelpu“ í setningunni: Ég hjálpaði stelpu.",
+      "answer": "þágufalli",
+      "hint": "Sögnin hjálpa tekur oft þágufall.",
+      "options": [
+        "þágufalli",
+        "þolfalli",
+        "nefnifalli",
+        "eignarfalli"
+      ]
+    },
+    {
+      "id": "v13_00946",
+      "subject": "icelandic",
+      "grade_level": 7,
+      "skill": "fallbeyging",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Í hvaða falli er orðið „bókar“ í setningunni: Kápa bókarinnar er rauð.",
+      "answer": "eignarfalli",
+      "hint": "Eignarfall svarar oft spurningunni hvers?",
+      "options": [
+        "eignarfalli",
+        "nefnifalli",
+        "þolfalli",
+        "þágufalli"
+      ]
+    },
+    {
+      "id": "v13_00947",
+      "subject": "icelandic",
+      "grade_level": 7,
+      "skill": "lesskilningur og ályktanir",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Texti: Nemendur ákváðu að skipuleggja söfnun fyrir bekkjarferð. Þau bjuggu til auglýsingu, skiptu með sér hlutverkum og settu sér markmið um að safna 25.000 kr. Hver var megintilgangur verkefnisins?",
+      "answer": "að safna fyrir bekkjarferð",
+      "hint": "Leitaðu að markmiði hópsins í textanum.",
+      "options": [
+        "að safna fyrir bekkjarferð",
+        "að halda afmæli",
+        "að læra um dýr",
+        "að skrifa ljóð"
+      ]
+    },
+    {
+      "id": "v13_00948",
+      "subject": "icelandic",
+      "grade_level": 7,
+      "skill": "lesskilningur og ályktanir",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Texti: Í fyrstu gekk verkefnið hægt, en þegar hópurinn skipti verkum jafnt fór allt að ganga betur. Hvað má álykta?",
+      "answer": "skipulag og samvinna hjálpuðu hópnum",
+      "hint": "Orðin 'skipti verkum jafnt' og 'ganga betur' eru lykilatriði.",
+      "options": [
+        "skipulag og samvinna hjálpuðu hópnum",
+        "verkefnið var hætt",
+        "enginn vann",
+        "þau gleymdu markmiðinu"
+      ]
+    },
+    {
+      "id": "v13_00949",
+      "subject": "icelandic",
+      "grade_level": 7,
+      "skill": "lesskilningur og ályktanir",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Texti: Rannsóknin sýndi að plöntur sem fengu meira ljós uxu hraðar en plöntur í skugga. Hver er líkleg niðurstaða?",
+      "answer": "ljós hefur áhrif á vöxt plantna",
+      "hint": "Berðu saman hópana tvo.",
+      "options": [
+        "ljós hefur áhrif á vöxt plantna",
+        "plöntur þurfa ekki vatn",
+        "skuggi er alltaf bestur",
+        "allar plöntur dóu"
+      ]
+    },
+    {
+      "id": "v13_00950",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "adverbs",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Choose the best word: She speaks very ____.",
+      "answer": "clearly",
+      "hint": "Adverbs often describe how something is done.",
+      "options": [
+        "clearly",
+        "clear",
+        "clearness",
+        "cleared"
+      ]
+    },
+    {
+      "id": "v13_00951",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "present perfect",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Choose the correct sentence.",
+      "answer": "He has never been to London.",
+      "hint": "Present perfect uses has/have + past participle.",
+      "options": [
+        "He has never been to London.",
+        "He have never been to London.",
+        "He never has went to London.",
+        "He has never go to London."
+      ]
+    },
+    {
+      "id": "v13_00952",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "conditionals",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Choose the correct sentence.",
+      "answer": "If it rains, we will stay inside.",
+      "hint": "First conditional: if + present, will + verb.",
+      "options": [
+        "If it rains, we will stay inside.",
+        "If it will rain, we stay inside.",
+        "If it rain, we stayed inside.",
+        "If rains, we will inside."
+      ]
+    },
+    {
+      "id": "v13_00953",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "connectors",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "What does 'although' mean?",
+      "answer": "þó að",
+      "hint": "Although introduces contrast.",
+      "options": [
+        "þó að",
+        "vegna þess að",
+        "á morgun",
+        "undir"
+      ]
+    },
+    {
+      "id": "v13_00954",
+      "subject": "english",
+      "grade_level": 7,
+      "skill": "prepositions",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Fill in the blank: I have lived here ____ 2020.",
+      "answer": "since",
+      "hint": "Since is used with a starting point in time.",
+      "options": [
+        "since",
+        "for",
+        "during",
+        "at"
+      ]
+    },
+    {
+      "id": "v13_00955",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "frumur",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er hlutverk hvatbera í frumu?",
+      "answer": "að vinna orku úr fæðu",
+      "hint": "Hvatberar eru oft kallaðir orkuver frumunnar.",
+      "options": [
+        "að vinna orku úr fæðu",
+        "að geyma erfðaefni eingöngu",
+        "að vernda húð",
+        "að mynda bein"
+      ]
+    },
+    {
+      "id": "v13_00956",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "erfðir",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er DNA?",
+      "answer": "erfðaefni lífvera",
+      "hint": "DNA geymir upplýsingar um eiginleika.",
+      "options": [
+        "erfðaefni lífvera",
+        "tegund af steini",
+        "orkumælieining",
+        "lofttegund"
+      ]
+    },
+    {
+      "id": "v13_00957",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "kraftar",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvaða kraftur vinnur gegn hreyfingu þegar hlutur rennur eftir gólfi?",
+      "answer": "núningskraftur",
+      "hint": "Núningur hægir oft á hreyfingu.",
+      "options": [
+        "núningskraftur",
+        "segulkraftur",
+        "ljóskraftur",
+        "hljóðkraftur"
+      ]
+    },
+    {
+      "id": "v13_00958",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "efni",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað gerist við þéttingu?",
+      "answer": "gas breytist í vökva",
+      "hint": "Vatnsgufa getur þést í vatnsdropa.",
+      "options": [
+        "gas breytist í vökva",
+        "vökvi breytist í gas",
+        "fast efni bráðnar",
+        "efni brennur"
+      ]
+    },
+    {
+      "id": "v13_00959",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "kraftar",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hver er munurinn á massa og þyngd?",
+      "answer": "massi er magn efnis, þyngd er kraftur",
+      "hint": "Þyngd fer eftir þyngdarkrafti.",
+      "options": [
+        "massi er magn efnis, þyngd er kraftur",
+        "þetta er nákvæmlega það sama",
+        "massi er litur hlutar",
+        "þyngd er rúmmál"
+      ]
+    },
+    {
+      "id": "v13_00960",
+      "subject": "science",
+      "grade_level": 7,
+      "skill": "loftslag",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvaða fullyrðing lýsir best loftslagsbreytingum?",
+      "answer": "langtímabreytingar á loftslagi jarðar",
+      "hint": "Loftslag er langtímamynstur.",
+      "options": [
+        "langtímabreytingar á loftslagi jarðar",
+        "veðrið í einum degi",
+        "flóð í einni á",
+        "snjór á mánudegi"
+      ]
+    },
+    {
+      "id": "v13_00961",
+      "subject": "geo",
+      "grade_level": 7,
+      "skill": "lífskjör og hagkerfi",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er verg landsframleiðsla oft notuð til að mæla?",
+      "answer": "efnahagslega framleiðslu lands",
+      "hint": "GDP/VLF tengist framleiðslu hagkerfis.",
+      "options": [
+        "efnahagslega framleiðslu lands",
+        "fjölda fjalla",
+        "hitastig sjávar",
+        "lengd áa"
+      ]
+    },
+    {
+      "id": "v13_00962",
+      "subject": "geo",
+      "grade_level": 7,
+      "skill": "mannfjöldi",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Af hverju getur aldurssamsetning þjóða skipt máli?",
+      "answer": "hún hefur áhrif á skóla, heilbrigðiskerfi og vinnumarkað",
+      "hint": "Aldur íbúa hefur áhrif á þjónustu samfélags.",
+      "options": [
+        "hún hefur áhrif á skóla, heilbrigðiskerfi og vinnumarkað",
+        "hún segir aðeins veðrið",
+        "hún breytir landamærum",
+        "hún ræður lit fána"
+      ]
+    },
+    {
+      "id": "v13_00963",
+      "subject": "geo",
+      "grade_level": 7,
+      "skill": "viðskipti",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er innflutningur?",
+      "answer": "vörur eða þjónusta keypt frá öðrum löndum",
+      "hint": "Inn merkir inn í landið.",
+      "options": [
+        "vörur eða þjónusta keypt frá öðrum löndum",
+        "vörur seldar úr landi",
+        "fjall á korti",
+        "kosning"
+      ]
+    },
+    {
+      "id": "v13_00964",
+      "subject": "geo",
+      "grade_level": 7,
+      "skill": "viðskipti",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er útflutningur?",
+      "answer": "vörur eða þjónusta seld til annarra landa",
+      "hint": "Út merkir út úr landinu.",
+      "options": [
+        "vörur eða þjónusta seld til annarra landa",
+        "vörur keyptar frá útlöndum",
+        "fólksfjöldi",
+        "loftslag"
+      ]
+    },
+    {
+      "id": "v13_00965",
+      "subject": "geo",
+      "grade_level": 7,
+      "skill": "lýðræði",
+      "difficulty": 4,
+      "type": "choice",
+      "text": "Hvað er stjórnarskrá?",
+      "answer": "grundvallarlög ríkis",
+      "hint": "Stjórnarskrá segir til um grundvallarreglur ríkis.",
+      "options": [
+        "grundvallarlög ríkis",
+        "veðurspá",
+        "kortalykill",
+        "tegund atvinnu"
       ]
     }
   ],

@@ -53,6 +53,11 @@
           <option value="adaptive">Sjálfvirkt</option>
         </select>
         <small id="gradeLevelHint">Veldu stig verkefna.</small>
+        <label class="adaptive-toggle">
+          <input type="checkbox" id="adaptiveModeCheck" onchange="setAdaptiveMode(this.checked)">
+          🧠 Snjallæfing
+        </label>
+        <small id="adaptiveHint">Kerfið getur valið veikustu færni oftar.</small>
       </div>
       <button class="menu active" onclick="showView('mission')">🎯 Mission</button>
       <button class="menu" onclick="showView('map')">🗺️ Mission-kort</button>
