@@ -69,6 +69,7 @@
       <button class="menu" onclick="showView('achievements')">🏆 Afrek</button>
       <button class="menu teacher-only hidden" onclick="showView('teacher')">👨‍🏫 Mælaborð kennara</button>
       <button class="menu teacher-only hidden" onclick="showView('questions')">✍️ Spurningabanki</button>
+      <button class="menu teacher-only hidden" onclick="showView('aibuilder')">🤖 Verkefnasmiður</button>
       <button class="menu teacher-only hidden" onclick="showView('packs')">📦 Verkefnapakkar</button>
       <button class="menu teacher-only hidden" onclick="showView('learningpaths')">🧭 Námsleiðir</button>
       <button class="menu teacher-only hidden" onclick="showView('quizteacher')">📝 Lokapróf</button>
@@ -191,6 +192,53 @@
         <div id="achievementGrid" class="grid"></div>
       </section>
 
+
+
+      <section id="view-aibuilder" class="view">
+        <h2>🤖 AI-verkefnasmiður kennara</h2>
+        <p class="teacher-intro">
+          Skrifaðu beiðni eins og „búðu til 20 verkefni um rafmagn fyrir 6. bekk“.
+          Verkefnasmiðurinn býr til spurningar sem þú getur yfirfarið, breytt og vistað í spurningabankann.
+        </p>
+
+        <div class="teacher-box">
+          <h3>1. Beiðni</h3>
+          <textarea id="aiPrompt" rows="3" placeholder="Dæmi: Búðu til 20 verkefni um rafmagn fyrir 6. bekk"></textarea>
+          <div class="form-grid">
+            <select id="aiSubject">
+              <option value="auto">Finna grein sjálfkrafa</option>
+              <option value="math">Stærðfræði</option>
+              <option value="icelandic">Íslenska</option>
+              <option value="english">Enska</option>
+              <option value="science">Náttúrufræði</option>
+              <option value="geo">Landafræði/samfélagsfræði</option>
+            </select>
+            <select id="aiGrade">
+              <option value="auto">Finna bekk sjálfkrafa</option>
+              <option value="5">5. bekkur</option>
+              <option value="6">6. bekkur</option>
+              <option value="7">7. bekkur</option>
+            </select>
+            <input id="aiCount" type="number" min="3" max="40" value="20" placeholder="Fjöldi">
+          </div>
+          <button onclick="generateAIQuestions()">Búa til verkefni</button>
+          <button class="gray-btn" onclick="loadAIPreset('science6')">Dæmi: Rafmagn 6. bekkur</button>
+          <button class="gray-btn" onclick="loadAIPreset('math7')">Dæmi: Prósentur 7. bekkur</button>
+          <button class="gray-btn" onclick="loadAIPreset('english7')">Dæmi: Irregular verbs 7. bekkur</button>
+          <span id="aiBuilderMsg"></span>
+        </div>
+
+        <div class="teacher-box">
+          <h3>2. Yfirfara verkefni</h3>
+          <p>Þú getur breytt spurningum, svörum, vísbendingum og valmöguleikum áður en þú vistar.</p>
+          <div class="ai-actions">
+            <button onclick="saveAllAIQuestions()">Vista öll í spurningabanka</button>
+            <button onclick="copyAIQuestionsJSON()">Afrita JSON</button>
+            <button class="gray-btn" onclick="clearAIQuestions()">Hreinsa</button>
+          </div>
+          <div id="aiQuestionPreview"></div>
+        </div>
+      </section>
 
       <section id="view-questions" class="view">
         <h2>✍️ Spurningabanki kennara</h2>

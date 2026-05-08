@@ -786,3 +786,35 @@ textarea, select{
   width:auto;
   margin-right:8px;
 }
+
+/* v1.7 AI question builder */
+.ai-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+.ai-question-card{
+  background:#fff;
+  border:2px solid #e5e7eb;
+  border-left:8px solid #7c3aed;
+  border-radius:22px;
+  padding:14px;
+  margin:12px 0;
+  box-shadow:0 10px 24px rgba(15,23,42,.08);
+}
+.ai-question-card h4{
+  margin:0 0 10px;
+}
+.ai-question-card label{
+  display:block;
+  font-size:.82rem;
+  font-weight:950;
+  color:#475569;
+  margin-top:8px;
+}
+.ai-question-card textarea,
+.ai-question-card input{
+  width:100%;
+  margin:4px 0 6px;
+}

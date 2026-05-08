@@ -677,6 +677,7 @@ function showView(id){
   document.querySelectorAll(".menu").forEach(b=>b.classList.remove("active"));
   if(id==="teacher") loadTeacher();
   if(id==="questions") loadTeacherQuestions();
+  if(id==="aibuilder") renderAIQuestionPreview();
   if(id==="packs") loadMissionPacks();
   if(id==="reports") loadReportsView();
   if(id==="learningpaths") loadLearningPaths();
@@ -1674,6 +1675,323 @@ async function loadQuizResults(quizId){
       </tr>`).join("")}
     </tbody></table>`;
   }catch(e){box.innerHTML = `<p class="bad">${e.message}</p>`}
+}
+
+
+let AI_GENERATED_QUESTIONS = [];
+
+const aiTopicTemplates = {
+  science: {
+    "rafmagn": {
+      skill: "rafmagn",
+      facts: [
+        ["Hvað þarf rafrás til að ljósapera lýsi?", "lokaða rafrás", "Rafmagn þarf heila leið frá rafhlöðu, í gegnum peru og til baka.", ["lokaða rafrás","opna rafrás","bara plast","ekkert vír"]],
+        ["Hvaða efni leiðir rafmagn vel?", "kopar", "Málmar eins og kopar leiða rafmagn vel.", ["kopar","plast","gúmmí","tré"]],
+        ["Hvað kallast efni sem leiðir rafmagn illa?", "einangrari", "Einangrari hleypir rafmagni illa í gegnum sig.", ["einangrari","leiðari","rafhlaða","segull"]],
+        ["Hvaða hlutur geymir raforku í einfaldri rafrás?", "rafhlaða", "Rafhlaða gefur rafrás orku.", ["rafhlaða","pera","rofi","vír"]],
+        ["Hvað gerir rofi í rafrás?", "opnar eða lokar rafrás", "Rofi stjórnar því hvort rafrás sé lokuð eða opin.", ["opnar eða lokar rafrás","býr til ljós sjálfur","eyðir vírum","breytir kopar í plast"]],
+        ["Hvað gerist ef rafrás er opin?", "straumur flæðir ekki", "Opin rafrás er rofin leið.", ["straumur flæðir ekki","peran lýsir alltaf","rafhlaðan hverfur","vírinn verður að gleri"]],
+        ["Hvað er skammhlaup?", "þegar straumur fer mjög auðvelda leið án eðlilegrar mótstöðu", "Skammhlaup getur verið hættulegt.", ["þegar straumur fer mjög auðvelda leið án eðlilegrar mótstöðu","þegar peran er máluð","þegar vír er úr tré","þegar rafhlaða er tóm og ekkert gerist"]],
+        ["Hvaða fullyrðing er rétt?", "Rafmagn getur verið hættulegt ef farið er óvarlega.", "Rafmagn þarf alltaf að umgangast með varúð.", ["Rafmagn getur verið hættulegt ef farið er óvarlega.","Rafmagn er aldrei hættulegt.","Vatn og rafmagn eru alltaf góð blanda.","Börn eiga að opna innstungur til að skoða þær."]]
+      ]
+    },
+    "frumur": {
+      skill: "frumur",
+      facts: [
+        ["Hvað er fruma?", "minnsta lifandi byggingareining lífvera", "Lífverur eru gerðar úr frumum.", ["minnsta lifandi byggingareining lífvera","tegund af steini","hluti af korti","veðurfyrirbæri"]],
+        ["Hvað geymir frumukjarninn?", "erfðaefni", "Frumukjarni geymir DNA.", ["erfðaefni","sand","loft","ljós"]],
+        ["Hvað gera hvatberar?", "vinna orku úr fæðu", "Hvatberar eru orkuver frumunnar.", ["vinna orku úr fæðu","vernda tennur","búa til bein","geyma vatn eingöngu"]],
+        ["Hvað er DNA?", "erfðaefni lífvera", "DNA geymir upplýsingar um eiginleika.", ["erfðaefni lífvera","tegund skýs","rafmagnstæki","hluti af auga"]]
+      ]
+    },
+    "loftslag": {
+      skill: "loftslag",
+      facts: [
+        ["Hver er munur á veðri og loftslagi?", "veður er stutt tímabil en loftslag langtímamynstur", "Loftslag er skoðað yfir langan tíma.", ["veður er stutt tímabil en loftslag langtímamynstur","það er enginn munur","loftslag er bara rigning","veður tekur alltaf 100 ár"]],
+        ["Hvað eru gróðurhúsaáhrif?", "lofttegundir halda eftir varma í lofthjúpi jarðar", "Gróðurhúsaáhrif halda jörðinni hlýrri.", ["lofttegundir halda eftir varma í lofthjúpi jarðar","jörðin hættir að snúast","vindur hverfur","hafið verður að sandi"]],
+        ["Hvað lýsir best loftslagsbreytingum?", "langtímabreytingar á loftslagi jarðar", "Loftslagsbreytingar eru breytingar yfir langan tíma.", ["langtímabreytingar á loftslagi jarðar","veðrið í dag","einn snjódagur","ein rigningarskúr"]]
+      ]
+    }
+  },
+  math: {
+    "prósent": {
+      skill: "prósentur",
+      generator: "percent"
+    },
+    "hlutföll": {
+      skill: "hlutföll",
+      generator: "ratio"
+    },
+    "jöfnur": {
+      skill: "jöfnur",
+      generator: "equation"
+    }
+  },
+  english: {
+    "irregular": {
+      skill: "óreglulegar sagnir",
+      facts: [
+        ["What is the past tense of go?", "went", "Go is irregular: go, went, gone.", ["went","goed","gone","going"]],
+        ["What is the past tense of see?", "saw", "See is irregular: see, saw, seen.", ["saw","seed","seen","seeing"]],
+        ["What is the past tense of write?", "wrote", "Write is irregular: write, wrote, written.", ["wrote","writed","written","writing"]],
+        ["Choose the correct sentence.", "I went to school yesterday.", "Yesterday needs past tense.", ["I went to school yesterday.","I go to school yesterday.","I gone to school yesterday.","I goed to school yesterday."]],
+        ["Choose the correct sentence.", "She wrote a letter.", "Wrote is the past tense of write.", ["She wrote a letter.","She write a letter.","She written a letter.","She writed a letter."]]
+      ]
+    },
+    "prepositions": {
+      skill: "prepositions",
+      facts: [
+        ["Fill in the blank: The cat is ____ the table.", "under", "Under means undir.", ["under","blue","quickly","apple"]],
+        ["Fill in the blank: I live ____ Iceland.", "in", "Use in with countries.", ["in","on","at","under"]],
+        ["Fill in the blank: The book is ____ the desk.", "on", "On means á.", ["on","in","happy","run"]]
+      ]
+    }
+  },
+  icelandic: {
+    "orðflokkar": {
+      skill: "orðflokkar",
+      facts: [
+        ["Hvaða orð er nafnorð?", "skóli", "Nafnorð er heiti á hlut, stað, dýri eða manneskju.", ["skóli","hlaupa","fallegur","mjög"]],
+        ["Hvaða orð er sagnorð?", "lesa", "Sagnorð lýsir athöfn eða ástandi.", ["lesa","bók","rauður","undir"]],
+        ["Hvaða orð er lýsingarorð?", "fallegur", "Lýsingarorð lýsir nafnorði.", ["fallegur","borð","hlaupa","og"]]
+      ]
+    },
+    "greinarmerki": {
+      skill: "greinarmerki",
+      facts: [
+        ["Hvaða greinarmerki á við í lok spurningar?", "spurningarmerki", "Spurningar enda á spurningarmerki.", ["spurningarmerki","punktur","komma","gæsalappir"]],
+        ["Veldu rétt skrifaða beina ræðu.", "Sara sagði: „Ég kem á morgun.“", "Bein ræða er oft í gæsalöppum.", ["Sara sagði: „Ég kem á morgun.“","Sara sagði ég kem á morgun.","„Sara sagði ég kem á morgun.","Sara sagði, ég kem á morgun"]]
+      ]
+    }
+  },
+  geo: {
+    "kort": {
+      skill: "kortalestur",
+      facts: [
+        ["Hvað sýnir kortalykill?", "merkingu tákna á korti", "Kortalykill útskýrir tákn.", ["merkingu tákna á korti","aldur fólks","hitastig matar","fjölda bóka"]],
+        ["Hvaða átt er efst á flestum kortum?", "norður", "Norður er yfirleitt efst á korti.", ["norður","suður","austur","vestur"]],
+        ["Hvað sýnir mælikvarði á korti?", "fjarlægðir", "Mælikvarði hjálpar okkur að átta okkur á fjarlægðum.", ["fjarlægðir","lit húsa","fjölda trjáa","aldur landa"]]
+      ]
+    },
+    "lýðræði": {
+      skill: "lýðræði",
+      facts: [
+        ["Hvað er lýðræði?", "stjórnarfar þar sem fólkið hefur áhrif á ákvarðanir", "Lýður merkir fólk.", ["stjórnarfar þar sem fólkið hefur áhrif á ákvarðanir","þegar einn ræður öllu","tegund fjalls","veðurkerfi"]],
+        ["Hvað eru kosningar?", "aðferð til að velja fulltrúa eða taka ákvörðun", "Kosningar eru mikilvægur hluti lýðræðis.", ["aðferð til að velja fulltrúa eða taka ákvörðun","tegund af korti","nafn á eldfjalli","mælieining"]]
+      ]
+    }
+  }
+};
+
+function loadAIPreset(kind){
+  if(kind==="science6"){
+    aiPrompt.value = "Búðu til 20 verkefni um rafmagn fyrir 6. bekk";
+    aiSubject.value = "science";
+    aiGrade.value = "6";
+    aiCount.value = 20;
+  }
+  if(kind==="math7"){
+    aiPrompt.value = "Búðu til 20 verkefni um prósentur fyrir 7. bekk";
+    aiSubject.value = "math";
+    aiGrade.value = "7";
+    aiCount.value = 20;
+  }
+  if(kind==="english7"){
+    aiPrompt.value = "Búðu til 20 verkefni um irregular verbs fyrir 7. bekk";
+    aiSubject.value = "english";
+    aiGrade.value = "7";
+    aiCount.value = 20;
+  }
+}
+
+function inferGradeFromPrompt(prompt){
+  const p = prompt.toLowerCase();
+  if(p.includes("7")) return 7;
+  if(p.includes("6")) return 6;
+  if(p.includes("5")) return 5;
+  return 5;
+}
+
+function inferSubjectFromPrompt(prompt){
+  const p = prompt.toLowerCase();
+  if(p.includes("rafmagn") || p.includes("frumur") || p.includes("loftslag") || p.includes("náttúru")) return "science";
+  if(p.includes("prósent") || p.includes("hlutf") || p.includes("jöfn") || p.includes("stærð")) return "math";
+  if(p.includes("english") || p.includes("verbs") || p.includes("preposition") || p.includes("enska")) return "english";
+  if(p.includes("orðflokk") || p.includes("greinarmerki") || p.includes("íslenska")) return "icelandic";
+  if(p.includes("kort") || p.includes("lýðræði") || p.includes("landafr")) return "geo";
+  return "science";
+}
+
+function inferTopicKey(subject, prompt){
+  const p = prompt.toLowerCase();
+  const topics = aiTopicTemplates[subject] || {};
+  for(const key of Object.keys(topics)){
+    if(p.includes(key)) return key;
+  }
+  if(subject==="english" && p.includes("irregular")) return "irregular";
+  return Object.keys(topics)[0];
+}
+
+function makeGeneratedQuestion(subject, grade, skill, text, answer, hint, options, difficulty=2){
+  return {
+    subject,
+    grade_level: Number(grade),
+    skill: skill || "almennt",
+    difficulty,
+    text,
+    answer,
+    hint,
+    options
+  };
+}
+
+function generateMathAI(topic, grade, count){
+  const out = [];
+  if(topic==="prósent"){
+    const bases = [40,60,80,100,120,150,200,240,300,400,500,800];
+    const pcts = [10,20,25,30,40,50,75];
+    for(let i=0;i<count;i++){
+      const base = bases[i % bases.length];
+      const pct = pcts[(i*2) % pcts.length];
+      const ans = base * pct / 100;
+      out.push(makeGeneratedQuestion("math", grade, "prósentur", `Hvað er ${pct}% af ${base}?`, String(ans), "Reiknaðu prósentuna sem hluta af hundraði.", [String(ans), String(ans+5), String(Math.max(1,ans-5)), String(base-pct)], 3));
+    }
+  } else if(topic==="hlutföll"){
+    for(let i=0;i<count;i++){
+      const a = 2 + (i%6), b = a+1, k = 2 + (i%5);
+      out.push(makeGeneratedQuestion("math", grade, "hlutföll", `Hlutfallið er ${a}:${b}. Hvað verður seinni talan ef fyrri talan verður ${a*k}?`, String(b*k), "Finndu stuðulinn og margfaldaðu báðar tölur.", [String(b*k), String(a*k+b), String(b+k), String(a+b)], 3));
+    }
+  } else {
+    for(let i=0;i<count;i++){
+      const a = 2 + (i%7), x = 3 + (i%9), b = 1 + (i%12);
+      const total = a*x + b;
+      out.push(makeGeneratedQuestion("math", grade, "jöfnur", `Leystu jöfnuna: ${a}x + ${b} = ${total}. Hvað er x?`, String(x), "Dragðu fyrst frá og deildu síðan með stuðlinum.", [String(x), String(x+1), String(x-1), String(x+2)], 4));
+    }
+  }
+  return out;
+}
+
+function generateAIQuestions(){
+  const prompt = aiPrompt.value.trim();
+  if(!prompt){
+    aiBuilderMsg.textContent = " Skrifaðu beiðni fyrst.";
+    return;
+  }
+  const subject = aiSubject.value === "auto" ? inferSubjectFromPrompt(prompt) : aiSubject.value;
+  const grade = aiGrade.value === "auto" ? inferGradeFromPrompt(prompt) : Number(aiGrade.value);
+  const count = Math.max(3, Math.min(40, Number(aiCount.value || 20)));
+  const topicKey = inferTopicKey(subject, prompt);
+  const topic = aiTopicTemplates[subject]?.[topicKey];
+
+  let generated = [];
+  if(topic?.generator && subject==="math"){
+    generated = generateMathAI(topicKey, grade, count);
+  } else if(topic?.facts){
+    for(let i=0;i<count;i++){
+      const f = topic.facts[i % topic.facts.length];
+      generated.push(makeGeneratedQuestion(subject, grade, topic.skill, f[0], f[1], f[2], f[3], grade>=7?3:2));
+    }
+  }
+
+  // Add some variation using "finndu villuna" and "fylla í eyðu"
+  generated = generated.map((q,i)=>{
+    if(i % 7 === 5){
+      return {...q, text:`Finndu rétta svarið: ${q.text}`, skill:q.skill + " - finndu svarið"};
+    }
+    if(i % 7 === 6 && q.text.includes("?")){
+      return {...q, text:q.text.replace("?", " — fylltu í rétta svarið."), skill:q.skill + " - fylla í eyðu"};
+    }
+    return q;
+  });
+
+  AI_GENERATED_QUESTIONS = generated;
+  renderAIQuestionPreview();
+  aiBuilderMsg.textContent = ` Búin að búa til ${generated.length} verkefni í ${SUBJECTS[subject]?.name || subject} fyrir ${grade}. bekk.`;
+}
+
+function renderAIQuestionPreview(){
+  const box = document.getElementById("aiQuestionPreview");
+  if(!box) return;
+  if(!AI_GENERATED_QUESTIONS.length){
+    box.innerHTML = "<p>Engin verkefni komin enn.</p>";
+    return;
+  }
+  box.innerHTML = AI_GENERATED_QUESTIONS.map((q,i)=>`
+    <div class="ai-question-card" data-i="${i}">
+      <h4>${i+1}. ${SUBJECTS[q.subject]?.name || q.subject} · ${q.grade_level}. bekkur · ${escapeHtml(q.skill)}</h4>
+      <label>Spurning</label>
+      <textarea class="ai-q-text" rows="2">${escapeHtml(q.text)}</textarea>
+      <label>Rétt svar</label>
+      <input class="ai-q-answer" value="${escapeHtml(q.answer)}">
+      <label>Vísbending</label>
+      <input class="ai-q-hint" value="${escapeHtml(q.hint)}">
+      <label>Valmöguleikar, aðskildir með |</label>
+      <input class="ai-q-options" value="${escapeHtml((q.options || []).join(" | "))}">
+      <button onclick="removeAIQuestion(${i})">Eyða</button>
+    </div>
+  `).join("");
+}
+
+function syncAIQuestionsFromPreview(){
+  document.querySelectorAll(".ai-question-card").forEach(card=>{
+    const i = Number(card.dataset.i);
+    const q = AI_GENERATED_QUESTIONS[i];
+    if(!q) return;
+    q.text = card.querySelector(".ai-q-text").value;
+    q.answer = card.querySelector(".ai-q-answer").value;
+    q.hint = card.querySelector(".ai-q-hint").value;
+    q.options = card.querySelector(".ai-q-options").value.split("|").map(x=>x.trim()).filter(Boolean);
+  });
+}
+
+function removeAIQuestion(i){
+  syncAIQuestionsFromPreview();
+  AI_GENERATED_QUESTIONS.splice(i,1);
+  renderAIQuestionPreview();
+}
+
+async function saveAllAIQuestions(){
+  syncAIQuestionsFromPreview();
+  if(!AI_GENERATED_QUESTIONS.length) return toast("Engin verkefni til að vista.");
+  let saved = 0;
+  for(const q of AI_GENERATED_QUESTIONS){
+    try{
+      await API.call("/api/teacher/questions", {
+        method:"POST",
+        body:JSON.stringify({
+          subject:q.subject,
+          skill:q.skill,
+          difficulty:q.difficulty || 2,
+          grade_level:q.grade_level || 5,
+          text:q.text,
+          answer:q.answer,
+          hint:q.hint,
+          options:q.options || [],
+          active:true
+        })
+      });
+      saved++;
+    }catch(e){
+      console.warn("Villa við vistun spurningar", e);
+    }
+  }
+  toast(`${saved} verkefni vistuð í spurningabanka.`);
+  AI_GENERATED_QUESTIONS = [];
+  renderAIQuestionPreview();
+  if(typeof loadTeacherQuestions === "function") loadTeacherQuestions();
+}
+
+function copyAIQuestionsJSON(){
+  syncAIQuestionsFromPreview();
+  const txt = JSON.stringify(AI_GENERATED_QUESTIONS, null, 2);
+  navigator.clipboard?.writeText(txt);
+  toast("JSON afritað.");
+}
+
+function clearAIQuestions(){
+  AI_GENERATED_QUESTIONS = [];
+  renderAIQuestionPreview();
+  aiBuilderMsg.textContent = "";
 }
 
 window.onload=()=>{if(API.token)boot();}

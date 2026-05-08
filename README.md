@@ -653,3 +653,30 @@ git push
 ```
 
 Render býr sjálfkrafa til nýju töflurnar `path_quizzes` og `path_quiz_attempts`.
+
+
+## v1.7 - AI-verkefnasmiður kennara
+
+Nýtt:
+
+- Kennari fær hnapp: `🤖 Verkefnasmiður`
+- Kennari skrifar beiðni eins og:
+  - `Búðu til 20 verkefni um rafmagn fyrir 6. bekk`
+  - `Búðu til 15 verkefni um prósentur fyrir 7. bekk`
+  - `Búðu til 10 verkefni um irregular verbs fyrir 7. bekk`
+- Verkefnasmiður býr til spurningar í réttum strúktúr
+- Kennari getur yfirfarið og breytt spurningum
+- Kennari getur vistað allar spurningar beint í spurningabankann
+- Hægt að afrita JSON
+
+Athugið: v1.7 notar innbyggðan verkefnasmið sem virkar án OpenAI/API lykils. Seinna má bæta við alvöru AI-tengingu.
+
+### Uppfærsla
+
+Afritaðu yfir núverandi verkefni og ýttu á GitHub:
+
+```cmd
+git add .
+git commit -m "Skola Royale v1.7 AI question builder"
+git push
+```
