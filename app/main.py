@@ -175,6 +175,38 @@ def init_db():
             FOREIGN KEY(pack_id) REFERENCES mission_packs(id) ON DELETE CASCADE,
             FOREIGN KEY(question_id) REFERENCES custom_questions(id) ON DELETE CASCADE
         );
+
+        CREATE TABLE IF NOT EXISTS learning_paths (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT NOT NULL,
+            description TEXT NOT NULL DEFAULT '',
+            class_name TEXT NOT NULL DEFAULT '',
+            grade_level INTEGER NOT NULL DEFAULT 5,
+            subject TEXT NOT NULL DEFAULT 'mixed',
+            active INTEGER NOT NULL DEFAULT 1,
+            reward_coins INTEGER NOT NULL DEFAULT 500,
+            created_by INTEGER,
+            created_at INTEGER NOT NULL,
+            updated_at INTEGER NOT NULL,
+            FOREIGN KEY(created_by) REFERENCES users(id)
+        );
+
+        CREATE TABLE IF NOT EXISTS learning_path_steps (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            path_id INTEGER NOT NULL,
+            step_order INTEGER NOT NULL DEFAULT 1,
+            title TEXT NOT NULL,
+            description TEXT NOT NULL DEFAULT '',
+            step_type TEXT NOT NULL DEFAULT 'practice',
+            subject TEXT NOT NULL DEFAULT 'mixed',
+            skill TEXT NOT NULL DEFAULT '',
+            grade_level INTEGER NOT NULL DEFAULT 5,
+            target_correct INTEGER NOT NULL DEFAULT 5,
+            boss_required INTEGER NOT NULL DEFAULT 0,
+            reward_coins INTEGER NOT NULL DEFAULT 100,
+            created_at INTEGER NOT NULL,
+            FOREIGN KEY(path_id) REFERENCES learning_paths(id) ON DELETE CASCADE
+        );
         """)
 
         # Lightweight migrations for older local databases
@@ -275,6 +307,40 @@ class MissionPackUpdate(BaseModel):
     class_name: Optional[str] = Field(default=None, max_length=80)
     question_ids: Optional[list[int]] = None
     active: Optional[bool] = None
+
+
+class LearningPathStepIn(BaseModel):
+    title: str = Field(min_length=2, max_length=140)
+    description: str = Field(default="", max_length=500)
+    step_type: str = Field(default="practice", max_length=40)
+    subject: str = Field(default="mixed", max_length=40)
+    skill: str = Field(default="", max_length=80)
+    grade_level: int = Field(default=5, ge=5, le=7)
+    target_correct: int = Field(default=5, ge=1, le=100)
+    boss_required: bool = False
+    reward_coins: int = Field(default=100, ge=0, le=5000)
+
+
+class LearningPathCreate(BaseModel):
+    title: str = Field(min_length=2, max_length=140)
+    description: str = Field(default="", max_length=800)
+    class_name: str = Field(default="", max_length=80)
+    grade_level: int = Field(default=5, ge=5, le=7)
+    subject: str = Field(default="mixed", max_length=40)
+    reward_coins: int = Field(default=500, ge=0, le=10000)
+    active: bool = True
+    steps: list[LearningPathStepIn] = Field(default_factory=list)
+
+
+class LearningPathUpdate(BaseModel):
+    title: Optional[str] = Field(default=None, min_length=2, max_length=140)
+    description: Optional[str] = Field(default=None, max_length=800)
+    class_name: Optional[str] = Field(default=None, max_length=80)
+    grade_level: Optional[int] = Field(default=None, ge=5, le=7)
+    subject: Optional[str] = Field(default=None, max_length=40)
+    reward_coins: Optional[int] = Field(default=None, ge=0, le=10000)
+    active: Optional[bool] = None
+    steps: Optional[list[LearningPathStepIn]] = None
 
 
 class ProgressIn(BaseModel):
@@ -1016,6 +1082,128 @@ def support_needs(class_name: Optional[str] = None, max_accuracy: int = 65, min_
             if d["nakvaemni"] <= max_accuracy:
                 out.append(d)
         return out
+
+
+
+def learning_step_row_to_dict(r):
+    return {
+        "id": r["id"],
+        "step_order": r["step_order"],
+        "title": r["title"],
+        "description": r["description"],
+        "step_type": r["step_type"],
+        "subject": r["subject"],
+        "skill": r["skill"],
+        "grade_level": r["grade_level"],
+        "target_correct": r["target_correct"],
+        "boss_required": bool(r["boss_required"]),
+        "reward_coins": r["reward_coins"],
+    }
+
+
+def learning_path_row_to_dict(conn, r, include_steps=True):
+    d = dict(r)
+    d["active"] = bool(d["active"])
+    if include_steps:
+        steps = conn.execute("""
+            SELECT id, step_order, title, description, step_type, subject, skill, grade_level, target_correct, boss_required, reward_coins
+            FROM learning_path_steps
+            WHERE path_id=?
+            ORDER BY step_order ASC, id ASC
+        """, (r["id"],)).fetchall()
+        d["steps"] = [learning_step_row_to_dict(s) for s in steps]
+    return d
+
+
+def replace_learning_steps(conn, path_id: int, steps: list[LearningPathStepIn]):
+    conn.execute("DELETE FROM learning_path_steps WHERE path_id=?", (path_id,))
+    for i, s in enumerate(steps, start=1):
+        conn.execute("""
+            INSERT INTO learning_path_steps(path_id, step_order, title, description, step_type, subject, skill, grade_level, target_correct, boss_required, reward_coins, created_at)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
+        """, (
+            path_id, i, s.title.strip(), s.description.strip(), s.step_type.strip() or "practice",
+            s.subject.strip() or "mixed", s.skill.strip(), s.grade_level, s.target_correct,
+            1 if s.boss_required else 0, s.reward_coins, now()
+        ))
+
+
+@app.get("/api/learning-paths")
+def assigned_learning_paths(user=Depends(current_user)):
+    class_name = user.get("class_name") or ""
+    with db() as conn:
+        rows = conn.execute("""
+            SELECT id, title, description, class_name, grade_level, subject, active, reward_coins, created_at, updated_at
+            FROM learning_paths
+            WHERE active=1 AND (class_name='' OR class_name=?)
+            ORDER BY updated_at DESC
+        """, (class_name,)).fetchall()
+        return [learning_path_row_to_dict(conn, r, include_steps=True) for r in rows]
+
+
+@app.get("/api/teacher/learning-paths")
+def teacher_list_learning_paths(teacher=Depends(require_teacher)):
+    with db() as conn:
+        rows = conn.execute("""
+            SELECT id, title, description, class_name, grade_level, subject, active, reward_coins, created_at, updated_at
+            FROM learning_paths
+            ORDER BY updated_at DESC
+        """).fetchall()
+        return [learning_path_row_to_dict(conn, r, include_steps=True) for r in rows]
+
+
+@app.post("/api/teacher/learning-paths")
+def teacher_create_learning_path(data: LearningPathCreate, teacher=Depends(require_teacher)):
+    with db() as conn:
+        cur = conn.execute("""
+            INSERT INTO learning_paths(title, description, class_name, grade_level, subject, active, reward_coins, created_by, created_at, updated_at)
+            VALUES (?,?,?,?,?,?,?,?,?,?)
+        """, (
+            data.title.strip(), data.description.strip(), data.class_name.strip(), data.grade_level,
+            data.subject.strip() or "mixed", 1 if data.active else 0, data.reward_coins,
+            teacher["id"], now(), now()
+        ))
+        path_id = cur.lastrowid
+        steps = data.steps or [
+            LearningPathStepIn(title="Æfing", description="Kláraðu fyrstu lotuna.", subject=data.subject, grade_level=data.grade_level, target_correct=5, reward_coins=100),
+            LearningPathStepIn(title="Áskorun", description="Sýndu að þú náir færninni.", subject=data.subject, grade_level=data.grade_level, target_correct=8, reward_coins=150),
+            LearningPathStepIn(title="Boss", description="Sigraðu lokabossinn.", step_type="boss", subject=data.subject, grade_level=data.grade_level, target_correct=5, boss_required=True, reward_coins=250),
+        ]
+        replace_learning_steps(conn, path_id, steps)
+        row = conn.execute("""
+            SELECT id, title, description, class_name, grade_level, subject, active, reward_coins, created_at, updated_at
+            FROM learning_paths WHERE id=?
+        """, (path_id,)).fetchone()
+        return learning_path_row_to_dict(conn, row, include_steps=True)
+
+
+@app.patch("/api/teacher/learning-paths/{path_id}")
+def teacher_update_learning_path(path_id: int, data: LearningPathUpdate, teacher=Depends(require_teacher)):
+    with db() as conn:
+        exists = conn.execute("SELECT id FROM learning_paths WHERE id=?", (path_id,)).fetchone()
+        if not exists:
+            raise HTTPException(status_code=404, detail="Námsleið fannst ekki.")
+        updates = {}
+        for field in ["title", "description", "class_name", "grade_level", "subject", "reward_coins"]:
+            value = getattr(data, field)
+            if value is not None:
+                updates[field] = value.strip() if isinstance(value, str) else value
+        if data.active is not None:
+            updates["active"] = 1 if data.active else 0
+        updates["updated_at"] = now()
+        sets = ", ".join([f"{k}=?" for k in updates])
+        conn.execute(f"UPDATE learning_paths SET {sets} WHERE id=?", list(updates.values()) + [path_id])
+        if data.steps is not None:
+            replace_learning_steps(conn, path_id, data.steps)
+    return {"ok": True}
+
+
+@app.delete("/api/teacher/learning-paths/{path_id}")
+def teacher_delete_learning_path(path_id: int, teacher=Depends(require_teacher)):
+    with db() as conn:
+        conn.execute("DELETE FROM learning_path_steps WHERE path_id=?", (path_id,))
+        conn.execute("DELETE FROM learning_paths WHERE id=?", (path_id,))
+    return {"ok": True}
 
 
 @app.get("/api/teacher/subject-summary")

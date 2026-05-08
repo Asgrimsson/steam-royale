@@ -572,3 +572,32 @@ git push
 ```
 
 Render deploy-ar sjálfkrafa.
+
+
+## v1.4 - Kennari stjórnar námsleið
+
+Nýtt:
+
+- Kennari getur búið til námsleiðir
+- Námsleið getur verið tengd bekk/hópi
+- Námsleið hefur bekkjarstig og grein
+- Hver námsleið hefur skref:
+  - æfing
+  - áskorun
+  - boss
+  - lokapróf
+- Nemandi sér námsleið sem ævintýrakort
+- Nemandi getur byrjað einstök skref
+- Skref geta stillt grein, þyngdarstig og boss
+
+### Uppfærsla
+
+Afritaðu yfir núverandi verkefni og ýttu á GitHub:
+
+```cmd
+git add .
+git commit -m "Skola Royale v1.4 learning paths"
+git push
+```
+
+Render deploy-ar sjálfkrafa.

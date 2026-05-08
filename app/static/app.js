@@ -39,6 +39,8 @@ let ASSIGNED_PACKS = [];
 let teacherQuestionsCache = [];
 let missionPacksCache = [];
 let MY_SKILL_STATS = [];
+let LEARNING_PATHS = [];
+let teacherLearningPathsCache = [];
 let currentStudentDetailId = null;
 
 const shopItems = [
@@ -674,6 +676,8 @@ function showView(id){
   if(id==="questions") loadTeacherQuestions();
   if(id==="packs") loadMissionPacks();
   if(id==="reports") loadReportsView();
+  if(id==="learningpaths") loadLearningPaths();
+  if(id==="pathmap") loadStudentLearningPaths();
   if(id==="boss") updateBossUI();
   if(id==="daily") renderDailyRewards();
   if(id==="achievements") renderAchievements();
@@ -1226,6 +1230,199 @@ function printCurrentStudentReport(){
     return;
   }
   window.print();
+}
+
+
+
+async function loadStudentLearningPaths(){
+  const box = document.getElementById("studentLearningPaths");
+  if(!box) return;
+  box.innerHTML = "<p>Hleð námsleiðum...</p>";
+  try{
+    LEARNING_PATHS = await API.call("/api/learning-paths");
+    renderStudentLearningPaths();
+  }catch(e){
+    box.innerHTML = `<p class="bad">${e.message}</p>`;
+  }
+}
+
+function renderStudentLearningPaths(){
+  const box = document.getElementById("studentLearningPaths");
+  if(!box) return;
+  if(!LEARNING_PATHS.length){
+    box.innerHTML = "<p>Engin námsleið er virk fyrir þig ennþá.</p>";
+    return;
+  }
+  box.innerHTML = LEARNING_PATHS.map(path => `
+    <div class="path-card">
+      <div class="path-header">
+        <h3>${path.subject === "mixed" ? "🎯" : SUBJECTS[path.subject]?.icon || "🧭"} ${escapeHtml(path.title)}</h3>
+        <span>${path.grade_level}. bekkur · ${path.class_name || "allir"} · verðlaun ${path.reward_coins} coins</span>
+      </div>
+      <p>${escapeHtml(path.description || "")}</p>
+      <div class="path-steps">
+        ${(path.steps || []).map((s,i)=>`
+          <div class="path-step ${s.step_type}">
+            <div class="step-orb">${s.step_type === "boss" || s.boss_required ? "👑" : i+1}</div>
+            <strong>${escapeHtml(s.title)}</strong>
+            <small>${escapeHtml(s.description || "")}</small>
+            <span>${SUBJECTS[s.subject]?.name || s.subject} · ${s.skill || "valin færni"} · ${s.target_correct} rétt</span>
+            <button onclick="startLearningPathStep(${path.id}, ${s.id})">Byrja skref</button>
+          </div>`).join("")}
+      </div>
+    </div>
+  `).join("");
+}
+
+function startLearningPathStep(pathId, stepId){
+  const path = LEARNING_PATHS.find(p=>p.id===pathId);
+  const step = path?.steps?.find(s=>s.id===stepId);
+  if(!step) return toast("Skref fannst ekki.");
+  state.zone = step.subject || "mixed";
+  state.gradeLevel = String(step.grade_level || path.grade_level || effectiveGradeLevel());
+  localStorage.setItem("sr_grade_level", state.gradeLevel);
+  state.activeLearningStep = {pathId, stepId, skill:step.skill, targetCorrect:step.target_correct, title:step.title, boss:step.boss_required};
+  showView("mission");
+  if(step.boss_required || step.step_type === "boss") startBossFight();
+  else nextQuestion();
+  toast(`Námsleið: ${step.title}`);
+}
+
+async function loadLearningPaths(){
+  if(!API.user || API.user.role !== "teacher") return;
+  try{
+    teacherLearningPathsCache = await API.call("/api/teacher/learning-paths");
+    renderLearningPathsList();
+    if(!document.querySelector(".lp-step-row")) {
+      addLearningPathStep("Æfing 1", "Kláraðu fyrstu æfingalotu.", "practice", 5);
+      addLearningPathStep("Áskorun", "Sýndu að þú náir færninni.", "challenge", 8);
+      addLearningPathStep("Boss", "Lokabardagi námsleiðarinnar.", "boss", 5, true);
+    }
+  }catch(e){
+    const list = document.getElementById("learningPathsList");
+    if(list) list.innerHTML = `<p class="bad">${e.message}</p>`;
+  }
+}
+
+function addLearningPathStep(title="", desc="", type="practice", target=5, boss=false){
+  const box = document.getElementById("lpStepsEditor");
+  if(!box) return;
+  const row = document.createElement("div");
+  row.className = "lp-step-row";
+  row.innerHTML = `
+    <input class="lp-step-title" placeholder="Heiti skrefs" value="${escapeHtml(title)}">
+    <input class="lp-step-skill" placeholder="Færni, t.d. prósentur">
+    <select class="lp-step-type">
+      <option value="practice">Æfing</option>
+      <option value="challenge">Áskorun</option>
+      <option value="boss">Boss</option>
+      <option value="quiz">Lokapróf</option>
+    </select>
+    <input class="lp-step-target" type="number" min="1" max="100" value="${target}">
+    <input class="lp-step-desc" placeholder="Lýsing" value="${escapeHtml(desc)}">
+    <label><input class="lp-step-boss" type="checkbox" ${boss ? "checked" : ""}> Boss</label>
+    <button onclick="this.closest('.lp-step-row').remove()">Eyða</button>
+  `;
+  box.appendChild(row);
+  row.querySelector(".lp-step-type").value = type;
+}
+
+function collectLearningPathSteps(){
+  const subject = document.getElementById("lpSubject")?.value || "mixed";
+  const grade = Number(document.getElementById("lpGrade")?.value || 5);
+  return [...document.querySelectorAll(".lp-step-row")].map(row => ({
+    title: row.querySelector(".lp-step-title").value || "Skref",
+    description: row.querySelector(".lp-step-desc").value || "",
+    step_type: row.querySelector(".lp-step-type").value || "practice",
+    subject,
+    skill: row.querySelector(".lp-step-skill").value || "",
+    grade_level: grade,
+    target_correct: Number(row.querySelector(".lp-step-target").value || 5),
+    boss_required: row.querySelector(".lp-step-boss").checked,
+    reward_coins: row.querySelector(".lp-step-boss").checked ? 250 : 100
+  }));
+}
+
+async function createLearningPath(){
+  lpMsg.textContent = "";
+  if(!lpTitle.value.trim()){
+    lpMsg.textContent = " Heiti vantar.";
+    return;
+  }
+  const payload = {
+    title: lpTitle.value,
+    description: lpDescription.value,
+    class_name: lpClass.value,
+    grade_level: Number(lpGrade.value || 5),
+    subject: lpSubject.value,
+    reward_coins: 500,
+    active: true,
+    steps: collectLearningPathSteps()
+  };
+  try{
+    await API.call("/api/teacher/learning-paths",{method:"POST", body:JSON.stringify(payload)});
+    lpMsg.textContent = " Námsleið vistuð ✅";
+    clearLearningPathForm();
+    await loadLearningPaths();
+  }catch(e){
+    lpMsg.textContent = " " + e.message;
+  }
+}
+
+function clearLearningPathForm(){
+  lpTitle.value = "";
+  lpDescription.value = "";
+  lpClass.value = "";
+  lpGrade.value = "5";
+  lpSubject.value = "mixed";
+  lpStepsEditor.innerHTML = "";
+  addLearningPathStep("Æfing 1", "Kláraðu fyrstu æfingalotu.", "practice", 5);
+  addLearningPathStep("Áskorun", "Sýndu að þú náir færninni.", "challenge", 8);
+  addLearningPathStep("Boss", "Lokabardagi námsleiðarinnar.", "boss", 5, true);
+}
+
+function renderLearningPathsList(){
+  const list = document.getElementById("learningPathsList");
+  if(!list) return;
+  if(!teacherLearningPathsCache.length){
+    list.innerHTML = "<p>Engar námsleiðir komnar enn.</p>";
+    return;
+  }
+  list.innerHTML = teacherLearningPathsCache.map(p => `
+    <div class="pack-card">
+      <div>
+        <h3>${p.active ? "✅" : "⏸"} ${escapeHtml(p.title)}</h3>
+        <p>${escapeHtml(p.description || "")}</p>
+        <div class="pack-meta">
+          <span>${p.grade_level}. bekkur</span>
+          <span>${SUBJECTS[p.subject]?.name || p.subject}</span>
+          <span>Bekkur: ${p.class_name || "allir"}</span>
+          <span>${(p.steps || []).length} skref</span>
+        </div>
+      </div>
+      <div class="pack-actions">
+        <button onclick="toggleLearningPath(${p.id}, ${p.active ? 0 : 1})">${p.active ? "Óvirkja" : "Virkja"}</button>
+        <button onclick="deleteLearningPath(${p.id})">Eyða</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+async function toggleLearningPath(id, active){
+  try{
+    await API.call(`/api/teacher/learning-paths/${id}`,{method:"PATCH",body:JSON.stringify({active:!!active})});
+    await loadLearningPaths();
+    toast(active ? "Námsleið virkjuð." : "Námsleið óvirkjuð.");
+  }catch(e){toast(e.message)}
+}
+
+async function deleteLearningPath(id){
+  if(!confirm("Viltu örugglega eyða námsleiðinni?")) return;
+  try{
+    await API.call(`/api/teacher/learning-paths/${id}`,{method:"DELETE"});
+    await loadLearningPaths();
+    toast("Námsleið eytt.");
+  }catch(e){toast(e.message)}
 }
 
 

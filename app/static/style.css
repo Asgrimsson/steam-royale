@@ -636,3 +636,99 @@ textarea, select{
   width:auto!important;
   transform:scale(1.15);
 }
+
+/* v1.4 learning paths */
+.learning-path-map{
+  display:grid;
+  gap:18px;
+}
+.path-card{
+  background:white;
+  border:2px solid #e5e7eb;
+  border-radius:28px;
+  padding:18px;
+  box-shadow:0 14px 34px rgba(15,23,42,.12);
+}
+.path-header{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:center;
+  border-bottom:2px solid #eef2ff;
+  padding-bottom:10px;
+  margin-bottom:12px;
+}
+.path-header h3{margin:0;font-size:1.45rem}
+.path-header span{
+  background:#111827;
+  color:white;
+  border-radius:999px;
+  padding:7px 12px;
+  font-weight:950;
+}
+.path-steps{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:12px;
+  margin-top:14px;
+}
+.path-step{
+  position:relative;
+  background:linear-gradient(135deg,#eff6ff,#f8fafc);
+  border:2px solid #bfdbfe;
+  border-radius:22px;
+  padding:14px;
+  min-height:210px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.path-step.boss{
+  background:linear-gradient(135deg,#fff7ed,#fee2e2);
+  border-color:#fdba74;
+}
+.step-orb{
+  width:52px;
+  height:52px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:white;
+  display:grid;
+  place-items:center;
+  font-size:1.5rem;
+  font-weight:950;
+  box-shadow:inset 0 -6px 0 rgba(0,0,0,.18);
+}
+.path-step.boss .step-orb{
+  background:linear-gradient(135deg,#f97316,#dc2626);
+}
+.path-step strong{font-size:1.12rem}
+.path-step small{color:#475569;font-weight:750;line-height:1.3}
+.path-step span{
+  margin-top:auto;
+  color:#1e3a8a;
+  font-weight:900;
+}
+.lp-step-row{
+  display:grid;
+  grid-template-columns:1.2fr 1fr .8fr .45fr 1.2fr .55fr auto;
+  gap:8px;
+  align-items:center;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:16px;
+  padding:10px;
+  margin:8px 0;
+}
+.lp-step-row input,
+.lp-step-row select{
+  margin:0;
+}
+.lp-step-row label{
+  font-size:.85rem;
+  font-weight:900;
+}
+@media(max-width:900px){
+  .lp-step-row{grid-template-columns:1fr}
+}

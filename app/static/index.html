@@ -63,11 +63,13 @@
       <button class="menu" onclick="showView('map')">🗺️ Mission-kort</button>
       <button class="menu" onclick="showView('boss')">👑 Boss Fight</button>
       <button class="menu" onclick="showView('daily')">🎁 Dagleg verðlaun</button>
+      <button class="menu" onclick="showView('pathmap')">🧭 Námsleið</button>
       <button class="menu" onclick="showView('shop')">🛒 Búðin</button>
       <button class="menu" onclick="showView('achievements')">🏆 Afrek</button>
       <button class="menu teacher-only hidden" onclick="showView('teacher')">👨‍🏫 Mælaborð kennara</button>
       <button class="menu teacher-only hidden" onclick="showView('questions')">✍️ Spurningabanki</button>
       <button class="menu teacher-only hidden" onclick="showView('packs')">📦 Verkefnapakkar</button>
+      <button class="menu teacher-only hidden" onclick="showView('learningpaths')">🧭 Námsleiðir</button>
       <button class="menu teacher-only hidden" onclick="showView('reports')">📊 Skýrslur</button>
       <button class="menu danger" onclick="logout()">Útskrá</button>
     </aside>
@@ -159,6 +161,12 @@
           </div>
         </div>
         <div class="reward-track" id="rewardTrack"></div>
+      </section>
+
+      <section id="view-pathmap" class="view">
+        <h2>🧭 Námsleiðin mín</h2>
+        <p>Hér sérðu námsleiðir sem kennari hefur virkjað fyrir bekkinn þinn.</p>
+        <div id="studentLearningPaths" class="learning-path-map"></div>
       </section>
 
       <section id="view-shop" class="view">
@@ -276,6 +284,46 @@
           <h3>🖨️ Prentvæn nemendaskýrsla</h3>
           <p>Opnaðu nemendaskýrslu í mælaborði kennara og ýttu svo á prenta.</p>
           <button onclick="printCurrentStudentReport()">Prenta síðustu opnuðu nemendaskýrslu</button>
+        </div>
+      </section>
+
+      <section id="view-learningpaths" class="view">
+        <h2>🧭 Námsleiðir kennara</h2>
+        <p class="teacher-intro">Búðu til markvissa námsleið fyrir bekk. Nemendur sjá hana sem ævintýrakort.</p>
+
+        <div class="teacher-box">
+          <h3>Búa til námsleið</h3>
+          <div class="form-grid">
+            <input id="lpTitle" placeholder="Heiti, t.d. 7. bekkur - Prósentur og hlutföll">
+            <input id="lpClass" placeholder="Bekkur/hópur, t.d. 7A. Skildu autt fyrir alla.">
+            <select id="lpGrade">
+              <option value="5">5. bekkur</option>
+              <option value="6">6. bekkur</option>
+              <option value="7">7. bekkur</option>
+            </select>
+            <select id="lpSubject">
+              <option value="mixed">Blandað</option>
+              <option value="math">Stærðfræði</option>
+              <option value="icelandic">Íslenska</option>
+              <option value="english">Enska</option>
+              <option value="science">Náttúrufræði</option>
+              <option value="geo">Landafræði/samfélagsfræði</option>
+            </select>
+          </div>
+          <textarea id="lpDescription" rows="2" placeholder="Lýsing á námsleiðinni"></textarea>
+
+          <h4>Skref í námsleið</h4>
+          <div id="lpStepsEditor"></div>
+          <button onclick="addLearningPathStep()">+ Bæta við skrefi</button>
+          <button onclick="createLearningPath()">Vista námsleið</button>
+          <button class="gray-btn" onclick="clearLearningPathForm()">Hreinsa</button>
+          <span id="lpMsg"></span>
+        </div>
+
+        <div class="teacher-box">
+          <h3>Virkar námsleiðir</h3>
+          <button onclick="loadLearningPaths()">Endurhlaða námsleiðir</button>
+          <div id="learningPathsList"></div>
         </div>
       </section>
 
